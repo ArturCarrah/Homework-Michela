@@ -247,7 +247,7 @@ LS &= 34{,}35
 
 Analisando o boxplot veja que ele não apresenta \textit{outliers} de forma visível, verifica-se pelos cálculos realizados que o valor mínimo de \(6{,}2\) situa-se acima do Limite Inferior de \(3{,}575\), enquanto o valor máximo de \(31{,}8\) encontra-se abaixo do Limite Superior de \(34{,}575\). Dessa forma, confirma-se que o conjunto de dados não contém valores atípicos, evidenciando uma distribuição consistente e bem comportada, sem observações que se destaquem significativamente do padrão geral.
 
-\subsubsection{item 4)}
+\subsubsection{Item 4}
 A avaliação da conformidade das emissões com o limite de 25 unidades, baseada na amostra de 80 observações, revela um cenário de parcial adequação. A quantificação dos dias em não conformidade foi realizada mediante análise das classes do histograma que superam o limite estabelecido, especificamente as classes $[25, 30)$, com 10 ocorrências, e $[30, 35]$, com 1 ocorrência, totalizando 11 dias de desconformidade.
 
 A proporção de excedências é calculada pela razão entre o número de dias fora do padrão e o total de observações, resultando em $11/80 = 0{,}1375$. Este valor indica que aproximadamente 13,75\% dos dias monitorados registraram emissões superiores ao permitido, configurando uma taxa de não conformidade estatisticamente significativa.
@@ -318,7 +318,7 @@ Como possuímos 20 dados, a médiana é a média entre o 10º e o 11º valor ord
 \text{\textbf{Desvio Padrão}} = \sqrt{\frac{(28-38,65)^2 + (34-38,65)^2 + \cdots + (46-38,65)^2}{19}} = \sqrt{98,555} = 9,9275 \text{ Anos}
 \]
 
-Uma vez que a média e a mediana se encontram muito próximas, a distribuição de idades tem uma certa simetria com centro na faixa de 38 a 39 anos. Além disso, esse valor de desvio-padrão nos informa que os dados estão distribuidos em torno desse centro e ao longo de todas as idades de maneira semelhante. \\
+Uma vez que a média e a mediana se encontram muito próximas, a distribuição de idades tem uma certa simetria com centro na faixa de 38 a 39 anos. Além disso, esse valor de desvio-padrão nos informa que os dados estão distribuidos em torno desse centro e ao longo de todas as idades de maneira semelhante, ou seja, indica uma grande diversidade da faixa etária dos aplicantes. \\
 
 
 \textbf{*} Para a \textbf{Renda Desejada}:
@@ -352,11 +352,77 @@ Dessa vez a média e a mediana estão um pouco deslocadas uma da outra, criando 
 
 
 \[
-\text{\textbf{Desvio Padrão}} = \sqrt{\frac{(2,3-1,92)^2 + (1,6-1,92)^2 + \cdots + (3,2-1,92)^2}{19}} = \sqrt{0,509} = 0,713 \text{ Mil Euros}
+\text{\textbf{Desvio Padrão}} = \sqrt{\frac{(2-14)^2 + (8-14)^2 + \cdots + (23-14)^2}{19}} = \sqrt{105,473} = 10,27 \text{ Anos}
 \]
 
-Dessa vez a média e a mediana estão um pouco deslocadas uma da outra, criando uma tendência para um dos lados. O desvio-padrão também é relativamente alto, indicando alta dispersão dos valores de salários.
+Mais uma vez a média e a mediana se encontram próximas. De fato, nesse caso elas são iguais, o que significa uma tendência para o valor de 14 anos. Porém, o desvio-padrão dos dessa variável é considerável, sugerindo que por mais que os candidatos sejam experientes, existe uma alta variação nessa experiência.
 
+Por fim, dadas essas medidas de disperção para cada variável, é possível inferir que os candidatos aplicantes são pessoas, em sua maioria, na faixa de 30-40 anos, pedindo em torno de 1,5-2,5 mil Euros e com 10+ anos de experiência, onde esses valores de idade possuem uma certa diversidade.
+
+\subsubsection{Item 2}
+Para cada um dos grupos de pessoas separados por nacionalidade, contabiliza-se as rendas médias e a experiência média.
+
+
+\textbf{*} Candidatos \textbf{Italianos}:
+
+Existem 8 candidatos italianos, onde estes têm uma média de renda desejada de
+\[\frac{(2,3+2,1+1,2+2,8+3,4+1,1+1,7+3,2)}{8} = 2,225 \text{ mil Euros}\] e uma experiência média de \[\frac{(2+15+13+20+32+29+7+23)}{8} = 17,625 \text{ Anos}\]
+
+\textbf{*} Candidatos \textbf{Ingleses}:
+
+Existem 2 candidatos ingleses, onde estes têm uma média de renda desejada de
+\[\frac{(1,6+2,7)}{2} = 2,15 \text{ mil Euros}\] e uma experiência média de \[\frac{(8+23)}{2} = 15,5 \text{ Anos}\]
+
+\textbf{*} Candidatos \textbf{Belgas}:
+
+Existem 2 candidatos belgas, onde estes têm uma média de renda desejada de
+\[\frac{(1,2+1,4)}{2} = 1,3 \text{ mil Euros}\] e uma experiência média de \[\frac{(21+5)}{2} = 13 \text{ Anos}\]
+
+\textbf{*} Candidatos \textbf{Espanhóis}:
+
+Existem 3 candidatos espanhóis, onde estes têm uma média de renda desejada de
+\[\frac{(0,9+ 1,6+1,2)}{3} = 1,234 \text{ mil Euros}\] e uma experiência média de \[\frac{(1+3+0)}{3} = 1,34 \text{ Anos}\]
+
+\textbf{*} Candidatos \textbf{Franceses}:
+
+Existem 3 candidatos franceses, onde estes têm uma média de renda desejada de
+\[\frac{(1,8+1,6+2)}{3} = 1,8 \text{ mil Euros}\] e uma experiência média de \[\frac{(28+1+19)}{3} = 16 \text{ Anos}\]
+
+\textbf{*} Candidatos \textbf{Alemães}:
+
+Existem 2 candidatos italianos, onde estes têm uma média de renda desejada de
+\[\frac{(2,5+2,1)}{2} = 2,3 \text{ mil Euros}\] e uma experiência média de \[\frac{(18+12)}{2} = 15 \text{ Anos}\]
+
+Com base na análise desses dados, é possível concluir que os candidatos alemães são os que demandam salários mais altos, em média, seguidos pelos italianos e pelos ingleses. Além disso, os italianos são os mais experientes, tendo logo atrás os ingleses e os alemães com mais de 15 anos de experiência. Isso mostra que os alemães, ingleses e italianos têm muitos anos de experiência mas também cobram um alto salário, indicando uma possível correlação entre essas variáveis.
+
+\subsubsection{Item 3}
+Como mencionado na questão anterior, suspeita-se que exista uma correlação entre a quantidade de anos de experiência e de renda desejada observando os dados de cada nacionalidade. De fato, pode-se realizar um cálculo a mais para verificar o nível de correlação entre essas duas variáveis. Esse cálculo é o coeficiente de Pearson, o qual mede o grau de correlação entre duas variáveis, indo de -1 (correlação total negativa) a 1 (correlação total positiva).
+
+Calcula-se o coeficiente de Pearson como a razão entre as médias e os desvios-padrões das duas variáveis. A implementação em R da função forneceu o valor de 0.497767, indicando uma correlação positiva considerável entre essas duas métricas. De fato, o gráfico de dispersão abaixo demonstra de modo visual essa correlação.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{ScatterPlot2.png}
+\end{figure}
+
+\subsubsection{Item 4}
+Os candidatos que atendem aos critérios de ter 10+ anos de experiência e uma renda desejada de menos de 2 mil Euros são 1 belga (46 anos), 1 francês (51 anos) e 2 italianos (39 e 52 anos). Essa particularização evidencia que algumas pessoas mais velhas (na faixa de idade de 40+) estão dispostas a aceitar um salário menor, mesmo com muitos anos de experiência.
+
+\subsubsection{Item 5}
+
+Usando boxplots para representar a distribuição da experiência e da renda desejada por nacionalidade é possível visualizar as diferenças entre os candidatos, como as que foram analisadas no item 1 e 2.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{nacionalidadeXrenda.png}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\linewidth]{nacionalidadeXexperiencia.png}
+\end{figure}
+
+\newpage
 
 \section{\textbf{Questão 3}}
 
@@ -373,7 +439,7 @@ O conjunto de dados em anexo, {\tt HW1\_bike\_sharing.csv}\footnote{\label{refno
 {\tt casual}      	& Número de usuários casuais                    		\\
 {\tt registered}  	& Número de usuários registrados                		\\
 \end{tabular}
-\caption{Variáveis do conjunto {\tt HW1\_bike\_sharing} (questão \protect{\ref{sec:q3}}).}
+\caption{Variáveis do conjunto {\tt HW1\_bike\_sharing} (questão 3).}
 \label{tab:ex3}
 \end{table}
 
@@ -412,7 +478,49 @@ Número de usuários registrados (registered) & Numérico \\ \hline
 \end{tabular}
 \end{table}
 
-Para adquirir o número total de observações e datas iniciais e 
+Para adquirir o número total de observações e datas iniciais e a data inicial e a data final da amostras utilizamos de funções do R para tal feito. Pois, é inviavel contar um por um pois temos uma grande quantidade de amostras. 
+
+Segue abaixo a tabela com as informações adquiridas:
+
+\begin{table}[h]
+\centering
+\caption{Resumo do Período de Observação}
+\label{tab:resumo_observacao}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Número Total de Observações} & \textbf{Data Inicial} & \textbf{Data Final} \\
+\hline
+1.250 & 15/03/2023 & 30/06/2024 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{item 2)}
+
+\begin{table}[h]
+\centering
+\caption{Medidas de Tendência Central e Quartis das Características Numéricas}
+\label{tab:estatisticas_descritivas}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Característica} & \textbf{Média} & \textbf{Mediana} & \textbf{Q1} & \textbf{Q3} & \textbf{IQR} \\
+\hline
+\hline
+\textbf{Índice de registro} & 512.5 & 512.5 & 256.2 & 768.8 & 512.6 \\
+\hline
+\textbf{Estações do ano} & 2.4 & 2.0 & 1.0 & 3.0 & 2.0 \\
+\hline
+\textbf{Condições metereológicas} & 1.8 & 2.0 & 1.0 & 2.0 & 1.0 \\
+\hline
+\textbf{Temperatura (◦C)} & 0.42 & 0.41 & 0.28 & 0.56 & 0.28 \\
+\hline
+\textbf{usuários casuais} & 85.3 & 72.6 & 42.1 & 118.9 & 76.8 \\
+\hline
+\textbf{usuários registrados} & 365.8 & 348.2 & 245.6 & 472.3 & 226.7 \\
+\hline
+\end{tabular}
+\end{table}
+
 
 \newpage
 \begin{appendices}
