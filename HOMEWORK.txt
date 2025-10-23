@@ -1,0 +1,437 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[portuguese]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{setspace} 
+
+\oddsidemargin 0.22in
+\textwidth 5.8in
+
+% Ajuste no título da seção para garantir que a numeração apareça
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\normalfont\Large\scshape}{\thesection}{1em}{#1}  % Aqui a numeração aparece antes do título
+\titleformat{\subsection}[block]{\normalfont\large\scshape}{\thesubsection}{1em}{#1}
+
+\usepackage[title,titletoc]{appendix}
+\AddToHook{env/appendices/begin}{
+\titleformat{\section}{\normalfont\Large\scshape}{}{0em}{#1\ \thesection} % Formato correto para as seções no apêndice
+}
+
+\usepackage[skins]{tcolorbox}
+\definecolor{bblue}{rgb}{0,0.3961,0.7412}
+\usepackage[bookmarksnumbered=true]{hyperref} 
+\hypersetup{
+     colorlinks = true,
+     linkcolor = bblue,
+     anchorcolor = bblue,
+     citecolor = bblue,
+     filecolor = bblue,
+     urlcolor = bblue
+ }
+
+\renewcommand{\lstlistingname}{Listado}
+\lstset{
+    backgroundcolor=\color[rgb]{0.86,0.88,0.93},
+    language=R, keywordstyle=\color[rgb]{0,0,1},
+    basicstyle=\footnotesize \ttfamily,breaklines=true,
+    escapeinside={\%*}{*)}
+}
+\usepackage{footmisc} \renewcommand{\labelitemi}{$\circ$}
+\usepackage{enumitem} \setlist[itemize]{leftmargin=*}
+
+\usepackage{scrextend}
+\deffootnote[1em]{1em}{1em}{\textsuperscript{\thefootnotemark}\,}
+\begin{document}
+\begin{figure}[!h] \includegraphics [scale=0.3] {Figures/Course-logo} \end{figure}
+\begin{spacing}{1.5}
+
+{\Large\sc \noindent \textbf{HOMEWORK 1}} \\
+{\large\sc \noindent \textbf{Nome completo:} Lucas Teixeira Holanda / Artur Carrah Cerqueira}\\
+{\large\sc \noindent \textbf{Número de matricula:} 568254 / 570754}
+
+\end{spacing}
+\vskip1cm
+
+
+
+\section{\textbf{QUESTÃO 1 - EMISSÕES DE UM GÁS POLUENTE}}
+
+As emissões diárias de um gás poluente de uma planta industrial foram registradas 80 vezes, em uma determinada unidade de medida. Os dados obtidos estão apresentados na Tabela \ref{tab:ex1}.
+\begin{table}[ht!]\centering
+\begin{tabular}{l l l l l l l l l l l l l}
+15.8 & 22.7 & 26.8 & 19.1 & 18.5 & 14.4 & 8.3 	 & 25.9 & 26.4 & 9.8  & 21.9 &10.5 \\
+17.3 & 6.2   &18.0  & 22.9 & 24.6 & 19.4 & 12.3 & 15.9 & 20.1 & 17.0 & 22.3 & 27.5 \\
+23.9 & 17.5 & 11.0 & 20.4 & 16.2 & 20.8 & 20.9 & 21.4 & 18.0 & 24.3 & 11.8  &17.9 \\
+18.7 & 12.8 & 15.5 & 19.2 & 13.9 & 28.6 & 19.4 & 21.6 & 13.5 & 24.6 & 20.0 & 24.1\\ 
+9.0   & 17.6 & 25.7 & 20.1 & 13.2 & 23.7 & 10.7 & 19.0 & 14.5 & 18.1 & 31.8 & 28.5 \\
+22.7 & 15.2 & 23.0 & 29.6 & 11.2 & 14.7 & 20.5 & 26.6 & 13.3 & 18.1 & 24.8 & 26.1 \\
+7.7 & 22.5 & 19.3 & 19.4 & 16.7 & 16.9 & 23.5 & 18.4
+\end{tabular}
+\caption{Emissões diárias de gas poluente (questão 1).}
+\label{tab:ex1}
+\end{table}
+
+\begin{enumerate}
+\item Calcule as medidas de tendência central (média, mediana e moda) e as medidas de dispersão (amplitude, variância, desvio padrão e coeficiente de variação) para o conjunto de dados da Tabela \ref{tab:ex1}. Interprete os resultados.
+\item Construa um histograma e um boxplot para os dados de emissões. Os dados parecem estar simetricamente distribuídos? Existem valores atípicos? 
+\item Determine os quartis (Q1, Q2, Q3) e o intervalo interquartil (IQR). Utilize esses valores para reforçar sua análise sobre a presença de valores atípicos.
+\item Suponha que o limite máximo aceitável diário para as emissões seja de 25 unidades. Qual a proporção de dias em que a planta excedeu esse limite? O comportamento geral das emissões estaria em conformidade com esse padrão regulatório?
+\end{enumerate}
+
+\newpage
+\subsection{\textbf{SOLUÇÃO}}
+
+\subsubsection{Item 1}
+
+Nesse item calculamos a média, mediana e moda, além das medidas de dispersão, a amplitude, a variância, o desvio padrão e o coeficiente de variação. Mas, antes fazer os calculos, primeiro nós ordenamos o valores que estão contidos na tabela, ficando da seguinte forma:
+
+\begin{tabular}{cccccccccccc}
+6.2 & 7.7 & 8.3 & 9.0 & 9.8 & 10.5 & 10.7 & 11.0 & 11.2 & 11.8 & 12.3 & 12.8 \\
+13.2 & 13.3 & 13.5 & 13.9 & 14.4 & 14.5 & 14.7 & 15.2 & 15.5 & 15.8 & 15.9 & 16.2 \\
+16.7 & 16.9 & 17.0 & 17.3 & 17.5 & 17.6 & 17.9 & 18.0 & 18.0 & 18.1 & 18.1 & 18.4 \\
+18.5 & 18.7 & 19.0 & 19.1 & 19.2 & 19.3 & 19.4 & 19.4 & 19.4 & 20.0 & 20.1 & 20.1 \\
+20.4 & 20.5 & 20.8 & 20.9 & 21.4 & 21.6 & 21.9 & 22.3 & 22.5 & 22.7 & 22.7 & 22.9 \\
+23.0 & 23.5 & 23.7 & 23.9 & 24.1 & 24.3 & 24.6 & 24.6 & 24.8 & 25.7 & 25.9 & 26.1 \\
+26.4 & 26.6 & 26.8 & 27.5 & 28.5 & 28.6 & 29.6 & 31.8 \\
+\end{tabular}
+\end{center}
+
+Depois de ordenar os valores em ordem crescente, é possível começar os calculos das medidas solicitadas. A \textbf{média} é calculada pela soma de todas as amostras e dividir pela quantidade de amostras, e como ja contamos antes, sabemos que temos 80 amostras. Então, temos que:
+\[
+\text{\textbf{Média}} = \frac{x_1 + x_2 + \cdots + x_{80}}{80} =  \frac{6.2 + 7.7 + \cdots + 31.8}{80} =  \frac{1521.7}{80} = 19.021
+\]
+
+A \textbf{mediana} é o valor intermediário dos valores ordenados, separando os valores de baixo e os da parte de cima. Como temos 80 dados, não possuimos um valor intermediário, então precisamos pegar o valor médio entre a posição 40 e a 41. Dessa forma, temos:
+
+\[
+\text{\textbf{Mediana}} = \frac{x_{40} + x_{41}}{2} = \frac{19,1 + 19,2}{2} = 19{,}15
+\] 
+
+A \textbf{moda} é o número que repete mais vezes dentre todos os nossos dados, e observando-os vimos que o 19,4 se repete mais vezes, um total de 3, então, $Moda = 19,4$.
+
+Agora vamos calcular as medidas de dispersão solicitadas. A \textbf{amplitude} é calculada pela diferença entre o maior e o menor valor dos dados ordenados. Observando nossos dados, temos:
+\[
+\text{\textbf{Amplitude}} = x_{\text{máximo}} - x_{\text{mínimo}} = 31.8 - 6.2 = 25.6
+\]
+
+A \textbf{variância} é uma medida que mostra o quanto os dados se dispersam em relação à média, algo a se notar é que usamos (n-1) no denominador, pois estamos trabalhando com variância amostral, pois temos uma pequena parcela da população, 80 amsotras. Usar essa diferença significa que estamos usando a correção de Bessel, que compensa o viés da variância, tornando o calculo mais preciso. Para calcular a variância amostral, usamos a fórmula:
+\[
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+\]
+onde $\bar{x} = 19.155$ é a média calculada anteriormente e $n = 80$ é o número de amostras. Calculando a soma dos quadrados das diferenças:
+\[
+s^2 = \frac{(6.2-19.155)^2 + (7.7-19.155)^2 + \cdots + (31.8-19.155)^2}{79} = \frac{2436.47}{79} = 30.84
+\]
+\\
+
+O \textbf{desvio padrão} é a raiz quadrada da variância, representando a dispersão média dos dados em relação à média:
+\[
+\text{\textbf{Desvio Padrão}} = \sqrt{s^2} = \sqrt{30.84} = 5.55
+\]
+\\
+
+O \textbf{coeficiente de variação} é uma medida relativa de dispersão, calculada como a razão entre o desvio padrão e a média, expresso em porcentagem:
+\[
+\text{\textbf{Coeficiente de Variação}} = \frac{s}{\bar{x}} \times 100\% = \frac{5.55}{19.02} \times 100\% = 29.18\%
+\]
+\\
+
+A variância amostral de 30,84 revela que existe uma dispersão moderada das observações em relação à média de 19,02. Isso demonstra que os dados possuem certa variabilidade, porém sem apresentar grandes discrepâncias ou valores atípicos.
+
+O desvio padrão, de cerca de 5,55, indica que, em geral, as medições de emissão de gases se distanciam aproximadamente 5,5 unidades da média. Dessa forma, a maior parte das observações está compreendida entre 13,5 e 24,5, evidenciando uma distribuição razoavelmente homogênea. 
+
+A variância amostral foi empregada pois o conjunto de 80 registros constitui
+apenas uma amostragem dos potenciais dias de funcionamento da fábrica, isto é, não se possui a totalidade da população de dados.
+\\
+\\
+\\
+
+\subsubsection{Item 2}
+
+Nesse item estamos tratando de formas de representar graficamente as nossas amostras, para isso temos duas formas diferente, o \textbf{histograma} e o \textbf{boxplot}.
+
+O histograma é uma representação gráfica da distribuição de frequências de um conjunto de dados. No seu eixo horizontal temos intervalos de igual amplitude e no eixo vertical temos a frequencia dos dados em cada intervalo, onde essa frequencia é representada por um barra vertical, onde a sua altura identifica a frequencia.
+
+O boxplot é um gráfico que condesa cinco medidas importantes, o menor valor do conjunto, o primeiro quartil (separa os 25 de baixo), a mediana, o terceiro quartil (separa os 25 de cima) e a o maior do conjunto. Ele fornece um resumo robusto da distribuição das amostras.
+
+Agora vamos realmente analisar os gráficos, primeiro temos o histogrma, veja que os intervalos estão de 5 em 5, decidimos assim para melhor visualização da distribuição das amostras:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{HISTOGRAMA 1.JPG}
+    \caption{}
+    \label{fig:placeholder}
+\end{figure}
+\\
+\\
+
+Pelo histograma podemos notar uma boa simetria dos dados, pórem também é nitido uma leve assimetria à esquerda. Pois a concentração dos dados está deslocada para valores maiores.
+\\
+\\
+Abaixo temos o boxplot, que usa outra forma de representar os gráficos, como comentado antes:
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{BOXPLOT 1.JPG}
+    \caption{}
+    \label{fig:placeholder}
+\end{figure}
+
+A análise de tendência central revela que a mediana (\(Q_2 = 19,15\)) apresenta valor bastante próximo à média aritmética, reforçando a característica de simetria na distribuição dos dados e indicando que a maior parte das observações concentra-se em torno do centro da distribuição.
+
+Sobre os valores extremos, a não identificação de pontos isolados (\textit{outliers}) na representação do boxplot sugere que tanto o valor máximo quanto o mínimo estão alinhados com a variabilidade esperada para o conjunto de dados, não apresentando discrepâncias significativas em relação ao padrão geral.
+
+Assim, ferramentas gráficas utilizadas demonstram consistência entre si, permitindo concluir que as medições de emissão apresentam relativa uniformidade, com dados concentrados próximos ao valor central e ausência de observações atípicas relevantes.
+\\
+
+\subsubsection{Item 3}
+Considerando um conjunto de dados com $n=80$ observações, o cálculo dos quartis segue o método em que as posições são determinadas pela média de duas observações ordenadas. Dessa forma, o primeiro quartil ($Q_1$) corresponde à média entre a $20^{\text{a}}$ e a $21^{\text{a}}$ observações, enquanto o terceiro quartil ($Q_3$) é obtido pela média entre a $60^{\text{a}}$ e a $61^{\text{a}}$ observações.
+
+Assim, temos os seguintes cálculos:
+
+\[
+\begin{array}{ll}
+\textbf{Primeiro Quartil ($Q_1$):} & \textbf{Terceiro Quartil ($Q_3$):} \\
+\begin{aligned}
+Q_1 &= \frac{n_{20} + n_{21}}{2} = \frac{15{,}2 + 15{,}5}{2} = 15{,}35
+\end{aligned}
+&
+\begin{aligned}
+Q_3 &= \frac{n_{60} + n_{61}}{2} = \frac{22{,}9 + 23{,}0}{2} = 22{,}95
+\end{aligned}
+\end{array}
+\]
+
+\vspace{0.5cm}
+
+Com base nesses resultados, podemos calcular a dispersão central através do Intervalo Interquartil (IIQ):
+\[
+\text{IIQ} = Q_3 - Q_1 = 22{,}95 - 15{,}35 = 7{,}60 \text
+\]
+
+Além disso, como o Quartil 2 (Q2) divide as amostras em dois grupos, ele possui o mesmo valor da mediana, então temos:
+\[
+\text{Mediana} = Q_2 = 19,15
+\]
+
+A partir do cálculo dos quartis, é possível determinar os limites \textbf{inferior} e \textbf{superior} para identificar possíveis valores atípicos (outliers) na distribuição. Estes limites são calculados da seguinte forma:
+
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Limite Inferior (LI):}
+\begin{align*}
+LI &= Q_1 - 1,5 \times IIQ \\
+LI &= 15{,}35 - 1,5 \times 7{,}60 \\
+LI &= 15{,}35 - 11{,}40 \\
+LI &= 3{,}95 
+\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Limite Superior (LS):}
+\begin{align*}
+LS &= Q_3 + 1,5 \times IIQ \\
+LS &= 22{,}95 + 1,5 \times 7{,}60 \\
+LS &= 22{,}95 + 11{,}40 \\
+LS &= 34{,}35 
+\end{align*}
+\end{minipage}
+\end{center}
+
+Analisando o boxplot veja que ele não apresenta \textit{outliers} de forma visível, verifica-se pelos cálculos realizados que o valor mínimo de \(6{,}2\) situa-se acima do Limite Inferior de \(3{,}575\), enquanto o valor máximo de \(31{,}8\) encontra-se abaixo do Limite Superior de \(34{,}575\). Dessa forma, confirma-se que o conjunto de dados não contém valores atípicos, evidenciando uma distribuição consistente e bem comportada, sem observações que se destaquem significativamente do padrão geral.
+
+\subsubsection{item 4)}
+A avaliação da conformidade das emissões com o limite de 25 unidades, baseada na amostra de 80 observações, revela um cenário de parcial adequação. A quantificação dos dias em não conformidade foi realizada mediante análise das classes do histograma que superam o limite estabelecido, especificamente as classes $[25, 30)$, com 10 ocorrências, e $[30, 35]$, com 1 ocorrência, totalizando 11 dias de desconformidade.
+
+A proporção de excedências é calculada pela razão entre o número de dias fora do padrão e o total de observações, resultando em $11/80 = 0{,}1375$. Este valor indica que aproximadamente 13,75\% dos dias monitorados registraram emissões superiores ao permitido, configurando uma taxa de não conformidade estatisticamente significativa.
+
+Do ponto de vista regulatório, uma taxa de 13,75\% demonstra que o processo operacional não se encontra em plena conformidade com o padrão estabelecido. Embora a distribuição de frequências apresente maior concentração nas classes inferiores, com picos entre 15 e 25 unidades, a presença consistente de valores na cauda superior da distribuição sinaliza a necessidade de intervenções corretivas.
+
+Operacionalmente, a ocorrência de emissões acima do limite em mais de um décimo do período analisado demanda atenção específica aos fatores que contribuem para esses picos. A redução desta proporção requer a identificação das causas fundamentais e a implementação de medidas de controle preventivo, visando garantir a aderência integral aos requisitos regulatórios e a melhoria contínua do desempenho ambiental.
+\newpage
+\section{\textbf{QUESTÃO 2 - SELEÇÃO DE CANDIDATOS}}
+Uma empresa italiana recebeu 20 currículos de cidadãos italianos e estrangeiros na seleção de pessoal qualificado para o cargo de gerente de relações exteriores. A tabela \ref{tab:ex2} reporta as informações consideradas relevantes na seleção: a idade, a nacionalidade, o nível mínimo de renda desejada (em milhares de euros), os anos de experiência no trabalho.
+
+\begin{table}[h] \centering
+\begin{tabular}{ l | l l l l}
+  	& Idade 	& Nacionalidade & Renda & Experiência\\ \hline \hline
+1	&  28 	& Italiana 		&  2.3 	& 2 \\
+2	&  34 	& Inglesa 		& 1.6 	& 8 \\
+3	&  46   	& Belga 		& 1.2 	& 21 \\
+4	&  26		& Espanhola 	& 0.9 	&1 \\
+5	&  37 	& Italiana		& 2.1 	& 15 \\
+6 	&  29 	& Espanhola	& 1.6 	& 3 \\
+7 	&  51 	& Francesa 	& 1.8 	& 28 \\
+8 	&  31 	& Belga 		& 1.4 	& 5 \\
+9 	&  39 	& Italiana 		&  1.2 	&13 \\
+10 	&  43 	& Italiana		& 2.8 	& 20 \\
+11 	&  58 	& Italiana		& 3.4 	& 32 \\
+12 	&  44 	& Inglesa		& 2.7 	& 23 \\
+13 	&  25 	& Francesa 	& 1.6 	& 1 \\
+14 	&  23 	& Espanhola	& 1.2 	& 0 \\
+15 	&  52 	& Italiana		& 1.1 	& 29 \\
+16 	&  42 	& Alemana	&  2.5 	&18 \\
+17 	&  48 	& Francesa 	& 2.0 	& 19 \\
+18 	&  33 	& Italiana		& 1.7 	& 7 \\
+19 	&  38 	& Alemana	& 2.1 	& 12 \\
+20 	&  46 	& Italiana		& 3.2 	& 23 \\
+\end{tabular} 
+\caption{Informações na seleção da empresa italiana (questão \protect{\ref{sec:q2}}).}
+\label{tab:ex2}
+\end{table}
+
+\begin{enumerate} 
+\item Calcule a média, mediana e desvio padrão para as variáveis idade, renda desejada e anos de experiência. O que você pode inferir a partir desses valores sobre o perfil típico dos candidatos?
+\item Agrupe os candidatos por nacionalidade e calcule a renda média desejada e os anos médios de experiência para cada grupo. Qual nacionalidade apresenta a maior renda média desejada? Qual grupo aparenta ser o mais experiente?
+\item Existe correlação entre anos de experiência e renda desejada? Utilize ferramentas visuais apropriadas (por exemplo, gráfico de dispersão) e calcule o coeficiente de correlação de Pearson. Interprete o resultado. 
+\item Suponha que a empresa queira priorizar candidatos com pelo menos 10 anos de experiência e renda desejada inferior a 2,0 (mil euros). Quantos candidatos atendem a ambos os critérios? Liste suas nacionalidades e idades.
+\item Construa gráficos que permitam visualizar a distribuição da idade e da renda desejada, separados por nacionalidade. Utilize histogramas, box-plots ou gráficos de barras, e comente as principais diferenças observadas entre os grupos.
+\end{enumerate}
+
+\subsection{\textbf{SOLUÇÃO}}
+
+\subsubsection{Item 1}
+
+Vamos calcular as medidas de disperção dos dados de idade, renda e anos de experiência dos candidatos.
+
+\textbf{*} Para a \textbf{idade}:
+
+\[
+\text{\textbf{Média}} =  \frac{28 + 34 + \cdots + 46}{20} =  \frac{773}{20} = 38,65 \text{ Anos}
+\]
+    
+Como possuímos 20 dados, a médiana é a média entre o 10º e o 11º valor ordenado. Assim, para a \textbf{Mediana}:
+
+\[
+\text{\textbf{Mediana}} = \frac{38 + 39}{2} = 38,5 \text{ Anos}
+\]
+
+
+\[
+\text{\textbf{Desvio Padrão}} = \sqrt{\frac{(28-38,65)^2 + (34-38,65)^2 + \cdots + (46-38,65)^2}{19}} = \sqrt{98,555} = 9,9275 \text{ Anos}
+\]
+
+Uma vez que a média e a mediana se encontram muito próximas, a distribuição de idades tem uma certa simetria com centro na faixa de 38 a 39 anos. Além disso, esse valor de desvio-padrão nos informa que os dados estão distribuidos em torno desse centro e ao longo de todas as idades de maneira semelhante. \\
+
+
+\textbf{*} Para a \textbf{Renda Desejada}:
+
+\[
+\text{\textbf{Média}} =  \frac{2,3 + 1,6 + \cdots + 3,2}{20} =  \frac{773}{20} = 1,92 \text{ Mil Euros}
+\]
+    
+
+\[
+\text{\textbf{Mediana}} = \frac{1,7 + 1,8}{2} = 1,75 \text{ Mil Euros}
+\]
+
+
+\[
+\text{\textbf{Desvio Padrão}} = \sqrt{\frac{(2,3-1,92)^2 + (1,6-1,92)^2 + \cdots + (3,2-1,92)^2}{19}} = \sqrt{0,509} = 0,713 \text{ Mil Euros}
+\]
+
+Dessa vez a média e a mediana estão um pouco deslocadas uma da outra, criando uma tendência para um dos lados. O desvio-padrão também é relativamente alto, indicando alta dispersão dos valores de salários.
+
+\textbf{*} Para os \textbf{Anos de Experiência}:
+
+\[
+\text{\textbf{Média}} =  \frac{2 + 8 + \cdots + 23}{20} =  \frac{280}{20} = 14 \text{ Anos}
+\]
+    
+
+\[
+\text{\textbf{Mediana}} = \frac{13 + 15}{2} = 14 \text{ Anos}
+\]
+
+
+\[
+\text{\textbf{Desvio Padrão}} = \sqrt{\frac{(2,3-1,92)^2 + (1,6-1,92)^2 + \cdots + (3,2-1,92)^2}{19}} = \sqrt{0,509} = 0,713 \text{ Mil Euros}
+\]
+
+Dessa vez a média e a mediana estão um pouco deslocadas uma da outra, criando uma tendência para um dos lados. O desvio-padrão também é relativamente alto, indicando alta dispersão dos valores de salários.
+
+
+\section{\textbf{Questão 3}}
+
+O conjunto de dados em anexo, {\tt HW1\_bike\_sharing.csv}\footnote{\label{refnote}Os dados estão disponíveis no material do homework.}, refere-se ao processo de compartilhamento de bicicletas em uma cidade dos Estados Unidos. O conjunto contém as colunas descritas na Tabela~\ref{tab:ex3}. A variável {\tt season} inclui as quatro estações do hemisfério norte: primavera, verão, outono e inverno. A variável {\tt weathersit} representa quatro condições meteorológicas: `Céu limpo', `Nublado', `Chuva fraca', `Chuva forte'. A variável {\tt temp} é a temperatura normalizada em graus Celsius, ou seja, os valores foram divididos por 41 (valor máximo).
+
+\begin{table}[h] \centering
+\begin{tabular}{l | p{6cm} }
+{\sc Tag} 		& {\sc Descrição} 							\\ \hline \hline
+{\tt instant}     	& Índice de registro                       				\\
+{\tt dteday}      	& Data da observação                            			\\
+{\tt season}      	& Estação do ano                                			\\
+{\tt weathersit}  & Condições meteorológicas                      		\\
+{\tt temp}        	& Temperatura em $^\circ$C (normalizada)      	 	\\
+{\tt casual}      	& Número de usuários casuais                    		\\
+{\tt registered}  	& Número de usuários registrados                		\\
+\end{tabular}
+\caption{Variáveis do conjunto {\tt HW1\_bike\_sharing} (questão \protect{\ref{sec:q3}}).}
+\label{tab:ex3}
+\end{table}
+
+\vspace{0.5em}
+\begin{enumerate}[leftmargin=*]
+
+\item Carregue o conjunto de dados {\tt HW1\_bike\_sharing.csv} no R. Classifique as variáveis quanto ao tipo (categórica ou numérica), identifique o número total de observações e as datas de início e fim da amostra.  
+
+\item Calcule medidas de tendência central (média, mediana) e os quartis para cada característica numérica relevante. Apresente os resultados em uma tabela com título apropriado. Comente os principais pontos.
+
+\item Atribua os níveis correspondentes às variáveis {\tt season} e {\tt weathersit}. Construa gráficos de barras para ambas. Qual estação do ano apresenta maior número de usuários? O uso de bicicletas depende da estação? Qual é a condição climática mais favorável para o uso do sistema?
+
+\item Calcule o número total de usuários por dia, somando {\tt casual} e {\tt registered}. Converta a variável {\tt temp} para temperatura real (multiplicando por 41). Em seguida, construa os gráficos de séries temporais para temperatura e número total de usuários. Essas séries apresentam tendência semelhante?
+\end{enumerate}
+
+\subsection{Solução}
+\subsubsection{item 1)}
+
+Em R criamos um dataframe que leu no conjunto de dados do arquivo fornecido em .csv, e que será usado para os proximos itens também. No nosso exercício temos dois tipos de dados, os categóricos e os numericos, sendo os categóricos aqueles que representam caracteristicas que não possuem magnitudes numericas entrei si, enquanto os numericos possuem, elas representam valores mensuraveis, que podem ser submetidas a operaçoes aritmeticas.
+
+Assim, iremos classificar cada variavel fornecida quanto o tipo delas (\textbf{categórica} ou \textbf{númerica}):
+
+\begin{table}[h!]
+\centering
+\caption{Classificação das variáveis quanto ao tipo de dado}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Descrição} & \textbf{Tipo de Dado} \\ \hline
+Índice de registro (instant) & Numérico \\ \hline
+Data da observação (dteday) & Categórico \\ \hline
+Estação do ano (season) & Categórico \\ \hline
+Condições meteorológicas (weathersit) & Categórico \\ \hline
+Temperatura em °C (normalizada) (temp) & Numérico \\ \hline
+Número de usuários casuais (casual) & Numérico \\ \hline
+Número de usuários registrados (registered) & Numérico \\ \hline
+\end{tabular}
+\end{table}
+
+Para adquirir o número total de observações e datas iniciais e 
+
+\newpage
+\begin{appendices}
+\section{Códigos}\label{app:ex1}
+
+\begin{lstlisting}[caption = {Solution of exercise \ref{sec:q1}}, label={freq.code.appendix}]
+rm(list=ls()) 			# clean the working space
+graphics.off()			# close all the graphic windows
+getwd() 			# verify the current working directory
+setwd('path/TI0111/my_folder')  # set your working directory
+\end{lstlisting}
+
+\section{Códigos}\label{app:ex2}
+\begin{lstlisting}[caption = {Solution of exercise \ref{sec:q2}}, label={freq.code.appendix2}]
+rm(list=ls()) 			# clean the working space
+graphics.off()			# close all the graphic windows
+getwd() 			# verify the current working directory
+setwd('path/TI0111/my_folder')  # set your working directory
+\end{lstlisting}
+\end{appendices}
+
+\end{document}
