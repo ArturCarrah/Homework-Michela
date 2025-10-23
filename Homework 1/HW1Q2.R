@@ -149,66 +149,15 @@ abline(model)
 correlacao <- cor(df$experiencia, df$renda, method = 'pearson') # Calculando o coeficiente de correlação de Pearson.
 sprintf("Coeficiente de correlacao de Pearson: %f", correlacao) # Por ser próximo de 0.5 a correlação existe e é razoável
 
-# Plotando histogramas para cada nacionalidade
 
-idade_ita <- df_italiana$idade
-renda_ita <- df_italiana$renda
+# Plotando boxplots para cada nacionalidade e dados associados
 
-hist(idade_ita, main="Idade dos Italianos",
-xlab="Idade", col="green")
+boxplot <- ggplot(df, aes(x=nacionalidade, y=renda))+
+            geom_boxplot(fill = "dark green")
 
-hist(renda_ita, main="Renda dos Italianos",
-xlab="Renda", col="green")
+boxplot
 
+boxplot <- ggplot(df, aes(x=nacionalidade, y=experiencia))+
+            geom_boxplot(fill = "blue")
 
-idade_eng <- df_inglesa$idade
-renda_eng <- df_inglesa$renda
-
-hist(idade_eng, main="Idade dos Ingleses",
-xlab="Idade")
-
-hist(renda_eng, main="Renda dos Ingleses",
-xlab="Renda")
-
-
-idade_bel <- df_belga$idade
-renda_bel <- df_belga$renda
-
-hist(idade_bel, main="Idade dos Belgas",
-xlab="Idade", col="yellow3")
-
-hist(renda_bel, main="Renda dos Belgas",
-xlab="Renda", col="yellow3")
-
-
-
-idade_esp <- df_espanhola$idade
-renda_esp <- df_espanhola$renda
-
-hist(idade_esp, main="Idade dos Espanhois",
-xlab="Idade", col="red")
-
-hist(renda_esp, main="Renda dos Espanhois",
-xlab="Renda", col="red")
-
-
-
-idade_fra <- df_francesa$idade
-renda_fra <- df_francesa$renda
-
-hist(idade_fra, main="Idade dos Franceses",
-xlab="Idade", col="blue")
-
-hist(renda_fra, main="Renda dos Franceses",
-xlab="Renda", col="blue")
-
-
-
-idade_ger <- df_alema$idade
-renda_ger <- df_alema$renda
-
-hist(idade_ger, main="Idade dos Alemaes",
-xlab="Idade", col="yellow")
-
-hist(renda_ger, main="Renda dos Alemaes",
-xlab="Renda", col="yellow")
+boxplot
