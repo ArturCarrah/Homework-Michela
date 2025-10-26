@@ -1,13 +1,12 @@
 \documentclass[a4paper,11pt]{article}
 
-\usepackage[portuguese]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath, amssymb}
-\usepackage{graphicx}
-\usepackage{color}
-\usepackage{listings}
-\usepackage{setspace} 
+\usepackage[portuguese]{babel} %Caracteres do português
+\usepackage[T1]{fontenc}       %Fonte
+\usepackage{amsmath, amssymb}  %Fórmulas matemáticas
+\usepackage{graphicx}          %Imagens
+\usepackage{color}             %Cores nas letras
+\usepackage{listings}          %Códigos de linguagens de programação
+\usepackage{setspace}          %Espaçamento dos parágrafos
 
 \oddsidemargin 0.22in
 \textwidth 5.8in
@@ -88,7 +87,7 @@ As emissões diárias de um gás poluente de uma planta industrial foram registr
 
 \subsubsection{Item 1}
 
-Nesse item calculamos a média, mediana e moda, além das medidas de dispersão, a amplitude, a variância, o desvio padrão e o coeficiente de variação. Mas, antes fazer os calculos, primeiro nós ordenamos o valores que estão contidos na tabela, ficando da seguinte forma:
+Nesse item calcula-se a média, mediana e moda, além das medidas de dispersão, a amplitude, a variância, o desvio padrão e o coeficiente de variação. Mas, antes fazer os calculos, primeiro é necessário ordenar o valores que estão contidos na tabela, ficando da seguinte forma:
 
 \begin{tabular}{cccccccccccc}
 6.2 & 7.7 & 8.3 & 9.0 & 9.8 & 10.5 & 10.7 & 11.0 & 11.2 & 11.8 & 12.3 & 12.8 \\
@@ -101,25 +100,25 @@ Nesse item calculamos a média, mediana e moda, além das medidas de dispersão,
 \end{tabular}
 \end{center}
 
-Depois de ordenar os valores em ordem crescente, é possível começar os calculos das medidas solicitadas. A \textbf{média} é calculada pela soma de todas as amostras e dividir pela quantidade de amostras, e como ja contamos antes, sabemos que temos 80 amostras. Então, temos que:
+Depois de ordenar os valores em ordem crescente, é possível começar os calculos das medidas solicitadas. A \textbf{média} é calculada pela soma de todas as amostras e dividir pela quantidade de amostras, e como já foi dito, existem 80 amostras. Então, tem-se:
 \[
 \text{\textbf{Média}} = \frac{x_1 + x_2 + \cdots + x_{80}}{80} =  \frac{6.2 + 7.7 + \cdots + 31.8}{80} =  \frac{1521.7}{80} = 19.021
 \]
 
-A \textbf{mediana} é o valor intermediário dos valores ordenados, separando os valores de baixo e os da parte de cima. Como temos 80 dados, não possuimos um valor intermediário, então precisamos pegar o valor médio entre a posição 40 e a 41. Dessa forma, temos:
+A \textbf{mediana} é o valor intermediário dos valores ordenados, separando os valores de baixo e os da parte de cima. Como existem 80 dados, não existe um valor intermediário, então precisa-se pegar o valor médio entre a posição 40 e a 41. Dessa forma:
 
 \[
 \text{\textbf{Mediana}} = \frac{x_{40} + x_{41}}{2} = \frac{19,1 + 19,2}{2} = 19{,}15
 \] 
 
-A \textbf{moda} é o número que repete mais vezes dentre todos os nossos dados, e observando-os vimos que o 19,4 se repete mais vezes, um total de 3, então, $Moda = 19,4$.
+A \textbf{moda} é o número que repete mais vezes dentre todos os dados, e observando-os , é nítido que o 19,4 se repete mais vezes, um total de 3, então, \textbf{Moda $= 19,4$}.
 
-Agora vamos calcular as medidas de dispersão solicitadas. A \textbf{amplitude} é calculada pela diferença entre o maior e o menor valor dos dados ordenados. Observando nossos dados, temos:
+Agora, é feito o cálculo das medidas de dispersão solicitadas. A \textbf{amplitude} é calculada pela diferença entre o maior e o menor valor dos dados ordenados. Observando os dados, tem-se:
 \[
 \text{\textbf{Amplitude}} = x_{\text{máximo}} - x_{\text{mínimo}} = 31.8 - 6.2 = 25.6
 \]
 
-A \textbf{variância} é uma medida que mostra o quanto os dados se dispersam em relação à média, algo a se notar é que usamos (n-1) no denominador, pois estamos trabalhando com variância amostral, pois temos uma pequena parcela da população, 80 amsotras. Usar essa diferença significa que estamos usando a correção de Bessel, que compensa o viés da variância, tornando o calculo mais preciso. Para calcular a variância amostral, usamos a fórmula:
+A \textbf{variância} é uma medida que mostra o quanto os dados se dispersam em relação à média, algo a se notar é que tem-se (n-1) no denominador, pois é trabalhado com variância amostral, pois na questão existe apenas uma pequena parcela da população, 80 amostras. Usar essa diferença significa que a correção de Bessel é usada, que compensa o viés da variância, tornando o cálculo mais preciso. Para calcular a variância amostral, usa-se a fórmula:
 \[
 s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
 \]
@@ -153,13 +152,13 @@ apenas uma amostragem dos potenciais dias de funcionamento da fábrica, isto é,
 
 \subsubsection{Item 2}
 
-Nesse item estamos tratando de formas de representar graficamente as nossas amostras, para isso temos duas formas diferente, o \textbf{histograma} e o \textbf{boxplot}.
+Esse item trata de formas de representar graficamente as amostras, para isso  duas formas diferentes são usdas, o \textbf{histograma} e o \textbf{boxplot}.
 
 O histograma é uma representação gráfica da distribuição de frequências de um conjunto de dados. No seu eixo horizontal temos intervalos de igual amplitude e no eixo vertical temos a frequencia dos dados em cada intervalo, onde essa frequencia é representada por um barra vertical, onde a sua altura identifica a frequencia.
 
 O boxplot é um gráfico que condesa cinco medidas importantes, o menor valor do conjunto, o primeiro quartil (separa os 25 de baixo), a mediana, o terceiro quartil (separa os 25 de cima) e a o maior do conjunto. Ele fornece um resumo robusto da distribuição das amostras.
 
-Agora vamos realmente analisar os gráficos, primeiro temos o histogrma, veja que os intervalos estão de 5 em 5, decidimos assim para melhor visualização da distribuição das amostras:
+Agora analisa-se os gráficos, primeiro no histogrma,é notável que os intervalos estão de 5 em 5, uma forma de melhorar a visualização da distribuição das amostras:
 
 \begin{figure}[h]
     \centering
@@ -170,16 +169,14 @@ Agora vamos realmente analisar os gráficos, primeiro temos o histogrma, veja qu
 \\
 \\
 
-Pelo histograma podemos notar uma boa simetria dos dados, pórem também é nitido uma leve assimetria à esquerda. Pois a concentração dos dados está deslocada para valores maiores.
+Pelo histograma nota-se uma boa simetria dos dados, pórem também é nitido uma leve assimetria à esquerda. Pois a concentração dos dados está deslocada para valores maiores.
 \\
 \\
-Abaixo temos o boxplot, que usa outra forma de representar os gráficos, como comentado antes:
+Abaixo o boxplot, que usa outra forma de representar os gráficos, como comentado anteriormente:
 \newpage
-\begin{figure}[h]
+\begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{BOXPLOT 1.JPG}
-    \caption{}
-    \label{fig:placeholder}
+    \includegraphics[width=0.75\linewidth]{boxplot1.png}
 \end{figure}
 
 A análise de tendência central revela que a mediana (\(Q_2 = 19,15\)) apresenta valor bastante próximo à média aritmética, reforçando a característica de simetria na distribuição dos dados e indicando que a maior parte das observações concentra-se em torno do centro da distribuição.
@@ -192,7 +189,7 @@ Assim, ferramentas gráficas utilizadas demonstram consistência entre si, permi
 \subsubsection{Item 3}
 Considerando um conjunto de dados com $n=80$ observações, o cálculo dos quartis segue o método em que as posições são determinadas pela média de duas observações ordenadas. Dessa forma, o primeiro quartil ($Q_1$) corresponde à média entre a $20^{\text{a}}$ e a $21^{\text{a}}$ observações, enquanto o terceiro quartil ($Q_3$) é obtido pela média entre a $60^{\text{a}}$ e a $61^{\text{a}}$ observações.
 
-Assim, temos os seguintes cálculos:
+Assim, tem-se os seguintes cálculos:
 
 \[
 \begin{array}{ll}
@@ -209,12 +206,12 @@ Q_3 &= \frac{n_{60} + n_{61}}{2} = \frac{22{,}9 + 23{,}0}{2} = 22{,}95
 
 \vspace{0.5cm}
 
-Com base nesses resultados, podemos calcular a dispersão central através do Intervalo Interquartil (IIQ):
+Com base nesses resultados, é possível calcular a dispersão central através do Intervalo Interquartil (IIQ):
 \[
 \text{IIQ} = Q_3 - Q_1 = 22{,}95 - 15{,}35 = 7{,}60 \text
 \]
 
-Além disso, como o Quartil 2 (Q2) divide as amostras em dois grupos, ele possui o mesmo valor da mediana, então temos:
+Além disso, como o Quartil 2 (Q2) divide as amostras em dois grupos, ele possui o mesmo valor da mediana, então:
 \[
 \text{Mediana} = Q_2 = 19,15
 \]
@@ -299,7 +296,7 @@ Uma empresa italiana recebeu 20 currículos de cidadãos italianos e estrangeiro
 
 \subsubsection{Item 1}
 
-Vamos calcular as medidas de disperção dos dados de idade, renda e anos de experiência dos candidatos.
+Realiza-se a seguir as medidas de disperção dos dados de idade, renda e anos de experiência dos candidatos.
 
 \textbf{*} Para a \textbf{idade}:
 
@@ -307,7 +304,7 @@ Vamos calcular as medidas de disperção dos dados de idade, renda e anos de exp
 \text{\textbf{Média}} =  \frac{28 + 34 + \cdots + 46}{20} =  \frac{773}{20} = 38,65 \text{ Anos}
 \]
     
-Como possuímos 20 dados, a médiana é a média entre o 10º e o 11º valor ordenado. Assim, para a \textbf{Mediana}:
+Como existem 20 dados, a médiana é a média entre o 10º e o 11º valor ordenado. Assim, para a \textbf{Mediana}:
 
 \[
 \text{\textbf{Mediana}} = \frac{38 + 39}{2} = 38,5 \text{ Anos}
@@ -318,7 +315,7 @@ Como possuímos 20 dados, a médiana é a média entre o 10º e o 11º valor ord
 \text{\textbf{Desvio Padrão}} = \sqrt{\frac{(28-38,65)^2 + (34-38,65)^2 + \cdots + (46-38,65)^2}{19}} = \sqrt{98,555} = 9,9275 \text{ Anos}
 \]
 
-Uma vez que a média e a mediana se encontram muito próximas, a distribuição de idades tem uma certa simetria com centro na faixa de 38 a 39 anos. Além disso, esse valor de desvio-padrão nos informa que os dados estão distribuidos em torno desse centro e ao longo de todas as idades de maneira semelhante, ou seja, indica uma grande diversidade da faixa etária dos aplicantes. \\
+Uma vez que a média e a mediana se encontram muito próximas, a distribuição de idades tem uma certa simetria com centro na faixa de 38 a 39 anos. Além disso, esse valor de desvio-padrão informa que os dados estão distribuidos em torno desse centro e ao longo de todas as idades de maneira semelhante, ou seja, indica uma grande diversidade da faixa etária dos aplicantes. \\
 
 
 \textbf{*} Para a \textbf{Renda Desejada}:
@@ -454,21 +451,23 @@ O conjunto de dados em anexo, {\tt HW1\_bike\_sharing.csv}\footnote{\label{refno
 
 \item Calcule o número total de usuários por dia, somando {\tt casual} e {\tt registered}. Converta a variável {\tt temp} para temperatura real (multiplicando por 41). Em seguida, construa os gráficos de séries temporais para temperatura e número total de usuários. Essas séries apresentam tendência semelhante?
 \end{enumerate}
+\\
 
 \subsection{Solução}
-\subsubsection{item 1)}
+\subsubsection{Item 1}
 
-Em R criamos um dataframe que leu no conjunto de dados do arquivo fornecido em .csv, e que será usado para os proximos itens também. No nosso exercício temos dois tipos de dados, os categóricos e os numericos, sendo os categóricos aqueles que representam caracteristicas que não possuem magnitudes numericas entrei si, enquanto os numericos possuem, elas representam valores mensuraveis, que podem ser submetidas a operaçoes aritmeticas.
+Em R, cria-se um dataframe que lê o conjunto de dados do arquivo fornecido em .csv, e que será usado para os proximos itens. No exercício, existem dois tipos de dados, os categóricos e os numéricos, sendo os categóricos aqueles que representam caracteristicas que não possuem magnitudes numericas entre si, enquanto os numéricos possuem, elas representam valores mensuráveis, que podem ser submetidos a operações aritméticas.
 
-Assim, iremos classificar cada variavel fornecida quanto o tipo delas (\textbf{categórica} ou \textbf{númerica}):
+Assim, abaixo encontra-se a classificação de cada variavel fornecida quanto o tipo delas (\textbf{categórica} ou \textbf{numérica}):
 
+\newpage
 \begin{table}[h!]
 \centering
 \caption{Classificação das variáveis quanto ao tipo de dado}
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Descrição} & \textbf{Tipo de Dado} \\ \hline
-Índice de registro (instant) & Numérico \\ \hline
+Índice de registro (instant) & Categórico \\ \hline
 Data da observação (dteday) & Categórico \\ \hline
 Estação do ano (season) & Categórico \\ \hline
 Condições meteorológicas (weathersit) & Categórico \\ \hline
@@ -478,7 +477,7 @@ Número de usuários registrados (registered) & Numérico \\ \hline
 \end{tabular}
 \end{table}
 
-Para adquirir o número total de observações e datas iniciais e a data inicial e a data final da amostras utilizamos de funções do R para tal feito. Pois, é inviavel contar um por um pois temos uma grande quantidade de amostras. 
+Para adquirir o número total de observações e datas iniciais e a data inicial e a data final da amostras utiliza-se de funções do R para tal feito, pois é inviável contar um por um, já que existem uma grande quantidade de amostras. 
 
 Segue abaixo a tabela com as informações adquiridas:
 
@@ -490,12 +489,15 @@ Segue abaixo a tabela com as informações adquiridas:
 \hline
 \textbf{Número Total de Observações} & \textbf{Data Inicial} & \textbf{Data Final} \\
 \hline
-1.250 & 15/03/2023 & 30/06/2024 \\
+731 & 01.01.2011 & 31.12.2012 \\
 \hline
 \end{tabular}
 \end{table}
 
-\subsubsection{item 2)}
+\subsubsection{Item 2}
+
+Primeiro, as caracteristicas relevantes para esse caso são as numéricas, pois o seu valor númerico significa algum grau de magnitude. Assim, para todas as caracteristicas numéricas foram calculada a média e a mediana, além de seus quartis. Para tal feito, um código em R foi executado, obtendo os seguintes valores:
+
 
 \begin{table}[h]
 \centering
@@ -506,12 +508,6 @@ Segue abaixo a tabela com as informações adquiridas:
 \textbf{Característica} & \textbf{Média} & \textbf{Mediana} & \textbf{Q1} & \textbf{Q3} & \textbf{IQR} \\
 \hline
 \hline
-\textbf{Índice de registro} & 512.5 & 512.5 & 256.2 & 768.8 & 512.6 \\
-\hline
-\textbf{Estações do ano} & 2.4 & 2.0 & 1.0 & 3.0 & 2.0 \\
-\hline
-\textbf{Condições metereológicas} & 1.8 & 2.0 & 1.0 & 2.0 & 1.0 \\
-\hline
 \textbf{Temperatura (◦C)} & 0.42 & 0.41 & 0.28 & 0.56 & 0.28 \\
 \hline
 \textbf{usuários casuais} & 85.3 & 72.6 & 42.1 & 118.9 & 76.8 \\
@@ -521,25 +517,404 @@ Segue abaixo a tabela com as informações adquiridas:
 \end{tabular}
 \end{table}
 
+Dos dados obtidos, é notável que as variaveis de usuários casuais e de usuários registrados possuem uma grande dispersão, com o primeiro e o terceiro quartil bem distantes, mostrando que existe uma grande variação entre as amostras obtidos no experimento. Por outro lado, a variavel de temperatura se apresenta bem simétrica, com média e mediana próximas.
 
 \newpage
-\begin{appendices}
-\section{Códigos}\label{app:ex1}
+\subsubsection{Item 3}
+    De começo, é necessário atribuir os níveis para as variaveis \textbf{season} (estações do ano) e \textbf{weathersit} (condições climáticas). Para a varivel \textit{season}, quatro valores foram atribuidos: Primavera, Verão, Outono e Inverno, e para a \textit{weathersit} também quatro valores: Céu limpo, Nublado, Chuva fraca e Chuva forte.
 
-\begin{lstlisting}[caption = {Solution of exercise \ref{sec:q1}}, label={freq.code.appendix}]
-rm(list=ls()) 			# clean the working space
-graphics.off()			# close all the graphic windows
-getwd() 			# verify the current working directory
-setwd('path/TI0111/my_folder')  # set your working directory
+   \begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Capturar.JPG}
+        \caption*{}
+        \label{fig:fig1}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{2.JPG}
+        \caption*{}
+        \label{fig:fig2}
+    \end{minipage}
+\end{figure}
+
+
+    \textbf{Qual estação do ano apresenta maior número de usuários?} Em um gráfico de barras, a varivel que possuir maior altura, indica a que possui maior usuários naquela condição. Assim, pelo gráfico a estação do ano que possui o maior número de usuários é o Outono.
+
+    \textbf{O uso de bicicletas depende da estação do ano?} Sim, o uso de bicicletas depende da estação do ano. A diferença entre a Primavera e o Verão, que mesmo não sendo o com maior número de usuarios de bike possui um valor alto, é de mais de 300 mil usuários.
+
+    \textbf{Qual é a condição climática mais favorável para o uso do sistema de compartilha-
+mento de bicicletas?} Pelo gráfico da condição climatica pelo número de usuarios que a condição mais favoravel para o uso do sistema de bicicletas é o Céu limpo, que possui a grande maioria dos usuários, indicando que eles tendem a usar mais a bicicletas em dias de céu limpo.
+
+\newpage
+\subsubsection{Item 4}
+
+Antes de criar as séries temporais para a temperatura e número total de usuários é necessário calcular o numero total de usuários por dia, somando o \textbf{casual} e o \textbf{registered}. Feito isso, altera-se a variável \textbf{temp} para temperatura real, multiplicando por 41. Desse modo, é possível contruir os gráficos das séries temporais.
+
+
+   \begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{temp.JPG}
+        \caption{}
+        \label{fig:fig1}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{num.JPG}
+        \caption{}
+        \label{fig:fig2}
+    \end{minipage}
+\end{figure}
+
+Analisando as séries temporais, identifica-se um padrão sazonal tanto na temperatura quanto no número de usuários do sistema de bicicletas compartilhadas. A temperatura sobe no verão e cai no inverno, acompanhando as estações do ano.
+
+O uso das bicicletas segue uma tendência: aumenta nos meses mais quentes (primavera e verão) e diminui no inverno, quando o clima desencoraja deslocamentos ao ar livre. Isso indica que o conforto térmico influencia a decisão de uso.
+
+Além disso, a série de usuários apresenta maior variabilidade, sugerindo que outros fatores, como eventos meteorológicos pontuais, feriados e hábitos de mobilidade, também impactam a demanda diária.
+
+Conclui-se assim que há uma relação positiva entre temperatura e demanda, mostrando que o clima é um fator relevante para a utilização do sistema.
+
+
+\newpage
+\section{\textbf{Apêndice - Códigos em R}}
+
+\subsection{Exercício 1:}
+
+\begin{lstlisting}
+   library(ggplot2) # ggplot2 para gráficos
+
+x <- c(15.8, 22.7, 26.8, 19.1, 18.5, 14.4, 8.3, 25.9, 26.4, 9.8, 21.9, 10.5, 17.3, 6.2, 18.0, 22.9, 24.6, 19.4, 12.3, 15.9, 20.1, 17.0, 22.3, 27.5, 23.9, 17.5, 11.0, 20.4, 16.2, 20.8, 20.9, 21.4, 18.0, 24.3, 11.8, 17.9, 18.7, 12.8, 15.5, 19.2, 13.9, 28.6, 19.4, 21.6, 13.5, 24.6, 20.0, 24.1, 9.0, 17.6, 25.7, 20.1, 13.2, 23.7, 10.7, 19.0, 14.5, 18.1, 31.8, 28.5, 22.7, 15.2, 23.0, 29.6, 11.2, 14.7, 20.5, 26.6, 13.3, 18.1, 24.8, 26.1, 7.7, 22.5, 19.3, 19.4, 16.7, 16.9, 23.5, 18.4)
+
+y = sort(x)
+
+# x é um vetor com os dados de emissão diários. Para calcular algumas medidas, criamos um vetor ordenado y contendo os valores de x 
+
+# Gambiarra(?) para achar a moda do conjunto. A função de moda não é nativa do R. Abaixo o link que forneceu uma resposta funcional
+#https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode
+
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+# Cálculo de média, moda e mediana
+
+mediana = median(x)
+moda = Mode(x)
+mean = mean(x)
+
+sprintf("Media: %f", mean)
+sprintf("Moda: %f", moda)
+sprintf("Mediana: %f", mediana)
+
+
+
+amplitude = y[80] - y[1] # Amplitude é definida como a diferença entre o valor máximo e mínimo do conjunto
+sprintf("Amplitude: %f", amplitude)
+
+var = var(x) # Variancia de amostra (dividido por n-1)
+sprintf("Variancia: %f", var)
+
+std = sd(x) # Desvio padrão de amostra (dividido por n-1)
+sprintf("Desvio Padrao: %f", std)
+
+coef_var = var/mean # Coeficiente de variação = variância/média
+sprintf("Coeficiente de Variacao: %f", coef_var)
+
+
+
+df <- as.data.frame(x) # Colocando x em um dataframe para fazer os gráficos
+
+hist <- ggplot(df, aes(x=x)) + 
+  geom_histogram(binwidth=5, color="black", fill="white")  # Histograma
+
+hist
+
+boxplot <- ggplot(df, aes(y=x))+
+            geom_boxplot(fill = "dark green") +
+            ylab("Emissoes de Gases (Unidades de Medida)") # Boxplot
+
+boxplot
+
+print("Valor dos elementos dos quartis: ")
+
+quantils <-quantile(y, c(0.25,0.5,0.75), type = 2) # Tipo 2 tira a média se for par
+quantils
+
+IQR = 22.95 - 15.35 # Inter Quartile Range
+
+sprintf("IQR: %f", IQR)
 \end{lstlisting}
 
-\section{Códigos}\label{app:ex2}
-\begin{lstlisting}[caption = {Solution of exercise \ref{sec:q2}}, label={freq.code.appendix2}]
-rm(list=ls()) 			# clean the working space
-graphics.off()			# close all the graphic windows
-getwd() 			# verify the current working directory
-setwd('path/TI0111/my_folder')  # set your working directory
+\subsection{Exercício 2:}
+
+\begin{lstlisting}
+    library(ggplot2) # ggplot2 para fazer os gráficos
+
+# Criando um dataframe com as colunas de idade, nacionalidade, renda e experiência (Obrigado ChatoGPT!)
+print("Tabela Original")
+cat("\n")
+
+df <- data.frame(
+  idade = c(28, 34, 46, 26, 37, 29, 51, 31, 39, 43, 58, 44, 25, 23, 52, 42, 48, 33, 38, 46),
+  nacionalidade = c("Italiana", "Inglesa", "Belga", "Espanhola", "Italiana", "Espanhola", 
+                    "Francesa", "Belga", "Italiana", "Italiana", "Italiana", "Inglesa", 
+                    "Francesa", "Espanhola", "Italiana", "Alemana", "Francesa", "Italiana", 
+                    "Alemana", "Italiana"),
+  renda = c(2.3, 1.6, 1.2, 0.9, 2.1, 1.6, 1.8, 1.4, 1.2, 2.8, 3.4, 2.7, 1.6, 1.2, 
+            1.1, 2.5, 2.0, 1.7, 2.1, 3.2),
+  experiencia = c(2, 8, 21, 1, 15, 3, 28, 5, 13, 20, 32, 23, 1, 0, 29, 18, 19, 7, 12, 23)
+)
+
+print(df)
+cat("\n") # O uso do cat é para criar uma nova linha e espaçar as informações
+
+print("Idade")
+cat("\n")
+
+# Para pegar só uma coluna do dataframe coloque df$nome_coluna
+# Estatistícas de renda, idade e experiência
+
+media_idade = mean(df$idade) 
+mediana_idade = median(df$idade)
+std_idade = sd(df$idade)
+sprintf("Media de idade dos candidatos: %f", media_idade)
+sprintf("Mediana das idades dos candidatos: %f", mediana_idade)
+sprintf("Desvio padrao das idades dos candidatos: %f", std_idade)
+
+cat("\n")
+
+print("Renda")
+cat("\n")
+
+media_renda = mean(df$renda)
+mediana_renda = median(df$renda)
+std_renda = sd(df$renda)
+sprintf("Media da renda desejada pelos candidatos: %f", media_renda)
+sprintf("Mediana da renda desejada pelos candidatos: %f", mediana_renda)
+sprintf("Desvio padrao das rendas desejadas pelos candidatos: %f", std_renda)
+
+cat("\n")
+
+print("Experiencia")
+cat("\n")
+
+media_exp = mean(df$experiencia)
+mediana_exp = median(df$experiencia)
+std_exp = sd(df$experiencia)
+sprintf("Media de anos de experiencia dos candidatos: %f", media_exp)
+sprintf("Mediana dos anos de experiencia dos candidatos: %f", mediana_exp)
+sprintf("Desvio padrao dos anos de experiencia dos candidatos: %f", std_exp)
+
+cat("\n")
+
+# Agora mostrando os dataframes divididos por nacionalidade e fazendo os devidos cálculos
+# Use subset para criar outro dataframe a partir de um dado específico
+
+# Copia e cola infinito abaixo para printar cada dataframe
+
+print("Dataframes divididos por nacionalidade: ")
+cat("\n")
+
+df_italiana <- subset(df, nacionalidade == "Italiana")
+df_inglesa <- subset(df, nacionalidade == "Inglesa")
+df_belga <- subset(df, nacionalidade == "Belga")
+df_espanhola <- subset(df, nacionalidade == "Espanhola")
+df_francesa <- subset(df, nacionalidade == "Francesa")
+df_alema <- subset(df, nacionalidade == "Alemana")
+
+print("Italianos")
+cat("\n")
+
+print(df_italiana)
+rendaMedia_ita <- mean(df_italiana$renda)
+expMedia_ita <- mean(df_italiana$experiencia)
+cat("\n")
+sprintf("Renda media italiana: %f", rendaMedia_ita)
+sprintf("Experiencia media italiana: %f", expMedia_ita)
+cat("\n")
+
+print("Ingleses")
+cat("\n")
+
+print(df_inglesa)
+rendaMedia_eng <- mean(df_inglesa$renda)
+expMedia_eng <- mean(df_inglesa$experiencia)
+cat("\n")
+sprintf("Renda media inglesa: %f", rendaMedia_eng)
+sprintf("Experiencia media inglesa: %f", expMedia_eng)
+cat("\n")
+
+print("Belgas")
+cat("\n")
+
+print(df_belga)
+rendaMedia_bel <- mean(df_belga$renda)
+expMedia_bel <- mean(df_belga$experiencia)
+cat("\n")
+sprintf("Renda media dos belgas: %f", rendaMedia_bel)
+sprintf("Experiencia media dos belgas: %f", expMedia_bel)
+cat("\n")
+
+print("Espanhois")
+cat("\n")
+
+print(df_espanhola)
+rendaMedia_esp <- mean(df_espanhola$renda)
+expMedia_esp <- mean(df_espanhola$experiencia)
+cat("\n")
+sprintf("Renda media dos espanhois: %f", rendaMedia_esp)
+sprintf("Experiencia media dos espanhois: %f", expMedia_esp)
+cat("\n")
+
+print("Franceses")
+cat("\n")
+
+print(df_francesa)
+rendaMedia_fra <- mean(df_francesa$renda)
+expMedia_fra <- mean(df_francesa$experiencia)
+cat("\n")
+sprintf("Renda media dos franceses: %f", rendaMedia_fra)
+sprintf("Experiencia media dos franceses: %f", expMedia_fra)
+cat("\n")
+
+print("Alemaes")
+cat("\n")
+
+print(df_alema)
+rendaMedia_ger <- mean(df_alema$renda)
+expMedia_ger <- mean(df_alema$experiencia)
+cat("\n")
+sprintf("Renda media dos alemaes: %f", rendaMedia_ger)
+sprintf("Experiencia media dos alemaes: %f", expMedia_ger)
+cat("\n")
+
+
+plot(df$experiencia, df$renda, xlab = "Anos de experiencia", # Plotando o gráfico de Renda x Experiência e traçando uma reta indicando
+                                                             # correlação entre os dados
+    ylab = "Renda desejada", col = "blue", pch = 19)
+
+model <- lm(df$renda ~ df$experiencia, data = df)
+abline(model)
+
+correlacao <- cor(df$experiencia, df$renda, method = 'pearson') # Calculando o coeficiente de correlação de Pearson.
+sprintf("Coeficiente de correlacao de Pearson: %f", correlacao) # Por ser próximo de 0.5 a correlação existe e é razoável
+
+
+# Plotando boxplots para cada nacionalidade e dados associados
+
+boxplot <- ggplot(df, aes(x=nacionalidade, y=renda))+
+            geom_boxplot(fill = "dark green")
+
+boxplot
+
+boxplot <- ggplot(df, aes(x=nacionalidade, y=experiencia))+
+            geom_boxplot(fill = "blue")
+
+boxplot
 \end{lstlisting}
-\end{appendices}
+
+\subsection{Exercício 3:}
+
+\begin{lstlisting}
+
+install.packages("ggplot2")
+install.packages("dplyr")
+
+library(ggplot2)
+library(dplyr)
+
+#leitura do arquivo .CSV
+df <- read.csv("HW1_bike_sharing.csv", stringsAsFactors = FALSE)
+
+#ITEM A =======================================================================================
+n_obs  <- nrow(df) 
+data_i <- as.Date(min(df$dteday, na.rm = TRUE)) 
+data_f <- as.Date(max(df$dteday, na.rm = TRUE))
+
+cat("Número de observações:", n_obs, "\n")
+cat("Data inicial:", data_i, "\n")
+cat("Data final:", data_f, "\n")
+
+#ITEM B =======================================================================================
+df$temp_real <- df$temp * 41
+df$total_users <- df$casual + df$registered
+
+num_vars <- c("instant", "temp", "temp_real", "casual", "registered", "total_users")
+
+tabela_sumarios <- data.frame(
+  Variável = num_vars,
+  Média = sapply(df[num_vars], mean, na.rm = TRUE),
+  Mediana = sapply(df[num_vars], median, na.rm = TRUE),
+  Q1 = sapply(df[num_vars], quantile, probs = 0.25, na.rm = TRUE),
+  Q3 = sapply(df[num_vars], quantile, probs = 0.75, na.rm = TRUE)
+)
+tabela_sumarios
+
+#ITEM C =======================================================================================
+
+# Atribuindo níveis
+df$season <- factor(df$season,
+                    levels = c(1, 2, 3, 4),
+                    labels = c("Primavera", "Verão", "Outono", "Inverno"))
+
+df$weathersit <- factor(df$weathersit,
+                        levels = c(1, 2, 3, 4),
+                        labels = c("Céu limpo", "Nublado", "Chuva fraca", "Chuva forte"))
+
+# ✅ Criação das tabelas ANTES dos gráficos
+df_estacao <- df %>%
+  group_by(season) %>%
+  summarise(média_usuarios = mean(total_users, na.rm = TRUE),
+            total_usuarios = sum(total_users, na.rm = TRUE),
+            .groups = "drop")
+
+df_clima <- df %>%
+  group_by(weathersit) %>%
+  summarise(média_usuarios = mean(total_users, na.rm = TRUE),
+            total_usuarios = sum(total_users, na.rm = TRUE),  # ← adicionado
+            .groups = "drop")
+
+# Gráfico de barras para 'season'
+ggplot(df_estacao, aes(x = season, y = total_usuarios, fill = season)) +
+  geom_col(width = 0.6, color = "black") +
+  scale_fill_manual(values = c("springgreen3", "gold", "darkorange", "deepskyblue3")) +
+  labs(title = "Total de Usuários por Estação do Ano",
+       x = "Estação do Ano", y = "Total de Usuários") +
+  theme_minimal(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        legend.position = "none")
+
+# Gráfico de barras para 'weathersit'
+ggplot(df_clima, aes(x = weathersit, y = total_usuarios, fill = weathersit)) +
+  geom_col(width = 0.6, color = "black") +
+  scale_fill_manual(values = c("deepskyblue3", "gray70", "gold", "darkred")) +
+  labs(title = "Total de Usuários por Condição Climática",
+       x = "Condição Climática", y = "Total de Usuários") +
+  theme_minimal(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        legend.position = "none")
+
+#ITEM D =======================================================================================
+df$dteday <- as.Date(df$dteday)
+df$total_users <- df$casual + df$registered
+df$temp_real <- df$temp * 41
+
+# Séries temporais
+ggplot(df, aes(x = dteday, y = temp_real)) +
+  geom_line(color = "steelblue") +
+  labs(title = "Série Temporal — Temperatura Real",
+       x = "Data", y = "Temperatura Real ") +
+  theme_minimal()
+
+ggplot(df, aes(x = dteday, y = total_users)) +
+  geom_line(color = "darkorange") +
+  labs(title = "Série Temporal — Número Total de Usuários",
+       x = "Data", y = "Número Total de Usuários") +
+  theme_minimal()
+\end{lstlisting}
 
 \end{document}
