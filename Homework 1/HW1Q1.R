@@ -43,12 +43,13 @@ sprintf("Coeficiente de Variacao: %f", coef_var)
 df <- as.data.frame(x) # Colocando x em um dataframe para fazer os gráficos
 
 hist <- ggplot(df, aes(x=x)) + 
-  geom_histogram(binwidth=1, color="black", fill="white") # Histograma
+  geom_histogram(binwidth=5, color="black", fill="white")  # Histograma
 
 hist
 
-boxplot <- ggplot(df, aes(x=x))+
-            geom_boxplot(fill = "dark green") # Boxplot
+boxplot <- ggplot(df, aes(y=x))+
+            geom_boxplot(fill = "dark green") +
+            ylab("Emissoes de Gases (Unidades de Medida)") # Boxplot
 
 boxplot
 
