@@ -31,6 +31,7 @@ cat("Valor Esperado:", Ex, "\n")
 Var = Ex*0.3
 cat("Variância:", Var, "\n")
 
+cat("Desvio-Padrão:", sqrt(Var), "\n")
 
 # Para X>=20:
 s = 0
@@ -49,5 +50,6 @@ for(i in 32:43){
 cat("P(30 < X < 43):", s, "\n")
 
 # Para X = 31:
+
 
 cat("P(X = 31):", pmf[32], "\n")
