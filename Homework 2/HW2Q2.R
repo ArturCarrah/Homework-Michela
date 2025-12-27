@@ -39,7 +39,7 @@ cat("Variância da dist. Binomial:", Ex_Binom*(1-0.0000001), "\n")
 
 s = 0
 for(i in 1:20){
-    s <- s + pmf[i]*(1/i)
+    s <- s + pmf[i+1]*(1/i)
 }
 
 cat("Probabilidade de ganhar:", s)
