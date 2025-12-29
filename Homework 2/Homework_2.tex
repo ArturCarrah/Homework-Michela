@@ -416,9 +416,7 @@ Para uma distribuição de Poisson com 1000000 testes e $\lambda = 1$, a distrib
 Você é responsável por monitorar a temperatura de uma CPU multicore em uma unidade
 de processamento embarcada. Sob carga normal, a temperatura da CPU apresenta flutuações devido a mudanças na carga de trabalho, nas condições ambientais e na eficiência
 do sistema de resfriamento. Testes mostram que a temperatura em regime estacionário
-da CPU segue uma distribuição normal com temperatura média µ = 62 ◦C e desviopadrão σ = 3, 5
-◦C. Sua tarefa é simular medições de temperatura da CPU e analisar
-suas propriedades estatísticas.
+da CPU segue uma distribuição normal com temperatura média $\mu = 62$ ºC e desvio-padrão $\sigma = 3,5$ ºC. Sua tarefa é simular medições de temperatura da CPU e analisar suas propriedades estatísticas.
 
 \vspace{0.5em}
 \begin{enumerate}[leftmargin=*]
@@ -549,7 +547,7 @@ box_muller_cpu_temp <- function(n) {
 \subsubsection{Item 2}
 Usando a função criada nos itens anteriores é possível gerar temperaturas da CPU a partir do método de Box-Muller. Assim, foram geradas 1000 medições dessa temperatura (lembre-se que nesse caso será usado média (\mu\)) = \(62^\circ\mathrm{C}\) e desvio padrão (\sigma\)) = \(3.5^\circ\mathrm{C}\)).
 
-Além disso, também foram gerados 1000 medições usando o geraror de números aleatórios normal do próprio R, passando os mesmos parâmetros. Isso foi feito para fins de comparação, para verificar se os resultados são semelhantes. Segue abaixo o código em R:
+Além disso, também foram gerados 1000 medições usando o gerador de números aleatórios normal do próprio R, passando os mesmos parâmetros. Isso foi feito para fins de comparação, para verificar se os resultados são semelhantes. Segue abaixo o código em R:
 
 \begin{lstlisting}
 T_box <- box_muller_cpu_temp(1000)
@@ -557,7 +555,7 @@ T_box <- box_muller_cpu_temp(1000)
 T_rnorm <- rnorm(n = 1000, mean = 62, sd = 3.5)
 \end{lstlisting}
 
-Considere que nesse ambiente a função que gera o Box-Muller já foi criada. Para melhor compreensão do que está acontecendo no código, segue uma imagem com algumas saídas das duas formas de geração de temperaturas (Na primeira linha são valores gerados pela função Box-Muller e na segunda linha valores gerados pelo próprio R):
+Considere que nesse ambiente a função que gera o Box-Muller já foi criada. Um ponto muito importante é que toda vez que o código for rodado os valores gerados serão diferentes, o que pode fazer com que tenha pequenas diferenças na média, nos outros valores e nos histogramas. Para melhor compreensão do que está acontecendo no código, segue uma imagem com algumas saídas das duas formas de geração de temperaturas (Na primeira linha são valores gerados pela função Box-Muller e na segunda linha valores gerados pelo próprio R):
 
 \begin{figure}[h]
     \centering
