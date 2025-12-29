@@ -1,5 +1,3 @@
-library(ggplot2) # Biblioteca para plotar os gráficos
-
 # Como temos uma baixíssima probabilidade e um grande número de pessoas, pode-se modelar essa pesquisa como uma distribuição de Poisson. Além disso, como temos p = 10^-7 e n = 10^7, intuitivamente o número de pessoas que ganhariam o prêmio em um dia seria 10^7*10^-7 = 1 pessoa. Portanto, o parâmetro dessa distribuição seria 1.
 
 x <- 0:20
@@ -10,13 +8,13 @@ pmf = dpois(x, 1)
 pmf2 = dbinom(x,10000000, 0.0000001)
 
 plot(x,pmf,type='h',col='red',lwd=2,
-    main = 'PMF da dist. de Poisson', xlab= 'x', ylab='P(x)')
+        xlab= 'x', ylab='P(x)')
 points(x,pmf, pch=19, col='red')
 
 abline(h=0) # Adiciona uma linha no valor de P(x) = 0 para aumentar a legibilidade
 
 plot(x,pmf2,type='h',col='blue',lwd=2,
-    main = 'PMF da dist. Binomial', xlab= 'x', ylab='P(x)')
+        xlab= 'x', ylab='P(x)')
 points(x,pmf2, pch=19, col='blue')
 
 abline(h=0) # Adiciona uma linha no valor de P(x) = 0 para aumentar a legibilidade
@@ -48,4 +46,4 @@ cat("Probabilidade de ganhar:", s)
 y = rpois(1000000, 1)
 
 hist(y, prob = TRUE, breaks = 9, border = 'black', right = FALSE,
-    main = "Distrib. de y")
+    main = " ")
