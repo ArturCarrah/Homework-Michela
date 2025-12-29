@@ -1,0 +1,507 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[portuguese]{babel} %Caracteres do português
+\usepackage[T1]{fontenc}       %Fonte
+\usepackage{amsmath, amssymb}  %Fórmulas matemáticas
+\usepackage{graphicx}          %Imagens
+\usepackage{color}             %Cores nas letras
+\usepackage{listings}          %Códigos de linguagens de programação
+\usepackage{setspace}          %Espaçamento dos parágrafos
+\usepackage{hyperref}
+
+\oddsidemargin 0.22in
+\textwidth 5.8in
+
+% Ajuste no título da seção para garantir que a numeração apareça
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\normalfont\Large\scshape}{\thesection}{1em}{#1}  % Aqui a numeração aparece antes do título
+\titleformat{\subsection}[block]{\normalfont\large\scshape}{\thesubsection}{1em}{#1}
+
+\usepackage[title,titletoc]{appendix}
+\AddToHook{env/appendices/begin}{
+\titleformat{\section}{\normalfont\Large\scshape}{}{0em}{#1\ \thesection} % Formato correto para as seções no apêndice
+}
+
+\usepackage[skins]{tcolorbox}
+\definecolor{bblue}{rgb}{0,0.3961,0.7412}
+\usepackage[bookmarksnumbered=true]{hyperref} 
+\hypersetup{
+     colorlinks = true,
+     linkcolor = bblue,
+     anchorcolor = bblue,
+     citecolor = bblue,
+     filecolor = bblue,
+     urlcolor = bblue
+ }
+
+\renewcommand{\lstlistingname}{Listado}
+\lstset{
+    backgroundcolor=\color[rgb]{0.86,0.88,0.93},
+    language=R, keywordstyle=\color[rgb]{0,0,1},
+    basicstyle=\footnotesize \ttfamily,breaklines=true,
+    escapeinside={\%*}{*)}
+}
+\usepackage{footmisc} \renewcommand{\labelitemi}{$\circ$}
+\usepackage{enumitem} \setlist[itemize]{leftmargin=*}
+
+\usepackage{scrextend}
+\deffootnote[1em]{1em}{1em}{\textsuperscript{\thefootnotemark}\,}
+\begin{document}
+\begin{figure}[!h] \includegraphics [scale=0.3] {Figures/Course-logo} \end{figure}
+\begin{spacing}{1.5}
+
+{\Large\sc \noindent \textbf{HOMEWORK 2}} \\
+{\large\sc \noindent \textbf{Nome completo:} Lucas Teixeira Holanda / Artur Carrah Cerqueira}\\
+{\large\sc \noindent \textbf{Número de matricula:} 568254 / 570754}
+
+\end{spacing}
+\vskip1cm
+
+
+
+\section{\textbf{QUESTÃO 1 - EMISSÕES DE UM GÁS POLUENTE}}
+
+As emissões diárias de um gás poluente de uma planta industrial foram registradas 80 vezes, em uma determinada unidade de medida. Os dados obtidos estão apresentados na Tabela \ref{tab:ex1}.
+\begin{table}[ht!]\centering
+\begin{tabular}{l l l l l l l l l l l l l}
+15.8 & 22.7 & 26.8 & 19.1 & 18.5 & 14.4 & 8.3 	 & 25.9 & 26.4 & 9.8  & 21.9 &10.5 \\
+17.3 & 6.2   &18.0  & 22.9 & 24.6 & 19.4 & 12.3 & 15.9 & 20.1 & 17.0 & 22.3 & 27.5 \\
+23.9 & 17.5 & 11.0 & 20.4 & 16.2 & 20.8 & 20.9 & 21.4 & 18.0 & 24.3 & 11.8  &17.9 \\
+18.7 & 12.8 & 15.5 & 19.2 & 13.9 & 28.6 & 19.4 & 21.6 & 13.5 & 24.6 & 20.0 & 24.1\\ 
+9.0   & 17.6 & 25.7 & 20.1 & 13.2 & 23.7 & 10.7 & 19.0 & 14.5 & 18.1 & 31.8 & 28.5 \\
+22.7 & 15.2 & 23.0 & 29.6 & 11.2 & 14.7 & 20.5 & 26.6 & 13.3 & 18.1 & 24.8 & 26.1 \\
+7.7 & 22.5 & 19.3 & 19.4 & 16.7 & 16.9 & 23.5 & 18.4
+\end{tabular}
+\caption{Emissões diárias de gas poluente (questão 1).}
+\label{tab:ex1}
+\end{table}
+
+\begin{enumerate}
+\item Calcule as medidas de tendência central (média, mediana e moda) e as medidas de dispersão (amplitude, variância, desvio padrão e coeficiente de variação) para o conjunto de dados da Tabela \ref{tab:ex1}. Interprete os resultados.
+\item Construa um histograma e um boxplot para os dados de emissões. Os dados parecem estar simetricamente distribuídos? Existem valores atípicos? 
+\item Determine os quartis (Q1, Q2, Q3) e o intervalo interquartil (IQR). Utilize esses valores para reforçar sua análise sobre a presença de valores atípicos.
+\item Suponha que o limite máximo aceitável diário para as emissões seja de 25 unidades. Qual a proporção de dias em que a planta excedeu esse limite? O comportamento geral das emissões estaria em conformidade com esse padrão regulatório?
+\end{enumerate}
+
+\newpage
+\subsection{\textbf{SOLUÇÃO}}
+
+\subsubsection{Item 1}
+
+Nesse item calcula-se a média, mediana e moda, além das medidas de dispersão, a amplitude, a variância, o desvio padrão e o coeficiente de variação. Mas, antes fazer os calculos, primeiro é necessário ordenar o valores que estão contidos na tabela, ficando da seguinte forma:
+
+\begin{tabular}{cccccccccccc}
+6.2 & 7.7 & 8.3 & 9.0 & 9.8 & 10.5 & 10.7 & 11.0 & 11.2 & 11.8 & 12.3 & 12.8 \\
+13.2 & 13.3 & 13.5 & 13.9 & 14.4 & 14.5 & 14.7 & 15.2 & 15.5 & 15.8 & 15.9 & 16.2 \\
+16.7 & 16.9 & 17.0 & 17.3 & 17.5 & 17.6 & 17.9 & 18.0 & 18.0 & 18.1 & 18.1 & 18.4 \\
+18.5 & 18.7 & 19.0 & 19.1 & 19.2 & 19.3 & 19.4 & 19.4 & 19.4 & 20.0 & 20.1 & 20.1 \\
+20.4 & 20.5 & 20.8 & 20.9 & 21.4 & 21.6 & 21.9 & 22.3 & 22.5 & 22.7 & 22.7 & 22.9 \\
+23.0 & 23.5 & 23.7 & 23.9 & 24.1 & 24.3 & 24.6 & 24.6 & 24.8 & 25.7 & 25.9 & 26.1 \\
+26.4 & 26.6 & 26.8 & 27.5 & 28.5 & 28.6 & 29.6 & 31.8 \\
+\end{tabular}
+\end{center}
+
+Depois de ordenar os valores em ordem crescente, é possível começar os calculos das medidas solicitadas. A \textbf{média} é calculada pela soma de todas as amostras e dividir pela quantidade de amostras, e como já foi dito, existem 80 amostras. Então, tem-se:
+\[
+\text{\textbf{Média}} = \frac{x_1 + x_2 + \cdots + x_{80}}{80} =  \frac{6.2 + 7.7 + \cdots + 31.8}{80} =  \frac{1521.7}{80} = 19.021
+\]
+
+A \textbf{mediana} é o valor intermediário dos valores ordenados, separando os valores de baixo e os da parte de cima. Como existem 80 dados, não existe um valor intermediário, então precisa-se pegar o valor médio entre a posição 40 e a 41. Dessa forma:
+
+\[
+\text{\textbf{Mediana}} = \frac{x_{40} + x_{41}}{2} = \frac{19,1 + 19,2}{2} = 19{,}15
+\] 
+
+A \textbf{moda} é o número que repete mais vezes dentre todos os dados, e observando-os , é nítido que o 19,4 se repete mais vezes, um total de 3, então, \textbf{Moda $= 19,4$}.
+
+Agora, é feito o cálculo das medidas de dispersão solicitadas. A \textbf{amplitude} é calculada pela diferença entre o maior e o menor valor dos dados ordenados. Observando os dados, tem-se:
+\[
+\text{\textbf{Amplitude}} = x_{\text{máximo}} - x_{\text{mínimo}} = 31.8 - 6.2 = 25.6
+\]
+
+A \textbf{variância} é uma medida que mostra o quanto os dados se dispersam em relação à média, algo a se notar é que tem-se (n-1) no denominador, pois é trabalhado com variância amostral, pois na questão existe apenas uma pequena parcela da população, 80 amostras. Usar essa diferença significa que a correção de Bessel é usada, que compensa o viés da variância, tornando o cálculo mais preciso. Para calcular a variância amostral, usa-se a fórmula:
+\[
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+\]
+onde $\bar{x} = 19.155$ é a média calculada anteriormente e $n = 80$ é o número de amostras. Calculando a soma dos quadrados das diferenças:
+\[
+s^2 = \frac{(6.2-19.155)^2 + (7.7-19.155)^2 + \cdots + (31.8-19.155)^2}{79} = \frac{2436.47}{79} = 30.84
+\]
+\\
+
+O \textbf{desvio padrão} é a raiz quadrada da variância, representando a dispersão média dos dados em relação à média:
+\[
+\text{\textbf{Desvio Padrão}} = \sqrt{s^2} = \sqrt{30.84} = 5.55
+\]
+\\
+
+O \textbf{coeficiente de variação} é uma medida relativa de dispersão, calculada como a razão entre o desvio padrão e a média, expresso em porcentagem:
+\[
+\text{\textbf{Coeficiente de Variação}} = \frac{s}{\bar{x}} \times 100\% = \frac{5.55}{19.02} \times 100\% = 29.18\%
+\]
+\\
+
+A variância amostral de 30,84 revela que existe uma dispersão moderada das observações em relação à média de 19,02. Isso demonstra que os dados possuem certa variabilidade, porém sem apresentar grandes discrepâncias ou valores atípicos.
+
+O desvio padrão, de cerca de 5,55, indica que, em geral, as medições de emissão de gases se distanciam aproximadamente 5,5 unidades da média. Dessa forma, a maior parte das observações está compreendida entre 13,5 e 24,5, evidenciando uma distribuição razoavelmente homogênea. 
+
+A variância amostral foi empregada pois o conjunto de 80 registros constitui
+apenas uma amostragem dos potenciais dias de funcionamento da fábrica, isto é, não se possui a totalidade da população de dados.
+\\
+\\
+\\
+
+\subsubsection{Item 2}
+
+Esse item trata de formas de representar graficamente as amostras, para isso  duas formas diferentes são usdas, o \textbf{histograma} e o \textbf{boxplot}.
+
+O histograma é uma representação gráfica da distribuição de frequências de um conjunto de dados. No seu eixo horizontal temos intervalos de igual amplitude e no eixo vertical temos a frequencia dos dados em cada intervalo, onde essa frequencia é representada por um barra vertical, onde a sua altura identifica a frequencia.
+
+O boxplot é um gráfico que condesa cinco medidas importantes, o menor valor do conjunto, o primeiro quartil (separa os 25 de baixo), a mediana, o terceiro quartil (separa os 25 de cima) e a o maior do conjunto. Ele fornece um resumo robusto da distribuição das amostras.
+
+Agora analisa-se os gráficos, primeiro no histogrma,é notável que os intervalos estão de 5 em 5, uma forma de melhorar a visualização da distribuição das amostras:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{HISTOGRAMA 1.JPG}
+    \caption{}
+    \label{fig:placeholder}
+\end{figure}
+\\
+\\
+
+Pelo histograma nota-se uma boa simetria dos dados, pórem também é nitido uma leve assimetria à esquerda. Pois a concentração dos dados está deslocada para valores maiores.
+\\
+\\
+Abaixo o boxplot, que usa outra forma de representar os gráficos, como comentado anteriormente:
+\newpage
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{boxplot1.png}
+\end{figure}
+
+A análise de tendência central revela que a mediana (\(Q_2 = 19,15\)) apresenta valor bastante próximo à média aritmética, reforçando a característica de simetria na distribuição dos dados e indicando que a maior parte das observações concentra-se em torno do centro da distribuição.
+
+Sobre os valores extremos, a não identificação de pontos isolados (\textit{outliers}) na representação do boxplot sugere que tanto o valor máximo quanto o mínimo estão alinhados com a variabilidade esperada para o conjunto de dados, não apresentando discrepâncias significativas em relação ao padrão geral.
+
+Assim, ferramentas gráficas utilizadas demonstram consistência entre si, permitindo concluir que as medições de emissão apresentam relativa uniformidade, com dados concentrados próximos ao valor central e ausência de observações atípicas relevantes.
+\\
+
+\subsubsection{Item 3}
+Considerando um conjunto de dados com $n=80$ observações, o cálculo dos quartis segue o método em que as posições são determinadas pela média de duas observações ordenadas. Dessa forma, o primeiro quartil ($Q_1$) corresponde à média entre a $20^{\text{a}}$ e a $21^{\text{a}}$ observações, enquanto o terceiro quartil ($Q_3$) é obtido pela média entre a $60^{\text{a}}$ e a $61^{\text{a}}$ observações.
+
+Assim, tem-se os seguintes cálculos:
+
+\[
+\begin{array}{ll}
+\textbf{Primeiro Quartil ($Q_1$):} & \textbf{Terceiro Quartil ($Q_3$):} \\
+\begin{aligned}
+Q_1 &= \frac{n_{20} + n_{21}}{2} = \frac{15{,}2 + 15{,}5}{2} = 15{,}35
+\end{aligned}
+&
+\begin{aligned}
+Q_3 &= \frac{n_{60} + n_{61}}{2} = \frac{22{,}9 + 23{,}0}{2} = 22{,}95
+\end{aligned}
+\end{array}
+\]
+
+\vspace{0.5cm}
+
+Com base nesses resultados, é possível calcular a dispersão central através do Intervalo Interquartil (IIQ):
+\[
+\text{IIQ} = Q_3 - Q_1 = 22{,}95 - 15{,}35 = 7{,}60 \text
+\]
+
+Além disso, como o Quartil 2 (Q2) divide as amostras em dois grupos, ele possui o mesmo valor da mediana, então:
+\[
+\text{Mediana} = Q_2 = 19,15
+\]
+
+A partir do cálculo dos quartis, é possível determinar os limites \textbf{inferior} e \textbf{superior} para identificar possíveis valores atípicos (outliers) na distribuição. Estes limites são calculados da seguinte forma:
+
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Limite Inferior (LI):}
+\begin{align*}
+LI &= Q_1 - 1,5 \times IIQ \\
+LI &= 15{,}35 - 1,5 \times 7{,}60 \\
+LI &= 15{,}35 - 11{,}40 \\
+LI &= 3{,}95 
+\end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\textbf{Limite Superior (LS):}
+\begin{align*}
+LS &= Q_3 + 1,5 \times IIQ \\
+LS &= 22{,}95 + 1,5 \times 7{,}60 \\
+LS &= 22{,}95 + 11{,}40 \\
+LS &= 34{,}35 
+\end{align*}
+\end{minipage}
+\end{center}
+
+Analisando o boxplot veja que ele não apresenta \textit{outliers} de forma visível, verifica-se pelos cálculos realizados que o valor mínimo de \(6{,}2\) situa-se acima do Limite Inferior de \(3{,}575\), enquanto o valor máximo de \(31{,}8\) encontra-se abaixo do Limite Superior de \(34{,}575\). Dessa forma, confirma-se que o conjunto de dados não contém valores atípicos, evidenciando uma distribuição consistente e bem comportada, sem observações que se destaquem significativamente do padrão geral.
+
+\subsubsection{Item 4}
+A avaliação da conformidade das emissões com o limite de 25 unidades, baseada na amostra de 80 observações, revela um cenário de parcial adequação. A quantificação dos dias em não conformidade foi realizada mediante análise das classes do histograma que superam o limite estabelecido, especificamente as classes $[25, 30)$, com 10 ocorrências, e $[30, 35]$, com 1 ocorrência, totalizando 11 dias de desconformidade.
+
+A proporção de excedências é calculada pela razão entre o número de dias fora do padrão e o total de observações, resultando em $11/80 = 0{,}1375$. Este valor indica que aproximadamente 13,75\% dos dias monitorados registraram emissões superiores ao permitido, configurando uma taxa de não conformidade estatisticamente significativa.
+
+Do ponto de vista regulatório, uma taxa de 13,75\% demonstra que o processo operacional não se encontra em plena conformidade com o padrão estabelecido. Embora a distribuição de frequências apresente maior concentração nas classes inferiores, com picos entre 15 e 25 unidades, a presença consistente de valores na cauda superior da distribuição sinaliza a necessidade de intervenções corretivas.
+
+Operacionalmente, a ocorrência de emissões acima do limite em mais de um décimo do período analisado demanda atenção específica aos fatores que contribuem para esses picos. A redução desta proporção requer a identificação das causas fundamentais e a implementação de medidas de controle preventivo, visando garantir a aderência integral aos requisitos regulatórios e a melhoria contínua do desempenho ambiental.
+\newpage
+\section{\textbf{QUESTÃO 2 - PESQUISA ONLINE}}
+Um site realiza uma pesquisa online e oferece uma recompensa a um usuário selecionado aleatoriamente que responde a uma série de perguntas. Cada um dos 10 milhões de visitantes diários tem, independentemente, probabilidade $p = 10^{-7}$ de ganhar a recompensa.
+
+\begin{enumerate} 
+\item Encontre uma aproximação simples e adequada para a função de massa de probabilidade (PMF) do número de vencedores em um dia, X. Justifique claramente se essa aproximação é apropriada para os valores dados de $n$ e $p$
+\item Calcule o valor esperado, E[X], e a variância Var(X), usando tanto a distribuição exata quanto a aproximada. Comente sobre a semelhança entre os resultados
+\item Suponha que você ganhe a recompensa, mas que possa haver outros vencedores. Seja $W \sim Pois(1)$ o número de vencedores além de você. Se houver vários vencedores, o prêmio é sorteado aleatoriamente entre todos eles. Encontre a probabilidade de que você realmente receba o prêmio
+\item Gere um grande número de simulações diárias para o número de vencedores. Crie uma comparação visual entre os resultados empíricos e a aproximação considerada no item 1. Descreva brevemente o que a visualização indica sobre a qualidade da aproximação
+\end{enumerate}
+
+\subsection{\textbf{SOLUÇÃO}}
+
+\subsubsection{Item 1}
+
+Uma aproximação válida para essa premiação é uma distribuição binominal, uma vez que para cada tentativa se escolhe um ou mais ganhadores (ou nenhum). A escolha se justifica, mesmo com os grandes números nos parâmetros, pela natureza da premiação em selecionar pessoas dentre um grande grupo. Os parâmetros dessa distribuição seriam o número de tentativas $n = 10^7$ e a probabilidade de cada pessoa ganhar $p = 10^{-7}$. Portanto, sua PMF pode ser escrita como 
+
+\begin{equation}
+P_X(k) = \begin{cases}
+\binom{10^7}{k}(10^{-7}) ^k (1-10^{-7})^{10^7-k} , & \text{para } k = 0, 1, 2, \dots \\
+0\ , & \text{caso contrário} \\
+\end{cases}
+\end{equation}
+
+\subsubsection{Item 2}
+A expressão correta para a premiação é uma distribuição de Poisson, onde intuitivamente o parâmetro é calculado pelo produto do número de pessoas com a probabilidade de cada uma ganhar, ou seja $\lambda = 10^7\times10^{-7} = 1$. Daí, essa distribuição tem valor esperado e variância igual ao parâmetro $\lambda$. Desse modo, o código em R no apêncide do texto retorna 1 para o valor esperado de ambas distribuições, uma variância de 1 para a distribuição de Poisson e uma variância de 0.9999999 para a distribuição binomial. Portanto, estes valores corroboram com a análise de que a distribuição binomial é uma boa aproximação para  a premiação da pesquisa, uma vez que se encontram muito próximos, de modo que possam ser considerados iguais para todos os efeitos.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{poisson.png}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{binom.png}
+\end{figure}
+
+\subsubsection{Item 3}
+
+A probabilidade de você receber o prêmio mesmo com outras pessoas também ganhando é dada pela Lei da Probabilidade Total. Para você receber dentre um número $i$ de ganhadores, é necessário primeiro ser selecionado para esse grupo e também ganhar dos outros $i-1$ competidores. Portanto, a probabilidade para você ser chamado para o grupo $i$ é $\frac{e^{-1}1^i}{i!}$ e a probabilidade de ganhar é $\frac{1}{i}$. Juntando ambas à Lei da Probabilidade Total: 
+
+\[ \sum_{i=1}^{\infty} \frac{1}{e}\frac{1}{i!\times i} = \frac{1}{e}\sum_{i=1}^{\infty} \frac{1}{i!\times i} = 0.4848291\]
+
+\subsubsection{Item 4}
+
+Para uma distribuição de Poisson com 1000000 testes e $\lambda = 1$, a distribuição de probabilidades se comporta exatamente como na aproximação binomial, tendo maiores probabilidades para $k=0$ e $k=1$, fortalecendo a distribuição binomial como aproximação para esse fenômeno.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image.png}
+\end{figure}
+
+
+\newpage
+
+\section{\textbf{Questão 3}}
+
+Você é responsável por monitorar a temperatura de uma CPU multicore em uma unidade
+de processamento embarcada. Sob carga normal, a temperatura da CPU apresenta flutuações devido a mudanças na carga de trabalho, nas condições ambientais e na eficiência
+do sistema de resfriamento. Testes mostram que a temperatura em regime estacionário
+da CPU segue uma distribuição normal com temperatura média µ = 62 ◦C e desviopadrão σ = 3, 5
+◦C. Sua tarefa é simular medições de temperatura da CPU e analisar
+suas propriedades estatísticas.
+
+\vspace{0.5em}
+\begin{enumerate}[leftmargin=*]
+
+\item Crie uma função que gere valores com distribuição normal usando a transformação
+de Box--Muller, a partir de entradas aleatórias uniformes. Especificamente:
+\begin{enumerate}
+  \item[(a)] Gere duas variáveis aleatórias uniformes independentes:
+  \[
+    U_1, U_2 \sim \mathrm{Unif}(0,1).
+  \]
+
+  \item[(b)] Calcule dois valores normais padrão usando as fórmulas de Box--Muller:
+  \[
+    Z_1 = \sqrt{-2\ln(U_1)}\,\cos(2\pi U_2),
+    \qquad
+    Z_2 = \sqrt{-2\ln(U_1)}\,\sin(2\pi U_2).
+  \]
+ \(Z_1\) e \(Z_2\) são variáveis aleatórias independentes com distribuição normal padrão.
+Concatene-as para formar um vetor Z de valores normais padrão.
+
+  \item[(c)] Converta cada valor normal padrão para a distribuição de temperatura da CPU:
+  \[
+    T = 62 + 3.5\,Z.
+  \]
+\end{enumerate}
+
+
+\item Use seu gerador de números aleatórios para gerar 1.000 medições de temperatura da CPU. Gere mais 1.000 valores de temperatura utilizando o gerador de números aleatórios normal embutido do R, com a mesma média e desvio-padrão .
+
+\item Para ambos os conjuntos de dados simulados, calcule:
+\begin{enumerate}
+  \item[(a)] Média amostral.
+  \item[(b)] Desvio-padrão amostral.
+  \item[(c)] Temperatura mínima e máxima observada.
+  \item[(d)] Probabilidade empírica e teórica \(P(T > 68)\).
+  \item[(e)] Probabilidade empírica e teórica \(P(60 < T < 65)\).
+  \item[(f)] Probabilidade teórica \(P(T > 75)\).
+\end{enumerate}
+Algum dos conjuntos de dados simulados (1{.}000 amostras) contém valores acima
+de \(75^\circ\mathrm{C}\)? Caso não, explique por que eventos raros requerem tamanhos de amostra
+grandes para serem observados.
+
+\item Visualize os resultados criando:
+\begin{enumerate}
+  \item[(a)] Um histograma das temperaturas simuladas da CPU (pode plotar os dois
+  conjuntos de dados separadamente ou sobrepostos).
+  \item[(b)] A função densidade de probabilidade (PDF) normal teórica (média \(62^\circ\mathrm{C}\),
+  desvio-padrão \(3{,}5^\circ\mathrm{C}\)) sobreposta ao histograma.
+\end{enumerate}
+
+\item Discuta seus resultados respondendo às seguintes perguntas: As distribuições empíricas da temperatura da CPU se assemelham à curva normal teórica? Quão próximas estão a média amostral e o desvio-padrão amostral dos valores esperados 62 ◦C e 3, 5
+◦C?
+Há diferenças perceptíveis entre o conjunto de dados gerado com seu RNG manual e
+o produzido pelo RNG embutido do R? Como essa simulação pode ajudar na avaliação de estratégias de resfriamento ou de escalonamento dinâmico de clock? Por que
+geradores de números aleatórios uniformes são a base dos sistemas de RNG?
+\end{enumerate}
+\\
+
+\subsection{Solução}
+\subsubsection{Item 1 (a)}
+
+Quando se trabalha com medições de temperatura com
+distribuição normal, é necessário ter variáveis distribuidas de forma normal, que são variáveis que seguem a distribuição Normal (Gaussiana). Para isso, são criadas duas variáveis aleatórias uniformemente independentes (\(U_1\) e \(U_2\)):
+
+\[
+    U_1, U_2 \sim \mathrm{Unif}(0,1).
+\]
+
+Uma variável aleatória uniforme é aquela que todos os valores dentro de um intervalo têm a mesma probabilidade de ocorrer.
+
+\subsubsection{Item 1 (b)}
+Após a geração das duas variáveis aleatórias independentes e uniformes, usa-se do método de Box-Muller para transformá-las em variáveis aleatórias independentes com distribuição normal. As formúlas de Box-Muller são da forma:
+
+\[
+    Z_1 = \sqrt{-2\ln(U_1)}\,\cos(2\pi U_2),
+    \qquad
+    Z_2 = \sqrt{-2\ln(U_1)}\,\sin(2\pi U_2).
+\]
+
+Essas duas variáveis seguem a distribuição normal padrão. E para fins de facilitar a análise, \(Z_1\) e \(Z_2\) são concatenados em um vetor Z, que representa as observações seguindo a distribuição normal com média zero e variância com valor unitário.
+
+\[
+    Z_1, Z_2 \sim \mathrm{N}(0,1).
+\]
+
+\subsubsection{Item 1 (c)}
+Depois de gerar o vetor Z, é necessário convertê-lo para a distribuição de temperatura da CPU: 
+  \[
+    T = 62 + 3.5Z ;(T = Temperatura, Z = vetor)
+  \]
+
+Veja que essa conversão é feita por uma transformação linear, onde \(62\) é a média (\(\mu\)) e \(3{,}5\) é o desvio-padrão (\(\sigma\)):
+
+\[
+    T = \mu + \sigma Z 
+  \]
+
+Sabe-se que a temperatura em regime estacionário segue uma distribuição normal com os valores acima e que a transformação linear da conversão preserva a normalidade dos dados, apenas deslocando a média de 0 para 62 e alterando os pontos devido ao desvio padrão. Assim, a nova variável aleatória T é da seguinte forma:
+\[
+    T \sim \mathrm{N}(62,3.5^2).
+\]
+
+Abaixo segue a função em R que gera os valores com distribuição normal usando a transformação de Box-Muller. Note que cada parte do código está informando de qual subitem ele é (item1 (a), item1 (b) ou item1 (c)).
+
+\begin{lstlisting}
+box_muller_cpu_temp <- function(n) {
+  #dados sobre a temperatura (media e desvio padrao)
+  mu <- 62
+  sigma <- 3.5
+  
+  #Item 1(a): Gerar U1, U2 ~ Unif(0,1) 
+  m <- ceiling(n / 2)
+  U1 <- runif(m)
+  U2 <- runif(m)
+
+  #Item 1(b): Box-Muller
+  Z1 <- sqrt(-2 * log(U1)) * cos(2 * pi * U2)
+  Z2 <- sqrt(-2 * log(U1)) * sin(2 * pi * U2)
+  Z  <- c(Z1, Z2)[1:n]
+
+  #Item 1(c): Conversao
+  T <- mu + sigma * Z
+  return(T)
+}
+\end{lstlisting}
+
+\subsubsection{Item 2}
+Usando a função criada nos itens anteriores é possível gerar temperaturas da CPU a partir do método de Box-Muller. Assim, foram geradas 1000 medições dessa temperatura (lembre-se que nesse caso será usado média (\mu\)) = \(62^\circ\mathrm{C}\) e desvio padrão (\sigma\)) = \(3.5^\circ\mathrm{C}\)).
+
+Além disso, também foram gerados 1000 medições usando o geraror de números aleatórios normal do próprio R, passando os mesmos parâmetros. Isso foi feito para fins de comparação, para verificar se os resultados são semelhantes. Segue abaixo o código em R:
+
+\begin{lstlisting}
+T_box <- box_muller_cpu_temp(1000)
+
+T_rnorm <- rnorm(n = 1000, mean = 62, sd = 3.5)
+\end{lstlisting}
+
+Considere que nesse ambiente a função que gera o Box-Muller já foi criada. Para melhor compreensão do que está acontecendo no código, segue uma imagem com algumas saídas das duas formas de geração de temperaturas (Na primeira linha são valores gerados pela função Box-Muller e na segunda linha valores gerados pelo próprio R):
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{temps.JPG}
+\end{figure}
+
+Ao comparar as medições de temperatura obtidas pelo método de Box--Muller com as
+geradas pelo gerador normal embutido do \textsf{R}, verifica-se que ambos os conjuntos são
+consistentes com a distribuição normal assumida para o regime estacionário da CPU. Em
+ambos os casos, as observações se concentram em torno da média de \(62\,^\circ\mathrm{C}\) e
+apresentam dispersão compatível com o desvio-padrão de \(3{,}5\,^\circ\mathrm{C}\). Estatísticas amostrais
+(média, desvio-padrão e valores mínimo e máximo) não indicam discrepâncias relevantes
+entre os métodos, sugerindo que a geração usando Box--Muller reproduz adequadamente
+o comportamento esperado de um gerador de variáveis normais.
+
+
+
+
+
+
+
+
+
+\subsubsection{Item 3 (a),(b),(c)}
+
+
+
+\newpage
+\section{\textbf{Apêndice - Códigos em R}}
+
+\subsection{Exercício 1:}
+
+\begin{lstlisting}
+   
+\end{lstlisting}
+
+\subsection{Exercício 2:}
+
+\begin{lstlisting}
+
+\end{lstlisting}
+
+\subsection{Exercício 3:}
+
+\begin{lstlisting}
+
+
+\end{lstlisting}
+
+\end{document}
