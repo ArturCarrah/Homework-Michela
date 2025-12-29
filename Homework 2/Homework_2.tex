@@ -60,200 +60,253 @@
 
 
 
-\section{\textbf{QUESTÃO 1 - EMISSÕES DE UM GÁS POLUENTE}}
+\section{\textbf{QUESTÃO 1 - RESTAURANTE}}
+Em um restaurante muito frequentado, aproximadamente 70 por cento dos clientes pedem uma
+sobremesa após o prato principal. Seja X a variável aleatória que representa o número de
+clientes que pedem sobremesa em uma amostra aleatória de n = 50 clientes
 
-As emissões diárias de um gás poluente de uma planta industrial foram registradas 80 vezes, em uma determinada unidade de medida. Os dados obtidos estão apresentados na Tabela \ref{tab:ex1}.
-\begin{table}[ht!]\centering
-\begin{tabular}{l l l l l l l l l l l l l}
-15.8 & 22.7 & 26.8 & 19.1 & 18.5 & 14.4 & 8.3 	 & 25.9 & 26.4 & 9.8  & 21.9 &10.5 \\
-17.3 & 6.2   &18.0  & 22.9 & 24.6 & 19.4 & 12.3 & 15.9 & 20.1 & 17.0 & 22.3 & 27.5 \\
-23.9 & 17.5 & 11.0 & 20.4 & 16.2 & 20.8 & 20.9 & 21.4 & 18.0 & 24.3 & 11.8  &17.9 \\
-18.7 & 12.8 & 15.5 & 19.2 & 13.9 & 28.6 & 19.4 & 21.6 & 13.5 & 24.6 & 20.0 & 24.1\\ 
-9.0   & 17.6 & 25.7 & 20.1 & 13.2 & 23.7 & 10.7 & 19.0 & 14.5 & 18.1 & 31.8 & 28.5 \\
-22.7 & 15.2 & 23.0 & 29.6 & 11.2 & 14.7 & 20.5 & 26.6 & 13.3 & 18.1 & 24.8 & 26.1 \\
-7.7 & 22.5 & 19.3 & 19.4 & 16.7 & 16.9 & 23.5 & 18.4
-\end{tabular}
-\caption{Emissões diárias de gas poluente (questão 1).}
-\label{tab:ex1}
-\end{table}
 
 \begin{enumerate}
-\item Calcule as medidas de tendência central (média, mediana e moda) e as medidas de dispersão (amplitude, variância, desvio padrão e coeficiente de variação) para o conjunto de dados da Tabela \ref{tab:ex1}. Interprete os resultados.
-\item Construa um histograma e um boxplot para os dados de emissões. Os dados parecem estar simetricamente distribuídos? Existem valores atípicos? 
-\item Determine os quartis (Q1, Q2, Q3) e o intervalo interquartil (IQR). Utilize esses valores para reforçar sua análise sobre a presença de valores atípicos.
-\item Suponha que o limite máximo aceitável diário para as emissões seja de 25 unidades. Qual a proporção de dias em que a planta excedeu esse limite? O comportamento geral das emissões estaria em conformidade com esse padrão regulatório?
+\item Determine a função de distribuição de X.
+
+\item Construa os gráficos da função massa de probabilidade (PMF) e da função distribuição
+acumulada (CDF) de X.
+
+\item Calcule o valor esperado, a variância e o desvio padrão de X.
+
+\item Calcule a probabilidade de
+\begin{enumerate}
+  \item[(a)] P(X ≥ 20).
+
+  \item[(b)] P(30 < X < 43).
+
+  \item[(c)] P(X = 31).
+\end{enumerate}
+
+\item Suponha que o restaurante estoque sobremesas com base na demanda esperada. Como
+o uso da distribuição de X poderia ajudar a reduzir desperdício e evitar falta de
+produtos.
+
+\item Como mudanças em p (por exemplo, sobremesa se torna mais popular, p = 0.8) ou em
+n (número de clientes) afetariam a forma e as probabilidades de X.
+
 \end{enumerate}
 
 \newpage
 \subsection{\textbf{SOLUÇÃO}}
 
 \subsubsection{Item 1}
+A variável aleatória X é o total de clients que pedem sobremesa em uma amostra aleatória de n = 50 clientes. Cada cliente pode fazer duas escolhas, pedir ou não pedir a sobremesa, ou seja, duas escolhas possíveis apenas. Considera-se que as escolhas são independentes e que as probabilidades de um cliente pedir uma sobremesa é \(\rho\) = 0.7, como foi fornecido pelo enunciado.
 
-Nesse item calcula-se a média, mediana e moda, além das medidas de dispersão, a amplitude, a variância, o desvio padrão e o coeficiente de variação. Mas, antes fazer os calculos, primeiro é necessário ordenar o valores que estão contidos na tabela, ficando da seguinte forma:
-
-\begin{tabular}{cccccccccccc}
-6.2 & 7.7 & 8.3 & 9.0 & 9.8 & 10.5 & 10.7 & 11.0 & 11.2 & 11.8 & 12.3 & 12.8 \\
-13.2 & 13.3 & 13.5 & 13.9 & 14.4 & 14.5 & 14.7 & 15.2 & 15.5 & 15.8 & 15.9 & 16.2 \\
-16.7 & 16.9 & 17.0 & 17.3 & 17.5 & 17.6 & 17.9 & 18.0 & 18.0 & 18.1 & 18.1 & 18.4 \\
-18.5 & 18.7 & 19.0 & 19.1 & 19.2 & 19.3 & 19.4 & 19.4 & 19.4 & 20.0 & 20.1 & 20.1 \\
-20.4 & 20.5 & 20.8 & 20.9 & 21.4 & 21.6 & 21.9 & 22.3 & 22.5 & 22.7 & 22.7 & 22.9 \\
-23.0 & 23.5 & 23.7 & 23.9 & 24.1 & 24.3 & 24.6 & 24.6 & 24.8 & 25.7 & 25.9 & 26.1 \\
-26.4 & 26.6 & 26.8 & 27.5 & 28.5 & 28.6 & 29.6 & 31.8 \\
-\end{tabular}
-\end{center}
-
-Depois de ordenar os valores em ordem crescente, é possível começar os calculos das medidas solicitadas. A \textbf{média} é calculada pela soma de todas as amostras e dividir pela quantidade de amostras, e como já foi dito, existem 80 amostras. Então, tem-se:
+Como apenas duas escolhas são possíveis, usa-se da distribuição binomial para fornecer a função de distribuição de X: 
 \[
-\text{\textbf{Média}} = \frac{x_1 + x_2 + \cdots + x_{80}}{80} =  \frac{6.2 + 7.7 + \cdots + 31.8}{80} =  \frac{1521.7}{80} = 19.021
+X \sim \mathrm{Binomial}(n,\,p).
 \]
 
-A \textbf{mediana} é o valor intermediário dos valores ordenados, separando os valores de baixo e os da parte de cima. Como existem 80 dados, não existe um valor intermediário, então precisa-se pegar o valor médio entre a posição 40 e a 41. Dessa forma:
+A distribuição binomial é usado para descrever o número de sucessos em um número fixo de tentativas, quando cada tentativa tem a mesma probabilidade de sucesso. Como o número de clientes é fixo (n=50) e cada um é independentes do outro, com probabilidade \(\rho\) = 0.7 de pedir sobremesa, tem-se:
 
 \[
-\text{\textbf{Mediana}} = \frac{x_{40} + x_{41}}{2} = \frac{19,1 + 19,2}{2} = 19{,}15
-\] 
-
-A \textbf{moda} é o número que repete mais vezes dentre todos os dados, e observando-os , é nítido que o 19,4 se repete mais vezes, um total de 3, então, \textbf{Moda $= 19,4$}.
-
-Agora, é feito o cálculo das medidas de dispersão solicitadas. A \textbf{amplitude} é calculada pela diferença entre o maior e o menor valor dos dados ordenados. Observando os dados, tem-se:
-\[
-\text{\textbf{Amplitude}} = x_{\text{máximo}} - x_{\text{mínimo}} = 31.8 - 6.2 = 25.6
+X \sim \mathrm{Binomial}(50,\,0{,}7).
 \]
 
-A \textbf{variância} é uma medida que mostra o quanto os dados se dispersam em relação à média, algo a se notar é que tem-se (n-1) no denominador, pois é trabalhado com variância amostral, pois na questão existe apenas uma pequena parcela da população, 80 amostras. Usar essa diferença significa que a correção de Bessel é usada, que compensa o viés da variância, tornando o cálculo mais preciso. Para calcular a variância amostral, usa-se a fórmula:
+Função de massa de probabilidade (PMF) da variável aleatória \(X\):
 \[
-s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}
+P(X = k) = \binom{50}{k}(0{,}7)^k(0{,}3)^{50-k},
+\quad k = 0, 1, 2, \ldots, 50.
 \]
-onde $\bar{x} = 19.155$ é a média calculada anteriormente e $n = 80$ é o número de amostras. Calculando a soma dos quadrados das diferenças:
+A PMF descreve a probabilidade de a variável aleatória discreta \(X\) assumir exatamente
+o valor \(k\), isto é, a probabilidade de ocorrerem exatamente \(k\) sucessos em \(50\)
+tentativas independentes, cada uma com probabilidade de sucesso igual a \(0{,}7\).
+
+Função de distribuição acumulada (CDF) de \(X\): 
 \[
-s^2 = \frac{(6.2-19.155)^2 + (7.7-19.155)^2 + \cdots + (31.8-19.155)^2}{79} = \frac{2436.47}{79} = 30.84
+F_X(x) = P(X \le x) = \sum_{k=0}^{\lfloor x \rfloor}
+\binom{50}{k}(0{,}7)^k(0{,}3)^{50-k}
 \]
-\\
-
-O \textbf{desvio padrão} é a raiz quadrada da variância, representando a dispersão média dos dados em relação à média:
-\[
-\text{\textbf{Desvio Padrão}} = \sqrt{s^2} = \sqrt{30.84} = 5.55
-\]
-\\
-
-O \textbf{coeficiente de variação} é uma medida relativa de dispersão, calculada como a razão entre o desvio padrão e a média, expresso em porcentagem:
-\[
-\text{\textbf{Coeficiente de Variação}} = \frac{s}{\bar{x}} \times 100\% = \frac{5.55}{19.02} \times 100\% = 29.18\%
-\]
-\\
-
-A variância amostral de 30,84 revela que existe uma dispersão moderada das observações em relação à média de 19,02. Isso demonstra que os dados possuem certa variabilidade, porém sem apresentar grandes discrepâncias ou valores atípicos.
-
-O desvio padrão, de cerca de 5,55, indica que, em geral, as medições de emissão de gases se distanciam aproximadamente 5,5 unidades da média. Dessa forma, a maior parte das observações está compreendida entre 13,5 e 24,5, evidenciando uma distribuição razoavelmente homogênea. 
-
-A variância amostral foi empregada pois o conjunto de 80 registros constitui
-apenas uma amostragem dos potenciais dias de funcionamento da fábrica, isto é, não se possui a totalidade da população de dados.
-\\
-\\
-\\
+A CDF representa a probabilidade
+acumulada de a variável aleatória assumir valores menores ou iguais a \(x\), x pertence aos números reais, sendo obtida
+pela soma das probabilidades associadas a todos os valores possíveis de \(X\) até esse
+limite.
 
 \subsubsection{Item 2}
+Para construir os gráficos da PMF e da CDF é necessário entender cada uma delas, o que foi feito no item anterior, onde PMF fornece o valor probabilistico quando X assume um valor exato e CDF quando assume qualquer valor abaixo de um valor exato. Então assim, a CDF será um gráfico que começa do zero e vai subindo até alcançar a probabilidade = 1, enquanto o PMF pode assumir qualquer forma, sendo o intervalo das probabilidades entre 0 e 1.
 
-Esse item trata de formas de representar graficamente as amostras, para isso  duas formas diferentes são usdas, o \textbf{histograma} e o \textbf{boxplot}.
+Segue abaixo o código em R e os gráficos da PMF e da CDF: 
+\begin{lstlisting}
+# Distribuição binomial com n=50 e p=0.7
+x <- 0:50
 
-O histograma é uma representação gráfica da distribuição de frequências de um conjunto de dados. No seu eixo horizontal temos intervalos de igual amplitude e no eixo vertical temos a frequencia dos dados em cada intervalo, onde essa frequencia é representada por um barra vertical, onde a sua altura identifica a frequencia.
+pmf = dbinom(x, 50, 0.7) # Função da PMF (51 valores, então pmf[1] = 0 e P(X = x) = pmf[x+1])       
 
-O boxplot é um gráfico que condesa cinco medidas importantes, o menor valor do conjunto, o primeiro quartil (separa os 25 de baixo), a mediana, o terceiro quartil (separa os 25 de cima) e a o maior do conjunto. Ele fornece um resumo robusto da distribuição das amostras.
+plot(x,pmf,type='h',col='red',lwd=2, # Gráfico da PMF xlab= 'x', ylab='P(x)')
 
-Agora analisa-se os gráficos, primeiro no histogrma,é notável que os intervalos estão de 5 em 5, uma forma de melhorar a visualização da distribuição das amostras:
+abline(h=0) # Adiciona uma linha no valor de P(x) = 0 para aumentar a legibilidade
+
+cdf = c(0, cumsum(pmf)) # Calculando a CDF a partir da PMF
+
+plot(cdf ,type='h',col='blue',lwd=2, # Gráfico da CDF xlab= 'x', ylab='P(X <= x)')
+
+abline(h=0) # Adiciona uma linha no valor de P(x) = 0 para aumentar a legibilidade
+\end{lstlisting}
+
+\begin{figure}[h]
+
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=0.9\linewidth, height=6cm]{PMF.JPG} 
+        \caption{Gráfico da PMF}
+        \label{fig:distp}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=0.9\linewidth, height=6cm]{CDF.JPG}
+        \caption{Gráfico da CDF}
+        \label{fig:distb}
+    \end{subfigure}
+\label{fig:image2}
+\end{figure}
+
+ Veja no gráfico da PMF que os valores estão perto do 35 sucessos, o que fornece o valor estimado da nossa variável aleatória X. Enquanto na CDF, está mostrando exatamente o esperado, valores se acumulando até chegar em 1.
+
+\subsubsection{Item 3}
+O valor esperado, a variância e o desvio-padrão são dados importantes de se obter quando está tratando de uma distribuição de uma variável aleatória. Assim, neste item esses dados serão discutidos e calculados.
+
+Para uma variável aleatória com distribuição binomial \(X \sim \mathrm{Binomial}(n,p)\), onde \textbf{n} corresponde ao número total de amostras e \textbf{p} a probabilidade de sucesso.
+ O valor esperado corresponde ao número médio de sucessos em \(n\) tentativas, sendo dado por
+\[
+\mathbb{E}[X] = np.
+\]
+A variância mede a dispersão em torno dessa média e, para a distribuição binomial, é
+\[
+\mathrm{Var}(X) = np(1-p).
+\]
+O desvio-padrão, por sua vez, é definido como a raiz quadrada da variância:
+\[
+\sigma_ = \sqrt{\mathrm{Var}(X)} = \sqrt{np(1-p)}.
+\]
+
+No presente caso, com \(n = 50\) e \(p = 0{,}7\), obtém-se
+\[
+\mathbb{E}[X] = 50 \cdot 0{,}7 = 35,
+\qquad
+\mathrm{Var}(X) = 50 \cdot 0{,}7 \cdot 0{,}3 = 10{,}5,
+\qquad
+\sigma = \sqrt{10{,}5} \approx 3{,}24.
+\]
+
+Outro forma de calcular esses valores é usando um código em R. Dessa forma, segue abaixo o código usado isso e os seus resultados logo em seguida.
+
+\begin{lstlisting}
+x <- 0:50
+
+# O valor esperado de uma distribuição binomial é n*p, nesse caso sendo 50*0.7 = 35.
+
+Ex = weighted.mean(x, pmf) # O valor esperado é uma média ponderada usando as probabilidades de pesos
+cat("Valor Esperado:", Ex, "\n")
+
+# A variância de uma distribuição binomial é n*p*(1-p), nesse caso sendo 50*0.7*0.3 = 10.5
+Var = Ex*0.3
+dp = sqrt(Var)
+cat("Variância:", Var, "\n")
+cat("Desvio-Padrão:", sqrt(Var), "\n")
+\end{lstlisting}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\linewidth]{HISTOGRAMA 1.JPG}
-    \caption{}
-    \label{fig:placeholder}
+    \includegraphics[width=0.5\linewidth]{dp.JPG}
+    \caption{Valor esperado, variância e desvio-padrão}
 \end{figure}
-\\
-\\
 
-Pelo histograma nota-se uma boa simetria dos dados, pórem também é nitido uma leve assimetria à esquerda. Pois a concentração dos dados está deslocada para valores maiores.
-\\
-\\
-Abaixo o boxplot, que usa outra forma de representar os gráficos, como comentado anteriormente:
+Note que os valores obtidos na Figura 2 estão iguais aos calculados teoricamente, o valida os dados obtidos.
+
 \newpage
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{boxplot1.png}
-\end{figure}
-
-A análise de tendência central revela que a mediana (\(Q_2 = 19,15\)) apresenta valor bastante próximo à média aritmética, reforçando a característica de simetria na distribuição dos dados e indicando que a maior parte das observações concentra-se em torno do centro da distribuição.
-
-Sobre os valores extremos, a não identificação de pontos isolados (\textit{outliers}) na representação do boxplot sugere que tanto o valor máximo quanto o mínimo estão alinhados com a variabilidade esperada para o conjunto de dados, não apresentando discrepâncias significativas em relação ao padrão geral.
-
-Assim, ferramentas gráficas utilizadas demonstram consistência entre si, permitindo concluir que as medições de emissão apresentam relativa uniformidade, com dados concentrados próximos ao valor central e ausência de observações atípicas relevantes.
-\\
-
-\subsubsection{Item 3}
-Considerando um conjunto de dados com $n=80$ observações, o cálculo dos quartis segue o método em que as posições são determinadas pela média de duas observações ordenadas. Dessa forma, o primeiro quartil ($Q_1$) corresponde à média entre a $20^{\text{a}}$ e a $21^{\text{a}}$ observações, enquanto o terceiro quartil ($Q_3$) é obtido pela média entre a $60^{\text{a}}$ e a $61^{\text{a}}$ observações.
-
-Assim, tem-se os seguintes cálculos:
-
-\[
-\begin{array}{ll}
-\textbf{Primeiro Quartil ($Q_1$):} & \textbf{Terceiro Quartil ($Q_3$):} \\
-\begin{aligned}
-Q_1 &= \frac{n_{20} + n_{21}}{2} = \frac{15{,}2 + 15{,}5}{2} = 15{,}35
-\end{aligned}
-&
-\begin{aligned}
-Q_3 &= \frac{n_{60} + n_{61}}{2} = \frac{22{,}9 + 23{,}0}{2} = 22{,}95
-\end{aligned}
-\end{array}
-\]
-
-\vspace{0.5cm}
-
-Com base nesses resultados, é possível calcular a dispersão central através do Intervalo Interquartil (IIQ):
-\[
-\text{IIQ} = Q_3 - Q_1 = 22{,}95 - 15{,}35 = 7{,}60 \text
-\]
-
-Além disso, como o Quartil 2 (Q2) divide as amostras em dois grupos, ele possui o mesmo valor da mediana, então:
-\[
-\text{Mediana} = Q_2 = 19,15
-\]
-
-A partir do cálculo dos quartis, é possível determinar os limites \textbf{inferior} e \textbf{superior} para identificar possíveis valores atípicos (outliers) na distribuição. Estes limites são calculados da seguinte forma:
-
-\begin{center}
-\begin{minipage}{0.45\textwidth}
-\centering
-\textbf{Limite Inferior (LI):}
-\begin{align*}
-LI &= Q_1 - 1,5 \times IIQ \\
-LI &= 15{,}35 - 1,5 \times 7{,}60 \\
-LI &= 15{,}35 - 11{,}40 \\
-LI &= 3{,}95 
-\end{align*}
-\end{minipage}
-\hfill
-\begin{minipage}{0.45\textwidth}
-\centering
-\textbf{Limite Superior (LS):}
-\begin{align*}
-LS &= Q_3 + 1,5 \times IIQ \\
-LS &= 22{,}95 + 1,5 \times 7{,}60 \\
-LS &= 22{,}95 + 11{,}40 \\
-LS &= 34{,}35 
-\end{align*}
-\end{minipage}
-\end{center}
-
-Analisando o boxplot veja que ele não apresenta \textit{outliers} de forma visível, verifica-se pelos cálculos realizados que o valor mínimo de \(6{,}2\) situa-se acima do Limite Inferior de \(3{,}575\), enquanto o valor máximo de \(31{,}8\) encontra-se abaixo do Limite Superior de \(34{,}575\). Dessa forma, confirma-se que o conjunto de dados não contém valores atípicos, evidenciando uma distribuição consistente e bem comportada, sem observações que se destaquem significativamente do padrão geral.
-
 \subsubsection{Item 4}
-A avaliação da conformidade das emissões com o limite de 25 unidades, baseada na amostra de 80 observações, revela um cenário de parcial adequação. A quantificação dos dias em não conformidade foi realizada mediante análise das classes do histograma que superam o limite estabelecido, especificamente as classes $[25, 30)$, com 10 ocorrências, e $[30, 35]$, com 1 ocorrência, totalizando 11 dias de desconformidade.
+Esse item explora o uso da PMF e da CDF para calcular diversos valores de probabilidades. Para isso, é possível usar uma função do R que faça o calculo de forma rápida.
+\begin{enumerate}
+  \item[(a)] \textbf{\(P(X \ge 20)\):}
 
-A proporção de excedências é calculada pela razão entre o número de dias fora do padrão e o total de observações, resultando em $11/80 = 0{,}1375$. Este valor indica que aproximadamente 13,75\% dos dias monitorados registraram emissões superiores ao permitido, configurando uma taxa de não conformidade estatisticamente significativa.
+  Essa probabilidade representa a chance de ocorrerem pelo menos \(20\) sucessos em
+  \(50\) tentativas. Ela pode ser calculada somando-se as probabilidades de todos os
+  valores de \(X\) maiores ou iguais a \(20\). De forma equivalente, pode-se utilizar a
+  função de distribuição acumulada para escrever, sendo interessante seu uso para ecvitar de calcular diretamente diversas probabildades de forma individual.
+  \[
+  P(X \ge 20) = 1 - P(X \le 19) = 0.9999971 
+  \]
 
-Do ponto de vista regulatório, uma taxa de 13,75\% demonstra que o processo operacional não se encontra em plena conformidade com o padrão estabelecido. Embora a distribuição de frequências apresente maior concentração nas classes inferiores, com picos entre 15 e 25 unidades, a presença consistente de valores na cauda superior da distribuição sinaliza a necessidade de intervenções corretivas.
+  \item[(b)] \textbf{ \(P(30 < X < 43)\):}
 
-Operacionalmente, a ocorrência de emissões acima do limite em mais de um décimo do período analisado demanda atenção específica aos fatores que contribuem para esses picos. A redução desta proporção requer a identificação das causas fundamentais e a implementação de medidas de controle preventivo, visando garantir a aderência integral aos requisitos regulatórios e a melhoria contínua do desempenho ambiental.
+  Nesse caso, deseja-se a probabilidade de que o número de sucessos esteja estritamente
+  entre \(30\) e \(43\). Isso corresponde à soma das probabilidades associadas aos valores
+  \(X = 31, 32, \ldots, 42\). Em termos da função de distribuição acumulada, essa
+  probabilidade pode ser expressa como
+  \[
+  P(30 < X < 43) = P(X \le 42) - P(X \le 30) = 0.9079332 
+  \]
+
+  \item[(c)] \textbf{\(P(X = 31)\):}
+
+  Essa probabilidade corresponde à chance de ocorrerem exatamente \(31\) sucessos em
+  \(50\) tentativas. Ela é obtida diretamente a partir da função de massa de probabilidade
+  da distribuição binomial, avaliando a PMF no ponto \(k = 31\).
+
+  \[
+P(X = 31) = \binom{50}{31}(0{,}7)^{31}(0{,}3)^{19} = 0.05575728 
+\]
+\end{enumerate}
+
+Note que no item (a) o valor deu extremamente proximo de 1, o que está de acordo com o gráfico da CDF, onde a grande maioria dos valores estão acima de 20. O resultado do item (b) também é interessante, pois confirma a maior presença dos valores ao redor do valor esperado, sendo sua probabilidade maior que 0.9. Por fim, o item (c) também está de acordo com o gráfico da PMF mostrado anteriormente.
+
+Abaixo segue o código em R usado para gerar esses valores:
+
+\begin{lstlisting}
+# Para X>=20:
+s = 0
+for(i in 21:50){
+  s <- s + pmf[i]
+}
+
+cat("P(X >= 20):", s, "\n")
+
+# Para 30 < X < 43:
+s = 0
+for(i in 32:43){
+  s <- s + pmf[i]
+}
+cat("P(30 < X < 43):", s, "\n")
+
+# Para X = 31:
+cat("P(X = 31):", pmf[32], "\n")
+\end{lstlisting}
+
+\subsubsection{Item 5}
+Com base na distribuição da variável aleatória \(X\), que modela o número de pedidos de sobremesa em um determinado período, o restaurante pode planejar seu estoque de forma mais eficiente, equilibrando disponibilidade e custo.
+
+A partir dessa distribuição, calculam-se medidas como a média \(\mathbb{E}[X]\) e a variância \(\operatorname{Var}(X)\), que fornecem uma ideia não apenas da demanda esperada, mas também de sua variabilidade. Isso permite ajustar o estoque para cobrir a maior parte dos cenários prováveis.
+
+Por exemplo, pode-se determinar:
+
+\begin{itemize}
+    \item \(P(X > k)\): probabilidade de a demanda ultrapassar certo nível \(k\) de estoque;
+    \item \(P(X \leq k)\): probabilidade de a demanda ficar abaixo ou igual a \(k\).
+\end{itemize}
+
+Com esses valores, escolhe-se um estoque \(k^*\) que atenda a um nível desejado de serviço, minimizando tanto o risco de falta quanto o desperdício por excesso de produção.
+
+Assim, o modelo probabilístico oferece uma base quantitativa para decisões de estoque, alinhando produção ao comportamento real da demanda.
+
+\subsubsection{Item 6}
+Alterações nos parâmetros \(p\) e \(n\) impactam diretamente o formato e as probabilidades da distribuição binomial associada à variável aleatória \(X\).
+
+Se a probabilidade de sucesso \(p\) aumenta (como quando uma sobremesa fica mais popular, digamos \(p = 0{,}8\)), a média \(\mathbb{E}[X] = np\) também cresce. Isso desloca a distribuição para valores mais altos, indicando um número esperado maior de pedidos. Já a variância \(\operatorname{Var}(X) = np(1-p)\) pode subir ou descer conforme \(p\), mas tende a diminuir quando \(p\) se aproxima de 1, tornando a distribuição mais concentrada em torno da média.
+
+Por outro lado, mudanças em \(n\)—o número de clientes—afetam tanto a posição quanto a dispersão da distribuição. Um aumento em \(n\) eleva a média e a variância proporcionalmente, tornando a curva mais espalhada, porém mais suave e simétrica, especialmente para \(n\) grande. Valores pequenos de \(n\) geram distribuições mais discretas e com maior variabilidade relativa.
+
+Em resumo, quando \(p\) sobe, a probabilidade individual de pedido aumenta, deslocando a distribuição para a direita. Já quando \(n\) cresce, amplia-se a escala do cenário, afetando o total esperado de pedidos e sua dispersão. Entender esses efeitos é essencial para avaliar como mudanças no comportamento da clientela ou no volume de atendimento influenciam a demanda.
+
+
+
+
+
+
+
 \newpage
 \section{\textbf{QUESTÃO 2 - PESQUISA ONLINE}}
 Um site realiza uma pesquisa online e oferece uma recompensa a um usuário selecionado aleatoriamente que responde a uma série de perguntas. Cada um dos 10 milhões de visitantes diários tem, independentemente, probabilidade $p = 10^{-7}$ de ganhar a recompensa.
@@ -790,37 +843,17 @@ distribuição normal teórica. Abaixo, a Figura 12 ilustra exatamente a semelha
 \end{figure}
 
 Os códigos dos histogramas e da curva da PDF se encontram no apêncice no final do arquivo, onde também se encontra o código completo do exercício 3.
-
+\newpage
 \subsubsection{Item 5}
-A análise dos histogramas e das estatísticas descritivas indica que as distribuições
-empíricas das temperaturas simuladas se assemelham de forma consistente à curva
-normal teórica assumida para o regime estacionário da CPU. Em ambos os conjuntos de
-dados, observa-se uma concentração dos valores em torno da média, bem como uma
-dispersão compatível com o formato simétrico característico da distribuição normal.
+As distribuições de temperatura da CPU geradas por simulação seguem consistentemente o perfil da curva normal teórica, como mostram os histogramas e estatísticas descritivas. Em todos os conjuntos, os valores se concentram em torno da média, com dispersão compatível com o formato simétrico esperado.
 
-As médias amostrais obtidas a partir das simulações encontram-se muito próximas do
-valor esperado de \(62\,^\circ\mathrm{C}\), enquanto os desvios-padrão amostrais apresentam
-valores coerentes com o desvio-padrão teórico de \(3{,}5\,^\circ\mathrm{C}\). Pequenas diferenças
-entre os valores amostrais e teóricos são esperadas devido à variabilidade inerente a
-amostras finitas, mas não comprometem o modelo probabilístico.
+As médias amostrais obtidas nas simulações apresentam valores muito próximos da expectativa teórica de 62, enquanto os desvios-padrão amostrais são coerentes com o parâmetro teórico de 3{,}5. Pequenas discrepâncias entre os valores amostrais e teóricos são esperadas devido à variabilidade da amostra, mas não comprometem a validade do modelo probabilístico adotado.
 
-Além disso, não são observadas diferenças perceptíveis entre o conjunto de dados
-gerado pelo gerador manual baseado na transformação de Box--Muller e aquele produzido
-pelo gerador normal embutido do \textsf{R}. Ambos os métodos resultam em distribuições
-estatisticamente semelhantes, indicando que a implementação do gerador manual é
-adequada para a geração de variáveis aleatórias normais.
+Não foram identificadas diferenças significativas entre o conjunto de dados gerado pelo método manual baseado na transformação de Box–Muller e aquele produzido pelo gerador normal do R. Ambos os métodos produzem distribuições estatisticamente equivalentes, indicando que a implementação do gerador manual é adequada e confiável para a geração de variáveis aleatórias normais.
 
-Esse tipo de simulação é útil na avaliação de estratégias de resfriamento e de
-escalonamento dinâmico de clock, pois permite estimar a probabilidade de ocorrência de
-temperaturas elevadas e analisar o comportamento térmico do sistema sob diferentes
-condições, mesmo antes da implementação em hardware real.
+Esse tipo de abordagem simulacional é particularmente útil para a avaliação de estratégias de resfriamento e de escalonamento dinâmico de clock, pois permite estimar probabilidades de ocorrência de temperaturas elevadas e analisar o comportamento térmico do sistema sob diferentes condições operacionais — inclusive sob variações de clock — tudo isso antes mesmo da implementação física em hardware real.
 
-Por fim, geradores de números aleatórios uniformes constituem a base dos sistemas de
-geração de números aleatórios porque são mais simples de implementar e podem ser
-transformados matematicamente para produzir variáveis aleatórias com outras
-distribuições, como a normal. Métodos como a transformação de Box--Muller exemplificam
-como sequências uniformes podem ser utilizadas para gerar distribuições mais complexas
-necessárias em simulações estatísticas e aplicações de engenharia.
+Por fim, é importante destacar que geradores de números aleatórios uniformes constituem a base fundamental dos sistemas de geração de números aleatórios, pois são mais simples de implementar e podem ser transformados matematicamente para produzir variáveis com distribuições mais complexas, como a normal. Métodos como a transformação de Box–Muller exemplificam precisamente como sequências uniformes podem ser convertidas eficientemente em distribuições normais, atendendo às necessidades de simulações estatísticas avançadas e aplicações práticas de engenharia.
 
 
 
@@ -852,20 +885,216 @@ necessárias em simulações estatísticas e aplicações de engenharia.
 
 \begin{lstlisting}
    
+# Distribuição binomial com n=50 e p=0.7
+
+x <- 0:50
+
+pmf = dbinom(x, 50, 0.7) # Função da PMF (51 valores, então pmf[1] = 0 e P(X = x) = pmf[x+1])       
+
+plot(x,pmf,type='h',col='red',lwd=2, # Gráfico da PMF
+     xlab= 'x', ylab='P(x)')
+
+abline(h=0) # Adiciona uma linha no valor de P(x) = 0 para aumentar a legibilidade
+
+
+cdf = c(0, cumsum(pmf)) # Calculando a CDF a partir da PMF
+
+plot(cdf ,type='h',col='blue',lwd=2, # Gráfico da CDF
+     xlab= 'x', ylab='P(X <= x)')
+
+abline(h=0) # Adiciona uma linha no valor de P(x) = 0 para aumentar a legibilidade
+
+
+
+# O valor esperado de uma distribuição binomial é n*p, nesse caso sendo 50*0.7 = 35.
+
+Ex = weighted.mean(x, pmf) # O valor esperado é uma média ponderada usando as probabilidades de pesos
+cat("Valor Esperado:", Ex, "\n")
+
+# A variância de uma distribuição binomial é n*p*(1-p), nesse caso sendo 50*0.7*0.3 = 10.5
+
+Var = Ex*0.3
+dp = sqrt(Var)
+cat("Variância:", Var, "\n")
+
+cat("Desvio-Padrão:", sqrt(Var), "\n")
+
+# Para X>=20:
+s = 0
+for(i in 21:50){
+  s <- s + pmf[i]
+}
+cat("P(X >= 20):", s, "\n")
+
+
+
+# Para 30 < X < 43:
+s = 0
+for(i in 32:43){
+  s <- s + pmf[i]
+}
+cat("P(30 < X < 43):", s, "\n")
+
+# Para X = 31:
+
+
+cat("P(X = 31):", pmf[32], "\n")
+
+
 \end{lstlisting}
 
 \subsection{Exercício 2:}
 
 \begin{lstlisting}
+# Como temos uma baixíssima probabilidade e um grande número de pessoas, pode-se modelar essa pesquisa como uma distribuição de Poisson. Além disso, como temos p = 10^-7 e n = 10^7, intuitivamente o número de pessoas que ganhariam o prêmio em um dia seria 10^7*10^-7 = 1 pessoa. Portanto, o parâmetro dessa distribuição seria 1.
 
+x <- 0:20
+pmf = dpois(x, 1)
+
+# Veja também que podemos modelar esse prêmio como sendo uma distribuição binomial, bem mais simples. Isso ocorre porque o valor do número de tentativas (n) da distribuição binomial é muito grande. Portanto, isso faz com que a distribuição binomial tenda a se distribuir como uma de Poisson.
+
+pmf2 = dbinom(x,10000000, 0.0000001)
+
+plot(x,pmf,type='h',col='red',lwd=2,
+        xlab= 'x', ylab='P(x)')
+points(x,pmf, pch=19, col='red')
+
+abline(h=0) # Adiciona uma linha no valor de P(x) = 0 para aumentar a legibilidade
+
+plot(x,pmf2,type='h',col='blue',lwd=2,
+        xlab= 'x', ylab='P(x)')
+points(x,pmf2, pch=19, col='blue')
+
+abline(h=0) # Adiciona uma linha no valor de P(x) = 0 para aumentar a legibilidade
+
+
+# Valor esperado e Variância
+
+Ex_Poisson = weighted.mean(x, pmf) # O valor esperado é uma média ponderada usando as probabilidades de pesos
+cat("Valor Esperado da dist. de Poisson:", Ex_Poisson, "\n")
+
+Ex_Binom = weighted.mean(x, pmf2) 
+cat("Valor Esperado da dist. Binomial:", Ex_Binom, "\n")
+
+cat("Variância da dist. de Poisson:", Ex_Poisson, "\n")
+
+cat("Variância da dist. Binomial:", Ex_Binom*(1-0.0000001), "\n")
+
+
+# A probabilidade de você ganhar dentre os outros vencedores é dado pela lei da probabilidade total
+
+s = 0
+for(i in 1:20){
+    s <- s + pmf[i+1]*(1/i)
+}
+
+cat("Probabilidade de ganhar:", s)
+
+
+y = rpois(1000000, 1)
+
+hist(y, prob = TRUE, breaks = 9, border = 'black', right = FALSE,
+    main = " ")
 \end{lstlisting}
 
 \subsection{Exercício 3:}
 
 \begin{lstlisting}
 
+box_muller_cpu_temp <- function(n){
+  #dados sobre a temperatura (media e desvio padrao)
+  mu <- 62
+  sigma <- 3.5
+  
+  #Item 1(a)
+  m <- ceiling(n / 2)
+  U1 <- runif(m)
+  U2 <- runif(m)
+  
+  #Item 1(b): Box-Muller
+  Z1 <- sqrt(-2 * log(U1)) * cos(2 * pi * U2)
+  Z2 <- sqrt(-2 * log(U1)) * sin(2 * pi * U2)
+  Z  <- c(Z1, Z2)[1:n]
+  
+  #Item 1(c): Conversao
+  T <- mu + sigma * Z
+  return(T)
+}
+
+T_box <- box_muller_cpu_temp(1000)
+
+T_rnorm <- rnorm(n = 1000, mean = 62, sd = 3.5)
+
+mean_box <- mean(T_box)
+sd_box <- sd(T_box)
+
+mean_rnorm <- mean (T_rnorm)
+sd_rnorm <- sd(T_rnorm)
+
+min_box <- min(T_box)
+max_box <- max(T_box)
+
+
+min_rnorm <- min(T_rnorm)
+max_rnorm <- max(T_rnorm)
+
+#valores empiricos
+prob_emp_box_D <- mean(T_box > 68)
+prob_emp_rnorm_D <- mean(T_rnorm > 68)
+
+#valores teoricos (vale para os dois)
+prob_teo_D <- 1 - pnorm(68,mean = 62,sd = 3.5)
+
+#valores empiricos
+prob_emp_box_E <- mean(T_box > 60 & T_box < 65)
+prob_emp_rnorm_E <- mean(T_rnorm > 60 & T_rnorm < 65)
+
+#valores teoricos (vale para os dois)
+prob_teo_E <- pnorm(65,mean = 62,sd = 3.5) - pnorm (60,mean = 62,sd = 3.5)
+
+#valores empiricos
+p_emp_box_F   <- mean(T_box > 75)
+p_emp_rnorm_F <- mean(T_rnorm > 75)
+
+#valores teoricos (vale para os dois)
+p_teo_F <- 1 - pnorm(75, mean = 62, sd = 3.5)
+
+par(mfrow = c(1, 2))
+
+#Box-Muller
+hist(T_box, breaks = 30,
+     main = "Temperaturas simuladas (Box-Muller)",
+     xlab = "Temperatura (°C)")
+
+#Gerador do R
+hist(T_rnorm, breaks = 30,
+     main = "Temperaturas simuladas (rnorm)",
+     xlab = "Temperatura (°C)")
+
+# Item 4(b): PDF normal teórica sobreposta ao histograma
+# (assumindo que já existe um vetor de temperaturas T: use T_box ou T_rnorm)
+
+mu <- 62
+sigma <- 3.5
+
+hist(T_box, breaks = 30, probability = TRUE,
+     main = "Box-Muller + PDF teórica",
+     xlab = "Temperatura (°C)")
+curve(dnorm(x, mean = mu, sd = sigma), add = TRUE, lwd = 2)
+
+hist(T_rnorm, breaks = 30, probability = TRUE,
+     main = "rnorm + PDF teórica",
+     xlab = "Temperatura (°C)")
+curve(dnorm(x, mean = mu, sd = sigma), add = TRUE, lwd = 2)
 
 \end{lstlisting}
 
-\end{document}
+\subsection{Probabilidades - distruição normal:}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{WhatsApp-Image-2022-05-31-at-13.15.07.jpeg}
+    \caption{}
+\end{figure}
 
+
+\end{document}
