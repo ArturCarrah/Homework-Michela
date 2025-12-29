@@ -79,7 +79,6 @@ hist(T_box, breaks = 30, probability = TRUE,
      xlab = "Temperatura (°C)")
 curve(dnorm(x, mean = mu, sd = sigma), add = TRUE, lwd = 2)
 
-# Se quiser fazer para o outro conjunto também, troque T_box por T_rnorm:
 hist(T_rnorm, breaks = 30, probability = TRUE,
      main = "rnorm + PDF teórica",
      xlab = "Temperatura (°C)")
