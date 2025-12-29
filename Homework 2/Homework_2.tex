@@ -8,6 +8,7 @@
 \usepackage{listings}          %Códigos de linguagens de programação
 \usepackage{setspace}          %Espaçamento dos parágrafos
 \usepackage{hyperref}
+\usepackage{subcaption}        %Para colocar 2 imagens lado a lado
 
 \oddsidemargin 0.22in
 \textwidth 5.8in
@@ -278,23 +279,70 @@ P_X(k) = \begin{cases}
 \end{equation}
 
 \subsubsection{Item 2}
-A expressão correta para a premiação é uma distribuição de Poisson, onde intuitivamente o parâmetro é calculado pelo produto do número de pessoas com a probabilidade de cada uma ganhar, ou seja $\lambda = 10^7\times10^{-7} = 1$. Daí, essa distribuição tem valor esperado e variância igual ao parâmetro $\lambda$. Desse modo, o código em R no apêncide do texto retorna 1 para o valor esperado de ambas distribuições, uma variância de 1 para a distribuição de Poisson e uma variância de 0.9999999 para a distribuição binomial. Portanto, estes valores corroboram com a análise de que a distribuição binomial é uma boa aproximação para  a premiação da pesquisa, uma vez que se encontram muito próximos, de modo que possam ser considerados iguais para todos os efeitos.
+A expressão correta para a premiação é uma distribuição de Poisson, onde intuitivamente o parâmetro é calculado pelo produto do número de pessoas com a probabilidade de cada uma ganhar, ou seja $\lambda = 10^7\times10^{-7} = 1$. Daí, essa distribuição tem valor esperado e variância igual ao parâmetro $\lambda$. Desse modo, o código em R apresentado a seguir retorna 1 para o valor esperado de ambas distribuições, uma variância de 1 para a distribuição de Poisson e uma variância de 0.9999999 para a distribuição binomial. Portanto, estes valores corroboram com a análise de que a distribuição binomial é uma boa aproximação para  a premiação da pesquisa, uma vez que se encontram muito próximos, de modo que possam ser considerados iguais para todos os efeitos. A distribuição binomial aproximada da figura \ref{fig:distb} é visualmente indistinguível da distribuição de Poisson na figura \ref{fig:distp}, exatamente como se espera a partir dos dados obtidos
+
+
+\begin{lstlisting}
+x <- 0:20
+pmf = dpois(x, 1)
+
+
+pmf2 = dbinom(x,10000000, 0.0000001)
+
+
+# Valor esperado e Variância
+
+Ex_Poisson = weighted.mean(x, pmf) # O valor esperado é uma média ponderada usando as probabilidades de pesos
+cat("Valor Esperado da dist. de Poisson:", Ex_Poisson, "\n")
+
+Ex_Binom = weighted.mean(x, pmf2) 
+cat("Valor Esperado da dist. Binomial:", Ex_Binom, "\n")
+
+cat("Variância da dist. de Poisson:", Ex_Poisson, "\n")
+
+cat("Variância da dist. Binomial:", Ex_Binom*(1-0.0000001), "\n")
+\end{lstlisting}
+
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\linewidth]{poisson.png}
+
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=0.9\linewidth, height=6cm]{poisson.png} 
+        \caption{Gráfico da PMF da distribuição de Poisson}
+        \label{fig:distp}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \includegraphics[width=0.9\linewidth, height=6cm]{binom.png}
+        \caption{Gráfico da PMF da distribuição Binomial}
+        \label{fig:distb}
+    \end{subfigure}
+
+\caption{Comparação entre a PMF da distribuição aproximada e da real}
+\label{fig:image2}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\linewidth]{binom.png}
-\end{figure}
 
 \subsubsection{Item 3}
 
 A probabilidade de você receber o prêmio mesmo com outras pessoas também ganhando é dada pela Lei da Probabilidade Total. Para você receber dentre um número $i$ de ganhadores, é necessário primeiro ser selecionado para esse grupo e também ganhar dos outros $i-1$ competidores. Portanto, a probabilidade para você ser chamado para o grupo $i$ é $\frac{e^{-1}1^i}{i!}$ e a probabilidade de ganhar é $\frac{1}{i}$. Juntando ambas à Lei da Probabilidade Total: 
 
 \[ \sum_{i=1}^{\infty} \frac{1}{e}\frac{1}{i!\times i} = \frac{1}{e}\sum_{i=1}^{\infty} \frac{1}{i!\times i} = 0.4848291\]
+
+Este resultado é validado pelo seguinte código em R:
+
+\begin{lstlisting}
+x <- 0:20
+pmf = dpois(x, 1)
+
+# A probabilidade de você ganhar dentre os outros vencedores é dado pela lei da probabilidade total
+
+s = 0
+for(i in 1:20){
+    s <- s + pmf[i+1]*(1/i)
+}
+
+cat("Probabilidade de ganhar:", s)
+\end{lstlisting}
 
 \subsubsection{Item 4}
 
@@ -303,6 +351,8 @@ Para uma distribuição de Poisson com 1000000 testes e $\lambda = 1$, a distrib
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\linewidth]{image.png}
+    \caption{Distribuição das probabilidades em uma simulação de Poisson usando um parâmetro de $\lambda = 1$}
+    \label{fig:placeholder}
 \end{figure}
 
 
@@ -478,7 +528,320 @@ o comportamento esperado de um gerador de variáveis normais.
 
 
 
-\subsubsection{Item 3 (a),(b),(c)}
+\subsubsection{Item 3 (a), (b)}
+Tendo gerado os 1000 dados de temperatura da CPU de duas maneiras diferentes(Pelo Box-Muller e diretamente pelo R) é possivel calcular as suas médias amostrais e seus desvios padrões.
+
+A média amostral é a divisão entre todas as temperaturas geradas pela quantidade total de amostras, que nesse caso é 1000. Para o desvio padrão calcula-se a diferença entre cada temperatura e a média amostral, obtendo os desvios. Esses desvios são elevados, e a média deles fornecem a variância do conjunto. Por fim, tira-se a raiz quadrada da variância, resultando no desvio-padrão.
+
+Segue abaixo o código gerador das médias amostrais e dos desvios-padrões reutilizando os valores gerados pela função Box-Muller e pelo gerador de numeros do R:
+
+\begin{lstlisting}
+#Funcao Box-Muller
+mean_box <- mean(T_box)
+sd_box <- sd(T_box)
+
+#Gerador de números do R
+mean_rnorm <- mean (T_rnorm)
+sd_rnorm <- sd(T_rnorm)
+   
+\end{lstlisting}
+
+Recapitulando, o Tbox é o vetor com os valores de temperatura gerados pelo Box-Muller e o Trnorm é o vetor com as temperaturas geradas pelo próprio R.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{mean.JPG}
+    \caption{média amostral}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{sd.JPG}
+    \caption{desvio-padrão}
+\end{figure}
+
+A Figura 2 representa a média amostral do Box-Muller e do gerador do R, já a Figura 3 representa os desvio-padrões, também seguindo a mesma ordem. É nitido a semelhança entre os resultados, com diferença baixas entre os valores das médias e dos desvios padrões, o que indicam proximidade entre os valores gerados pelas duas formas.
+
+\subsubsection{Item 3 (c)}
+Além da média e do desvio-padrão, um dado muito importante de se obter são os valores máximos e mínimos de temperatura, pois mostra o quanto os valores gerados estão dispersos para ambos os lados.
+
+Para isso usa-se de uma ferramenta do R. Segue abaixo o código usado:
+
+\begin{lstlisting}
+#Funcao Box-Muller
+min_box <- min(T_box)
+max_box <- max(T_box)
+
+#Gerador de números do R
+min_rnorm <- min(T_rnorm)
+max_rnorm <- max(T_rnorm)
+\end{lstlisting}
+
+As figuras abaixo mostram os resultados obtidos de máximos e mínimos. Na primeira tem-se os máximos de temperatura e na segunda os mínimos.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{max.JPG}
+    \caption{Temperatura máxima}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{min.JPG}
+    \caption{Temperatura mínima}
+\end{figure}
+
+Note que na Figura 4 que mostra as temperaturas máximas quanto na Figura 5 que mostra as temperaturas mínimas, a diferença entre as duas funções foi menos de \(1^\circ\mathrm{C}\), o que mostra consistência e proximidade nos dados obtidos.
+
+\newpage
+\subsubsection{Item 3 (d),(e),(f)}
+Nesse item será feito o calculo das probabilidades empíricas e teóricas de eventos diferentes usando as temperaturas da CPU. Lembre-se que o modelo das temperaturas segue uma distribuição normal com média (\mu\)) = \(62^\circ\mathrm{C}\) e desvio-padrão (\sigma\)) = \(3.5^\circ\mathrm{C}\).
+
+Como se trata de uma distribuição normal , usaremos do resultado da transformação que nos fornece o Z, que seus valores de probabilidade são baseados em uma tabela de relacionada valores de probabilidades fixas (é possível encontrar essa tabela no final do arquivo).
+
+\[
+Z = \frac{X - \mu}{\sigma}
+\]
+
+Z é o resultado da transformação, \mu\) é a média amostral e \sigma\) é o desvio-padrão.
+
+Além disso, para calcular os valores empíricos e teóricos, é necessário reutilizar os códigos fornecidos dos Itens 1 e 2 e 3 (a)(b)(c). Eles podem ser encontrados no apêndice ao final do arquivo.
+\vspace{0.5cm}
+
+\subtitle{\textbf{(d) - P(T > 68):}}
+A probabilidade empírica é obtida diretamente a partir dos dados gerados, sendo calculada como a proporção de observações de temperatura que excedem \(68\,^\circ\mathrm{C}\)
+em relação ao número total de amostras. Em termos práticos, conta-se quantos valores do conjunto  satisfazem a condição \(T > 68\) e divide-se esse número pelo total de observações.
+
+Já a probabilidade teórica é determinada assumindo que a temperatura da CPU segue uma
+distribuição normal com média \(\mu = 62\) e desvio-padrão \(\sigma = 3{,}5\). Nesse caso, a
+probabilidade \(P(T > 68)\) é calculada a partir da função de distribuição acumulada da
+normal, após a padronização da variável mostrada acima (o valor Z). 
+
+Segue abaixo  o código feito em R e sua saída (Figura 8) com os valores desejados de probabilidades:
+
+\begin{lstlisting}
+#valores empiricos
+prob_emp_box_D <- mean(T_box > 68)
+prob_emp_rnorm_D <- mean(T_rnorm > 68)
+
+#valores teoricos (vale para os dois)
+prob_teo_D <- 1 - pnorm(68,mean = 62,sd = 3.5)   
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{prob1.JPG}
+    \caption{P(T > 68)}
+\end{figure}
+
+Utilizando a fórmula da transformação citada anteriormente é possivel calcular o resultado teórico e mostrar que os valores obtidos são extremamente pertos:
+\[
+Z = \frac{68 - 62}{3{,}5} \approx 1{,}71
+\]
+Assim, 
+\[
+P(T > 68) = P(Z > 1{,}71) = 1 - \Phi(1{,}71) \approx 0{,}043
+\]
+
+\vspace{0.5cm}
+
+\subtitle{\textbf{(e) - P(60 < T < 65):}}
+A probabilidade empírica é estimada a partir dos dados simulados, calculando-se a fração
+de observações cuja temperatura está estritamente entre \(60\,^\circ\mathrm{C}\) e
+\(65\,^\circ\mathrm{C}\). Esse procedimento consiste em contar o número de amostras que
+satisfazem a condição \(60 < T < 65\) e dividir esse total pelo número de medições
+realizadas.
+
+Por outro lado, a probabilidade teórica é obtida assumindo que a variável aleatória
+\(T\) segue uma distribuição normal com média \(\mu = 62\) e desvio-padrão
+\(\sigma = 3{.}5\). Nesse contexto, a probabilidade desejada é expressa como
+\[
+P(60 < T < 65) = F_T(65) - F_T(60),
+\]
+onde \(F_T(\cdot)\) representa a função de distribuição acumulada da normal.
+
+Segue abaixo  o código feito em R e sua saída (Figura 9) com os valores desejados de probabilidades:
+
+\begin{lstlisting}
+#valores empiricos
+prob_emp_box_E <- mean(T_box > 60 & T_box < 65)
+prob_emp_rnorm_E <- mean(T_rnorm > 60 & T_rnorm < 65)
+
+#valores teoricos (vale para os dois)
+prob_teo_E <- pnorm(65,mean = 62,sd = 3.5) - pnorm (60,mean = 62,sd = 3.5)
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{prob2.JPG}
+    \caption{P(60 < T < 65)}
+\end{figure}
+
+Para o cálculo teórico dessa probabilidade, a variável aleatória \(T\) é
+padronizada utilizando a transformação da distribuição normal, substituindo \(\mu = 62\,^\circ\mathrm{C}\) e \(\sigma = 3{,}5\,^\circ\mathrm{C}\), obtêm-se os valores
+padronizados aos limites do intervalo:
+\[
+Z_1 = \frac{60 - 62}{3{,}5} \approx -0{,}57,
+\qquad
+Z_2 = \frac{65 - 62}{3{,}5} \approx 0{,}86.
+\]
+Assim,
+\[
+P(60 < T < 65) = P(-0{,}57 < Z < 0{,}86) = \Phi(0{,}86) - \Phi(-0{,}57) \approx 0{,}52.
+\]
+\newpage
+
+\vspace{0.5cm}
+
+\subtitle{\textbf{(f) - P(T > 75):}}
+Para a probabilidade empírica \(P(T > 75)\), utiliza se o conjunto de dados simulados. Nesse caso, a probabilidade é calculada como a razão entre
+o número de observações cuja temperatura excede \(75\,^\circ\mathrm{C}\) e o total de amostras
+geradas. Em termos práticos, verifica-se quantos valores do vetor de temperaturas
+simuladas satisfazem a condição \(T > 75\) e divide-se esse número pelo total de
+1{.}000 medições.
+
+Devido ao fato de \(75\,^\circ\mathrm{C}\) estar a vários desvios-padrão acima da média
+\(\mu = 62\,^\circ\mathrm{C}\), a probabilidade teórica associada a esse evento é extremamente
+baixa. Assim, é comum que, em amostras de tamanho limitado, como 1{.}000 observações,
+nenhum valor ultrapasse esse limiar. Esse resultado empírico reforça a ideia de que
+eventos raros exigem tamanhos de amostra significativamente grandes para serem
+observados.
+
+Segue abaixo  o código feito em R e sua saída (Figura 10) com os valores desejados de probabilidades:
+
+\begin{lstlisting}
+#valores empiricos
+p_emp_box_F   <- mean(T_box > 75)
+p_emp_rnorm_F <- mean(T_rnorm > 75)
+
+#valores teoricos (vale para os dois)
+p_teo_F <- 1 - pnorm(75, mean = 62, sd = 3.5)
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{prob3.JPG}
+    \caption{P(60 < T < 65)}
+\end{figure}
+
+Para o cálculo teórico da probabilidade \(P(T > 75)\), a variável aleatória \(T\) é padronizada
+por meio da transformação da normal padrão, substituindo \(\mu = 62\,^\circ\mathrm{C}\), \(\sigma = 3{,}5\,^\circ\mathrm{C}\) e \(T = 75\,^\circ\mathrm{C}\), tem-se:
+\[
+Z = \frac{75 - 62}{3{,}5} \approx 3{,}71.
+\]
+Assim,
+\[
+P(T > 75) = P(Z > 3{,}71) = 1 - \Phi(3{,}71) \approx 0{,}0001.
+\]
+
+Note que na Figura 10, os valores de probabilidades empíricas foram zero, isso diz que nenhuma temperatura gerada ultrapassou 75.
+
+\textbf{Algum dos conjuntos de dados simulados (1.000 amostras) contém valores acima
+de 75◦C?} Com base nos resultados obtidos, observa-se que nenhum dos conjuntos de dados simulados
+com amostras apresentou valores de temperatura acima de \(75\,^\circ\mathrm{C}\). Em
+particular, as probabilidades empíricas estimadas a partir dos dados gerados pelo método
+de Box--Muller e pelo gerador normal embutido do R foram ambas iguais a zero.
+
+Por outro lado, o cálculo teórico indica que a probabilidade de ocorrência de temperaturas
+acima de \(75\,^\circ\mathrm{C}\) é extremamente baixa,
+\[
+p_{\text{teo}} = P(T > 75) \approx 0{,}0001019.
+\]
+
+Esses resultados ilustram que eventos raros, caracterizados por probabilidades muito
+pequenas, exigem tamanhos de amostra significativamente maiores para serem observados
+empiricamente com frequência apreciável. Em amostras relativamente pequenas, como no
+caso de \(1{.}000\) observações, é comum que tais eventos simplesmente não ocorram,
+mesmo quando sua probabilidade teórica é não nula.
+
+
+\subsubsection{Item 4 (a)}
+Para melhor analisar os dados obtidos, foram construídos dois histogramas das temperaturas
+simuladas da CPU, utilizando tanto os dados gerados pelo método de Box--Muller quanto
+aqueles obtidos pelo gerador normal do R. Os histogramas são importantes para 
+avaliar a distribuição empírica das observações, evidenciando a concentração dos valores
+em torno da média e a dispersão característica do conjunto de dados.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{hist1.JPG}
+    \caption{Histogramas das temperaturas simuladas da CPU}
+\end{figure}
+
+Na Figura 11, o histograma da esquerda representa aquele gerado pelas amostras da função Box-Muller e o da direita é o gerado pelas amostras da função de geração de números do R. Veja que nos dois os valores de concentram perto da média (62), o que está de acordo com o que já foi discutido anteriormente, mostrando assim uma distribuição normal dos valores.
+
+\subsubsection{Item 4 (b)}
+
+Para comparar a distribuição empírica das temperaturas simuladas com o modelo
+probabilístico assumido, sobrepõe-se ao histograma a função densidade de probabilidade
+(PDF) teórica da normal com média \(\mu = 62\,^\circ\mathrm{C}\) e desvio-padrão
+\(\sigma = 3{,}5\,^\circ\mathrm{C}\). Como o histograma é plotado na escala de densidade
+(probabilidade), a curva pode ser desenhada diretamente no mesmo gráfico,
+permitindo verificar visualmente a proximidade entre as amostras simuladas e a
+distribuição normal teórica. Abaixo, a Figura 12 ilustra exatamente a semelhança entre a angulação da curva do PDF e do histograma, sendo na esquerda a da função Box-Muller e na direita a gerada pelas amostras da função de geração de números do R.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{hist2.JPG}
+    \caption{Histogramas das temperaturas simuladas da CPU com PDF}
+\end{figure}
+
+Os códigos dos histogramas e da curva da PDF se encontram no apêncice no final do arquivo, onde também se encontra o código completo do exercício 3.
+
+\subsubsection{Item 5}
+A análise dos histogramas e das estatísticas descritivas indica que as distribuições
+empíricas das temperaturas simuladas se assemelham de forma consistente à curva
+normal teórica assumida para o regime estacionário da CPU. Em ambos os conjuntos de
+dados, observa-se uma concentração dos valores em torno da média, bem como uma
+dispersão compatível com o formato simétrico característico da distribuição normal.
+
+As médias amostrais obtidas a partir das simulações encontram-se muito próximas do
+valor esperado de \(62\,^\circ\mathrm{C}\), enquanto os desvios-padrão amostrais apresentam
+valores coerentes com o desvio-padrão teórico de \(3{,}5\,^\circ\mathrm{C}\). Pequenas diferenças
+entre os valores amostrais e teóricos são esperadas devido à variabilidade inerente a
+amostras finitas, mas não comprometem o modelo probabilístico.
+
+Além disso, não são observadas diferenças perceptíveis entre o conjunto de dados
+gerado pelo gerador manual baseado na transformação de Box--Muller e aquele produzido
+pelo gerador normal embutido do \textsf{R}. Ambos os métodos resultam em distribuições
+estatisticamente semelhantes, indicando que a implementação do gerador manual é
+adequada para a geração de variáveis aleatórias normais.
+
+Esse tipo de simulação é útil na avaliação de estratégias de resfriamento e de
+escalonamento dinâmico de clock, pois permite estimar a probabilidade de ocorrência de
+temperaturas elevadas e analisar o comportamento térmico do sistema sob diferentes
+condições, mesmo antes da implementação em hardware real.
+
+Por fim, geradores de números aleatórios uniformes constituem a base dos sistemas de
+geração de números aleatórios porque são mais simples de implementar e podem ser
+transformados matematicamente para produzir variáveis aleatórias com outras
+distribuições, como a normal. Métodos como a transformação de Box--Muller exemplificam
+como sequências uniformes podem ser utilizadas para gerar distribuições mais complexas
+necessárias em simulações estatísticas e aplicações de engenharia.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -505,3 +868,4 @@ o comportamento esperado de um gerador de variáveis normais.
 \end{lstlisting}
 
 \end{document}
+
