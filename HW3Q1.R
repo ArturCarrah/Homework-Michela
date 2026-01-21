@@ -47,7 +47,6 @@ p_ll <- ggplot(df_ll, aes(x = lambda, y = loglik)) +
   theme_minimal()  # Usando um tema minimalista para melhorar a visualização
 
 # Salva o gráfico
-ggsave("Q1_loglik_with_MLE.png", plot = p_ll, width = 8, height = 5, dpi = 150)
 print(p_ll)
 
 # (5a) Tempo médio estimado: E[X] = 1/lambda
