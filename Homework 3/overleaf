@@ -1,0 +1,836 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[portuguese]{babel} %Caracteres do português
+\usepackage[T1]{fontenc}       %Fonte
+\usepackage{amsmath, amssymb}  %Fórmulas matemáticas
+\usepackage{graphicx}          %Imagens
+\usepackage{color}             %Cores nas letras
+\usepackage{listings}          %Códigos de linguagens de programação
+\usepackage{setspace}          %Espaçamento dos parágrafos
+\usepackage{hyperref}
+\usepackage{subcaption}        %Para colocar 2 imagens lado a lado
+
+\oddsidemargin 0.22in
+\textwidth 5.8in
+
+% Ajuste no título da seção para garantir que a numeração apareça
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[block]{\normalfont\Large\scshape}{\thesection}{1em}{#1}  % Aqui a numeração aparece antes do título
+\titleformat{\subsection}[block]{\normalfont\large\scshape}{\thesubsection}{1em}{#1}
+
+\usepackage[title,titletoc]{appendix}
+\AddToHook{env/appendices/begin}{
+\titleformat{\section}{\normalfont\Large\scshape}{}{0em}{#1\ \thesection} % Formato correto para as seções no apêndice
+}
+
+\usepackage[skins]{tcolorbox}
+\definecolor{bblue}{rgb}{0,0.3961,0.7412}
+\usepackage[bookmarksnumbered=true]{hyperref} 
+\hypersetup{
+     colorlinks = true,
+     linkcolor = bblue,
+     anchorcolor = bblue,
+     citecolor = bblue,
+     filecolor = bblue,
+     urlcolor = bblue
+ }
+
+\renewcommand{\lstlistingname}{Listado}
+\lstset{
+    backgroundcolor=\color[rgb]{0.86,0.88,0.93},
+    language=R, keywordstyle=\color[rgb]{0,0,1},
+    basicstyle=\footnotesize \ttfamily,breaklines=true,
+    escapeinside={\%*}{*)}
+}
+\usepackage{footmisc} \renewcommand{\labelitemi}{$\circ$}
+\usepackage{enumitem} \setlist[itemize]{leftmargin=*}
+
+\usepackage{scrextend}
+\deffootnote[1em]{1em}{1em}{\textsuperscript{\thefootnotemark}\,}
+\begin{document}
+\begin{figure}[!h] \includegraphics [scale=0.3] {Figures/Course-logo} \end{figure}
+\begin{spacing}{1.5}
+
+{\Large\sc \noindent \textbf{HOMEWORK 3}} \\
+{\large\sc \noindent \textbf{Nome completo:} Lucas Teixeira Holanda / Artur Carrah Cerqueira}\\
+{\large\sc \noindent \textbf{Número de matricula:} 568254 / 570754}
+
+\end{spacing}
+\vskip1cm
+
+
+
+\section*{Questão 1}
+
+
+Assume-se que o tempo de vida \(X\) (medido em anos) de um computador segue uma distribuição exponencial com parâmetro desconhecido \(\lambda > 0\). Uma amostra aleatória dos tempos de vida dos computadores é apresentada na Tabela 1. Os dados são fictícios e são utilizados apenas para fins ilustrativos.
+
+\[
+\text{Dados: } 
+\begin{array}{cccccccccc}
+0.99 & 2.31 & 10.85 & 6.15 & 10.81 & 3.72 & 5.75 & 4.15 & 9.27 & 7.84 \\
+2.31 & 10.85 & 6.15 & 1.81 & 3.72 & 5.75 & 10.40 & 10.04 & 4.15 & 9.27
+\end{array}
+\]
+
+Tabela 1: Dados usados na questão 1: Tempo de vida (em anos) dos computadores.
+
+\begin{enumerate}
+    \item Escreva a função densidade de probabilidade da distribuição exponencial com parâmetro \(\lambda\).
+    
+    \item Dada uma amostra aleatória \(X_1, X_2, \dots, X_n\):
+    \begin{enumerate}
+        \item Escreva a função de verossimilhança \(L(\lambda)\).
+        \item Derive a correspondente função log-verossimilhança \(\ell(\lambda)\).
+        \item Determine o estimador de máxima verossimilhança (MLE) \(\hat{\lambda}\) de \(\lambda\).
+    \end{enumerate}
+    
+    \item Utilizando os dados fornecidos na Tabela 1, calcule o valor numérico do MLE \(\hat{\lambda}\).
+    
+    \item Construa o gráfico da função log-verossimilhança \(\ell(\lambda)\) com base nos dados observados, considerando um intervalo adequado de valores para \(\lambda\). Indique claramente no gráfico o valor do estimador de máxima verossimilhança \(\hat{\lambda}\).
+    
+    \item Utilizando o parâmetro estimado \(\hat{\lambda}\):
+    \begin{enumerate}
+        \item Calcule o tempo médio de vida estimado de um computador.
+        \item Calcule a probabilidade de que um computador funcione por mais de 5 anos.
+    \end{enumerate}
+    
+    \item A distribuição exponencial possui a propriedade da falta de memória, o que significa que a probabilidade de falha no futuro não depende do tempo que o computador já esteve em funcionamento.
+    \begin{enumerate}
+        \item Explique essa propriedade com suas próprias palavras.
+        \item Discuta brevemente se essa suposição parece razoável para modelar o tempo de vida de computadores.
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+\section{\textbf{SOLUÇÃO}}
+
+\subsection{Item 1}
+A função densidade de probabilidade (PDF) da distribuição exponencial com parâmetro \(\lambda > 0\) é dada por:
+
+\[
+f(x; \lambda) = 
+\begin{cases} 
+\lambda e^{-\lambda x} & \text{para } x \geq 0 \\
+0 & \text{para } x < 0
+\end{cases}
+\]
+
+Onde \(x\) é a variável aleatória que representa o tempo de vida do computador, medido em anos e \(\lambda > 0\) é o parâmetro da distribuição, que também é a taxa de falha do sistema.
+
+Essa função descreve a probabilidade de um evento ocorrer em um intervalo de tempo específico, sendo a distribuição exponencial caracterizando a vida útil do computador, assumindo que o tempo até a falha segue essa distribuição.
+
+\subsection{Item 2}
+\textbf{(a) Escrevendo a função de verossimilhança  \(L(\lambda)\)}
+
+A função de verossimilhança para uma amostra aleatória \(X_1, X_2, \dots, X_n\) de uma distribuição exponencial com parâmetro \(\lambda\) é dada por:
+
+\[
+L(\lambda) = \prod_{i=1}^{n} f(X_i; \lambda) = \prod_{i=1}^{n} \lambda e^{-\lambda X_i}
+\]
+
+Onde \(X_1, X_2, \dots, X_n\) são as \(n\) observações da amostra, representando os tempos de vida dos computadores. \(f(X_i; \lambda) = \lambda e^{-\lambda X_i}\) é a função de densidade de probabilidade (PDF) da distribuição exponencial, que descreve a probabilidade de uma observação \(X_i\) ocorrer em um determinado valor, dado o parâmetro \(\lambda\). \(\lambda > 0\) é o parâmetro da distribuição exponencial, que representa a taxa de falha. Quanto maior \(\lambda\), maior a taxa de falhas e menor a vida útil média.
+
+O símbolo \( \prod \) é o símbolo de produto, e significa que estamos multiplicando todas as probabilidades associadas às \(n\) observações. Ou seja, estamos multiplicando as funções de densidade \(f(X_i; \lambda)\) para cada \(i = 1, 2, \dots, n\).
+
+Ou seja, a função de verossimilhança é o produto de todas as probabilidades de observarmos cada valor \(X_i\) da amostra, dado o parâmetro \(\lambda\). A expressão final para a função de verossimilhança é:
+
+\[
+L(\lambda) = \lambda^n e^{-\lambda \sum_{i=1}^{n} X_i}
+\]
+
+\( \lambda^n \) vem do fato de que está sendo multiplicando \(\lambda\) \(n\) vezes, uma para cada observação \(X_i\). \( e^{-\lambda \sum_{i=1}^{n} X_i} \) vem do fato de que está sendo multiplicando as exponenciais de cada observação, o que leva a uma soma no expoente.
+
+O **produto** (\(\prod\)) é uma operação importante em estatística, especialmente em verossimilhança, pois estamos considerando a probabilidade conjunta de todas as observações.
+
+Na linguagem R foi criado exatamente essa função de verossimilhança:
+
+\begin{lstlisting}
+loglik_exp <- function(lambda, x) {
+  if (lambda <= 0) return(-Inf)
+  n <- length(x)
+  n * log(lambda) - lambda * sum(x)
+\end{lstlisting}
+
+\\
+\\
+
+\textbf{(b)Derive a correspondente função log-verossimilhança}
+
+A função log-verossimilhança é o logaritmo natural da função de verossimilhança \(L(\lambda)\). Aplicando o logaritmo natural, tem-se:
+
+\[
+\ell(\lambda) = \log L(\lambda) = \log \left( \lambda^n e^{-\lambda \sum_{i=1}^{n} X_i} \right)
+\]
+
+Usando as propriedades dos logaritmos:
+
+\[
+\ell(\lambda) = \log \left( \lambda^n \right) + \log \left( e^{-\lambda \sum_{i=1}^{n} X_i} \right)
+\]
+
+Aplicando as propriedades dos logaritmos:
+
+1. \(\log(\lambda^n) = n \log(\lambda)\)
+
+2. \(\log(e^x) = x\)
+
+Dessa forma, a função log-verossimilhança é da forma:
+
+\[
+\ell(\lambda) = n \log \lambda - \lambda \sum_{i=1}^{n} X_i
+\]
+
+Essa é a função log-verossimilhança que será utilizada para maximizar a verossimilhança e determinar o estimador de máxima verossimilhança (MLE) de \(\lambda\).
+
+
+
+\textbf{(c) Estimador de Máxima Verossimilhança (MLE)}
+
+Para determinar o estimador de máxima verossimilhança (MLE), deriva-se a função log-verossimilhança \(\ell(\lambda)\) em relação a \(\lambda\) e iguala-se a derivada a zero.
+
+Primeiro, a derivada \(\ell(\lambda)\) em relação a \(\lambda\):
+
+\[
+\frac{d}{d\lambda} \ell(\lambda) = \frac{d}{d\lambda} \left( n \log \lambda - \lambda \sum_{i=1}^{n} X_i \right)
+\]
+
+A derivada de \(n \log \lambda\) é \(\frac{n}{\lambda}\), e a derivada de \(-\lambda \sum_{i=1}^{n} X_i\) é \(-\sum_{i=1}^{n} X_i\). Assim:
+
+\[
+\frac{d}{d\lambda} \ell(\lambda) = \frac{n}{\lambda} - \sum_{i=1}^{n} X_i
+\]
+
+Igualando a derivada a zero para maximizar a log-verossimilhança:
+
+\[
+\frac{n}{\lambda} - \sum_{i=1}^{n} X_i = 0
+\]
+
+Resolvendo para \(\lambda\), obtem-se o estimador de máxima verossimilhança \(\hat{\lambda}\):
+
+\[
+\hat{\lambda} = \frac{n}{\sum_{i=1}^{n} X_i}
+\]
+
+Este é o estimador de máxima verossimilhança para \(\lambda\). Ele  representa a melhor estimativa para o parâmetro desconhecido \(\lambda\), dado o conjunto de dados observados. Ele é o valor de \(\lambda\) que maximiza a probabilidade de observar os dados amostrais sob o modelo de distribuição exponencial.
+
+No caso da distribuição exponencial, o parâmetro \(\lambda\) é a taxa de falha. O estimador \(\hat{\lambda} = \frac{n}{\sum_{i=1}^{n} X_i}\) significa que a taxa de falha estimada é a razão entre o número de observações \(n\) e a soma dos tempos de vida observados dos computadores.
+
+A função criada na linguagem R:
+\begin{lstlisting}
+lambda_est <- n / sx
+\end{lstlisting}
+
+\subsection{Item 3}
+
+O estimador de máxima verossimilhança (MLE) para o parâmetro \(\lambda\) de uma distribuição exponencial é dado pela fórmula abaixo, como já foi visto antes:
+
+\[
+\hat{\lambda} = \frac{n}{\sum_{i=1}^{n} X_i}
+\]
+
+A tabela 1 fornece a amostra de tempos de vida dos computadores. Assim, é possível calcular o estimador desejado. Primeiro, analisa-se o número de observações n, nesse caso n = 20. Após isso, calcula-se a soma dos valores das observações:
+
+\[
+\sum_{i=1}^{20} X_i = 
+\begin{array}{c}
+0.99 + 2.31 + 10.85 + 6.15 + 10.81 + 3.72 + 5.75 + 4.15 + 9.27 + 7.84 \\
++ 2.31 + 10.85 + 6.15 + 1.81 + 3.72 + 5.75 + 10.40 + 10.04 + 4.15 + 9.27
+\end{array}
+\]
+
+Substituindo os valores de \(n\) e \(\sum_{i=1}^{n} X_i\) na fórmula do MLE:
+
+\[
+\hat{\lambda} = \frac{n}{\sum_{i=1}^{n} X_i} = \frac{20}{126.29} \approx 0.15837
+\]
+
+Portanto, o valor numérico do estimador de máxima verossimilhança para \(\lambda\) é aproximadamente \( \hat{\lambda} \approx 0.15837 \). Esse valor indica que a taxa média de falhas estimada para os computadores é de aproximadamente \(0.15837\) falhas por ano. Isso significa que, em média, a cada ano, cerca de \(15.84\%\) dos computadores da amostra falham.
+
+
+
+\newpage
+\subsection{Item 4}
+
+Para construir o gráfico da função log-verossimilhança \(\ell(\lambda)\), precisamos primeiro definir o intervalo de valores de \(\lambda\) a ser considerado. O intervalo deve incluir o valor de \(\hat{\lambda}\), que é o estimador de máxima verossimilhança.
+
+A função log-verossimilhança \(\ell(\lambda)\) é dada por:
+
+\[
+\ell(\lambda) = n \log \lambda - \lambda \sum_{i=1}^{n} X_i
+\]
+
+O gráfico da função log-verossimilhança é construído variando \(\lambda\) dentro de um intervalo adequado e calculando \(\ell(\lambda)\) para cada valor de \(\lambda\).
+
+Para construir o gráfico, escolhe-se o intervalo de \(\lambda\): um intervalo de valores para \(\lambda\) ao redor de \(\hat{\lambda}\), depois calcula-se os valores de \(\ell(\lambda)\), para cada valor de \(\lambda\) no intervalo, calcula-se o valor correspondente de \(\ell(\lambda)\). Para plotar o gráfico, usa-se a linguagem R, que possui uma função para isso.
+
+No gráfico, o valor de \(\hat{\lambda}\) será indicado claramente como o valor de \(\lambda\) que maximiza a função log-verossimilhança. A linha vertical será desenhada em \(\lambda = \hat{\lambda}\), mostrando o valor do estimador de máxima verossimilhança.
+
+O gráfico (Figura 1) ilustra a forma da função log-verossimilhança e com o valor de \(\hat{\lambda}\) corresponde ao ponto de máxima verossimilhança no gráfico. Ele está ilustrado como um ponto azul.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{4A.JPG}
+    \caption{Gráfico da função log-verossimilhança com o valor do estimador de máxima verossimilhança (\(\hat{\lambda}\)) indicado.}
+\end{figure}
+
+Abaixo, o código em R para plotar o gráfico da Figura 1.
+\begin{lstlisting}
+    # Grafico da log-verossimilhança
+p_ll <- ggplot(df_ll, aes(x = lambda, y = loglik)) +
+  geom_line() +  
+  geom_vline(xintercept = lambda_est, linetype = 2, color = "red") +  
+  geom_point(aes(x = lambda_est, y = loglik_exp(lambda_est, x)), size = 3, color = "blue") +  
+  annotate("text", x = lambda_est, y = loglik_exp(lambda_est, x), label = paste("λ̂ = ", round(lambda_est, 5)), 
+           vjust = -1, color = "blue") +  
+  labs(
+    title = "",
+    x = expression(lambda),
+    y = expression(l(lambda))
+  ) +
+  theme_minimal() 
+
+print(p_ll)
+\end{lstlisting}
+
+
+
+\subsection{Item 5}
+Com o valor estimado de \(\hat{\lambda}\) encontrado no item 3, podemos calcular o tempo médio de vida estimado de um computador e a probabilidade de que ele funcione por mais de 5 anos.
+
+\textbf{(a) Calcule o tempo médio de vida estimado de um computador}
+
+A vida útil média \( \mathbb{E}[X] \) de um computador, em uma distribuição exponencial com parâmetro \(\lambda\), é dada pela fórmula:
+
+\[
+\mathbb{E}[X] = \frac{1}{\lambda}
+\]
+
+Portanto, utilizando o estimador de máxima verossimilhança \(\hat{\lambda}\), o tempo médio de vida estimado dos computadores será:
+
+\[
+\mathbb{E}[X] = \frac{1}{\hat{\lambda}}
+\]
+
+Substituindo o valor de \(\hat{\lambda} \approx 0.15837\), obtem-se:
+
+\[
+\mathbb{E}[X] = \frac{1}{0.15837} \approx 6.32 \text{ anos}
+\]
+
+Portanto, o tempo médio de vida estimado de um computador é aproximadamente \(6.32\) anos.
+
+Calculando esse valor pelo R, podemos comparar os dois valores:
+\begin{lstlisting}
+media_vida <- 1 / lambda_est
+\end{lstlisting}
+
+Pelo R, encontra-se o valor de 6.3145, mostrando que realmente o cálculo do tempo médio de vida de um computador está correto.
+
+\textbf{(b) Calcule a probabilidade de que um computador funcione por mais de 5 anos}
+
+A probabilidade de que um computador funcione por mais de 5 anos, dado que a distribuição é exponencial com parâmetro \(\lambda\), é dada pela fórmula:
+
+\[
+P(X > 5) = \exp(-\lambda \cdot 5)
+\]
+
+Substituindo \(\hat{\lambda} \approx 0.15837\), encontra-se:
+
+\[
+P(X > 5) = \exp(-0.15837 \cdot 5) \approx \exp(-0.79185) \approx 0.453
+\]
+
+Portanto, a probabilidade de que um computador funcione por mais de 5 anos é aproximadamente \(0.453\), ou 45.3\%.
+
+Assim, como no item (a) , é interessante comparar esse valor com o encontrado pelo R:
+\begin{lstlisting}
+p_5 <- exp(-lambda_est * 5)
+\end{lstlisting}
+
+O valor encontrado pelo R foi de 0.4530158, o que está de acordo com o valor encontrado pelos cálculos acima.
+
+\subsection{Item 6}
+\textbf{item (a)}
+
+A propriedade da falta de memória da distribuição exponencial significa que a probabilidade de falha no futuro é independente do tempo que o computador já funcionou. Ou seja, a distribuição exponencial não "lembra" de quanto tempo o computador já foi utilizado. Se um computador não falhou até um certo tempo \( t \), a probabilidade de falhar no próximo intervalo de tempo \( \Delta t \) é a mesma que seria se o computador estivesse começando a operar agora. 
+
+Matematicamente, isso é expresso como:
+
+\[
+P(X > t + \Delta t | X > t) = P(X > \Delta t)
+\]
+
+\(P(X > t + \Delta t | X > t)\) é a probabilidade de o computador funcionar por mais um intervalo de tempo \(\Delta t\), dado que ele já funcionou por \(t\) unidades de tempo.
+
+Essa propriedade implica que, se o computador já sobreviveu até o tempo \( t \), a probabilidade de sobrevivência adicional não é afetada pelo tempo \( t \) que já passou.
+
+\subsubsection*{item (b)}
+
+A suposição da falta de memória pode não ser realista para modelar o tempo de vida de computadores em muitos casos devido a diversos fatores. Um deles é a dependência do tempo de uso, a probabilidade de falha de um computador pode aumentar com o tempo de uso. Por exemplo, um computador que já foi utilizado por muitos anos pode ter componentes desgastados o que torna mais provável uma falha no futuro. Isso contraria a ideia da falta de memória, onde a probabilidade de falha no futuro seria a mesma, independentemente do tempo já decorrido.
+
+Fatores externos, como condições ambientais, como temperatura e umidade, ou uso excessivo de recursos, podem tornar a falha mais provável à medida que o tempo passa, o que sugere uma dependência do tempo de uso, e não uma distribuição exponencial.
+
+Portanto, para modelar o tempo de vida dos computadores de forma mais realista, poderia ser mais apropriado usar distribuições que considerem a taxa de falha variável ao longo do tempo.
+
+
+
+
+\newpage
+\section*{Questão 2}
+
+O conjunto de dados de \texttt{penguins}, na biblioteca \texttt{palmerpenguins3} do R, contém medidas para as três espécies de pinguins (figura 1): ilha no arquipélago Palmer na Antártica, tamanho (comprimento da nadadeira, massa corporal, dimensões do bico) e sexo. Importe o conjunto de dados e familiarize-se com ele.
+
+\begin{enumerate}
+    \item Considere a massa corporal (\texttt{body\_mass}) em gramas como variável independente, \( x \), e o comprimento do bico (\texttt{bill\_length}) em milímetros como variável dependente \( y \). Construa um gráfico de dispersão entre \( x \) e \( y \). Com base no gráfico, comente se uma relação linear entre as variáveis parece plausível.
+    
+    \item Defina os parâmetros da reta de regressão com o método dos mínimos quadrados e verifique os resultados obtidos com o comando \texttt{lm()} no R. Adicione a reta de regressão no gráfico de dispersão.
+    
+    \item Calcule os resíduos da regressão e apresente uma representação gráfica dos mesmos. Em seguida, calcule a raiz do erro quadrático médio (RMSE, do inglês) e o coeficiente de determinação \( R^2 \). Comente sobre os resultados obtidos.
+    
+    \item O conjunto de dados não apresenta outliers evidentes. Modifique esse conjunto introduzindo artificialmente uma observação extrema, seja por meio de um aumento ou de uma redução substancial no valor da massa corporal ou do comprimento do bico de um dos pinguins. Em seguida, ajuste um modelo de regressão linear utilizando o conjunto de dados modificado. Compare os coeficientes estimados da regressão, as retas ajustadas e os valores do RMSE e do \( R^2 \) com aqueles obtidos no item 2. Por fim, discuta a influência da observação artificialmente introduzida sobre os resultados da regressão.
+\end{enumerate}
+
+\newpage
+\section{\textbf{SOLUÇÃO}}
+
+\subsection{Item 1}
+
+Primeiro, para analisar a relação entre a massa corporal (\(x\)) e o comprimento do bico (\(y\)) dos pinguins, é construído um gráfico de dispersão. Um gráfico de dispersão é uma representação gráfica que mostra a relação entre duas variáveis. Neste gráfico, cada ponto representa uma observação da amostra, com a variável independente \(x\) (massa corporal) representada no eixo \(x\) e a variável dependente \(y\) (comprimento do bico) representada no eixo \(y\). O gráfico resultante mostra a relação entre a massa corporal (\(x\)) e o comprimento do bico (\(y\)).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{bico.png}
+    \caption{Gráfico de dispersão entre Massa e Tamanho do Bico}
+    \label{fig:bico}
+\end{figure}
+
+Ao analisar o gráfico gerado (Figura \ref{fig:bico}), pode-se comentar sobre a relação entre as duas variáveis. Os pontos no gráfico se alinham aproximadamente a uma linha reta, isso sugere que existe uma relação linear entre as variáveis. Caso contrário, se os pontos estivessem dispersos de maneira aleatória, isso indicaria uma relação não linear ou nenhuma relação clara entre as variáveis.
+
+O gráfico da Figura \ref{fig:bico} foi importante para se veja de forma gráfica a relação linear entre as duas variáveis.
+
+Abaixo, segue o código usado (Em R) para gerar o gráfico:
+\begin{lstlisting}
+    dispersao_g <- ggplot(df, aes(x = x, y = y)) +
+  geom_point() +
+  labs(
+    title = "",
+    x = "massa corporal (g)",
+    y = "comprimento do bico (mm)"
+  )
+
+print(dispersao_g)
+\end{lstlisting}
+
+
+\subsection{Item 2}
+
+O método dos mínimos quadrados é utilizado para estimar os parâmetros da reta de regressão linear, ou seja, a equação da reta que melhor se ajusta aos dados de uma amostra. A reta de regressão é dada por:
+
+\[
+y = b_0 + b_1 x
+\]
+
+Onde \( b_0 \) é a interseção da reta (valor de \(y\) quando \(x = 0\)) e \( b_1 \) é o coeficiente angular da reta (a inclinação da reta, que indica a variação de \(y\) para cada unidade de variação de \(x\)).
+
+A estimativa dos parâmetros \( b_0 \) e \( b_1 \) é feita através do método dos mínimos quadrados, que busca minimizar a soma dos quadrados das diferenças entre os valores observados e os valores preditos pela reta.
+
+O cálculo do coeficiente angular \( b_1 \) e do coeficiente linear \( b_0 \) pode ser feito manualmente com as seguintes fórmulas:
+
+\[
+b_1 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+\]
+\[
+b_0 = \bar{y} - b_1 \bar{x}
+\]
+
+\( x_i \) e \( y_i \) são os valores observados das variáveis independentes e dependentes e\( \bar{x} \) e \( \bar{y} \) são as médias de \(x\) e \(y\), respectivamente.
+
+
+
+No R, a função \texttt{lm()} pode ser utilizada para calcular os coeficientes da reta de regressão. Assim, as duas formas foram testadas em R para verificar os resultados, abaixo segue o código que calcula pelos mínimos quadrados e pela função fornecida:
+
+\begin{lstlisting}
+    xv <- df$x
+yv <- df$y
+
+xbar <- mean(xv)  # Média de x 
+ybar <- mean(yv)  # Média de y 
+
+Sxx <- sum((xv - xbar)^2)
+Sxy <- sum((xv - xbar) * (yv - ybar))
+
+# Cálculo (b1) e (b0)
+b1_manual <- Sxy / Sxx
+b0_manual <- ybar - b1_manual * xbar
+
+cat("Coeficientes da reta de regressão (manual):\n")
+cat("  b0 =", b0_manual, "\n")
+cat("  b1 =", b1_manual, "\n\n")
+
+# Checagem com lm()
+fit <- lm(y ~ x, data = df) 
+print(coef(fit)) 
+cat("\n")
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{oi.JPG}
+    \caption{Cálculo de b0 e b1}
+    \label{fig:parametros}
+\end{figure}
+
+Veja pela Figura \ref{fig:parametros} que os valores encontrados pelos dois métodos estão iguais, o que mostra consistência nos resultados.
+
+Após calcular os parâmetros da reta, podemos adicionar a reta de regressão ao gráfico de dispersão. O gráfico final incluirá os pontos de dados e a reta ajustada.
+
+O código em R que gerou o gráfico de dispersão com a reta de regressão é o seguinte:
+
+\begin{lstlisting}
+    # Adicionar a reta de regressão ao gráfico de dispersão
+dispersao_g_line <- dispersao_g +
+  geom_abline(intercept = coef(fit)[1], slope = coef(fit)[2], color = "red")  # Linha da regressão
+
+print(dispersao_g_line)
+\end{lstlisting}
+
+\newpage
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{reta.png}
+    \caption{Reta de Regressão}
+    \label{fig:reta}
+\end{figure}
+
+O gráfico resultante (Figura \ref{fig:reta}) mostra a relação entre a massa corporal e o comprimento do bico, com a reta de regressão ajustada (linha vermelha), que descreve a relação linear entre as duas variáveis.
+
+
+\subsection{Item 3}
+
+Após ajustar o modelo de regressão linear, é possível calcular os resíduos, que são as diferenças entre os valores observados e os valores ajustados pela reta de regressão. Os resíduos são dados por:
+
+\[
+r_i = y_i - \hat{y}_i
+\]
+
+Onde \( y_i \) é o valor observado da variável dependente \(y\) e \( \hat{y}_i \) é o valor predito pela reta de regressão para o valor \(x_i\).
+
+Para visualizar esses resíduos, cria-se um gráfico de dispersão (Figura \ref{fig:residuos}) dos resíduos pelos os valores ajustados. Isso ajuda a identificar se há padrões nos erros da regressão, o que pode indicar problemas no modelo, foi colocado uma linha de referência e uma grade de coordenadas para facilitar a visualização de anomalias.
+
+\newpage
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{111.JPG}
+    \caption{Resíduos}
+    \label{fig:residuos}
+\end{figure}
+
+
+Abaixo, segue o código em R que mostra esse gráfico:
+\begin{lstlisting}
+#Resduos vs Ajustados
+p_resid <- ggplot(data.frame(fitted = fitted_vals, resid = res),
+                  aes(x = fitted, y = resid)) +
+geom_point() +
+geom_hline(yintercept = 0, linetype = 2) +
+    labs(
+    title = "Resíduos vs Ajustados (original)",
+    x = "Valores ajustados",
+    y = "Resíduos"
+  )
+
+print(p_resid)
+\end{lstlisting}
+
+Agora, será mostrado o Cálculo da Raiz do Erro Quadrático Médio (RMSE):
+
+A Raiz do Erro Quadrático Médio (RMSE) é uma medida da precisão do modelo de regressão, e é dada pela fórmula:
+
+\[
+RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} r_i^2}
+\]
+
+Onde \( r_i \) são os resíduos.
+
+Para calcular o  do Coeficiente de Determinação \( R^2 \) é necessário entender, primeiro, o que ele representa. O coeficiente de determinação \(R^2\) mede a proporção da variabilidade na variável dependente \(y\) que é explicada pela variável independente \(x\) no modelo de regressão. Ele é dado por:
+
+\[
+R^2 = 1 - \frac{SSE}{SST}
+\]
+
+Onde \(SSE\) é a soma dos quadrados dos erros (resíduos) e \(SST\) é a soma total dos quadrados (a variabilidade total de \(y\) em torno de sua média).
+
+O valor de \( R^2 \) varia de 0 a 1. Um valor mais próximo de 1 indica que o modelo de regressão explica bem a variabilidade dos dados.
+
+Segue o código em R para o cálculo de \( R^2 \) e RMSE:
+\begin{lstlisting}
+# (3) RMSE e R²
+
+# Calcular RMSE
+rmse <- sqrt(mean(res^2))
+
+# Calcular R² 
+SSE <- sum(res^2)
+SST <- sum((yv - mean(yv))^2)
+R2  <- 1 - SSE / SST
+
+cat("  RMSE =", rmse, "\n")
+cat("  R²   =", R2, "\n\n")
+\end{lstlisting}
+
+
+Os valores obtidos para o ajuste do modelo de regressão linear são:
+
+    \item RMSE = 4.410974 e \( R^2 \) = 0.3474526
+
+O valor do RMSE calculado foi de aproximadamente 4.41 mm, o que representa o desvio padrão típico das predições. Esse valor sugere que, embora o modelo forneça uma boa estimativa geral, ele não é extremamente preciso e a margem de erro é significativa.
+
+Por outro lado, o coeficiente de determinação \( R^2 \approx 0.3475 \) revela que 34.75\% da variabilidade observada no comprimento do bico é explicada pela variação na massa corporal. Embora o valor de \( R^2 \) seja considerável, ele ainda é relativamente baixo, indicando que uma parte significativa da variabilidade no comprimento do bico não é explicada pela massa corporal.
+
+A interpretação desses resultados sugere que, embora a massa corporal seja um preditor estatisticamente significante, ela não captura a totalidade do fenômeno morfológico dos pinguins.
+
+Contudo, a distribuição aleatória dos resíduos, observada na Figura \ref{fig:residuos}, confirma que o modelo linear é imparcial, fornecendo uma estimativa média robusta.
+
+
+\subsection{Item 4}
+
+Para avaliar o impacto de um outlier no modelo de regressão, é introduzido uma observação extrema no conjunto de dados. No contexto dessa questão, foi modificado a massa corporal do primeiro pinguim do conjunto de dados, triplicando-a. Com isso, criou-se um ponto distante do restante dos dados.
+
+A introdução de um outlier artificial pode ter um impacto significativo nos parâmetros da regressão linear. Como o método dos mínimos quadrados utilizado para ajustar a reta de regressão é sensível a pontos extremos, o outlier pode deslocar a reta de regressão, fazendo com que ela se ajuste de maneira mais favorável ao ponto extremo.
+
+Essa hipótese pode ser confirmada comparando os parâmetros de ambas as regressões. Como o dado do primeiro penguim foi apenas deslocado na horizontal para a direita (aumento de massa), é de se esperar que a reta tenha uma inclinação menor, o que de fato ocorre, já que o coeficiente angular dessa nova reta é 0,00312, em comparação ao valor de 0,004 da reta original. Como consequência, o valor do coeficiente linear também aumenta, de 27,15072 para 30,79877.
+
+Uma vez que se é introduzido um valor "mais aleatório", a tendência é que a explicabilidade do modelo diminua e tenha uma aleatoriedade maior. Isso é visto analisando os valores de $R^2$, que é menor no modelo com outlier. Aliado a isso, o valor do RMSE aumenta, pois, ao incluir uma maior aleatoriedade, o modelo tem sua capacidade de previsão prejudicada, cometendo erros maiores, como verificado na tabela abaixo:
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Comparativo da introdução de um outlier no modelo.}
+    \label{tab:q2-outlier-comp}
+    \small % Reduz o tamanho da fonte
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Métrica} & \textbf{Modelo Original} & \textbf{Modelo com Outlier}  \\
+        \midrule
+         ($\hat{\beta}_0$) & $27{,}15072$ & $30{,}79877$  \\
+        ($\hat{\beta}_1$) & $0{,}0040$ & $0{,}00312$ \\
+        $R^2$  & $0{,}3574$ & $0{,}2592$  \\
+        RMSE  & $4{,}4109$ & $4{,}6997$  \\
+        \bottomrule
+    \end{tabular}%
+    }
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{outlier.png}
+    \caption{Comparação entre os modelos original e com outlier. A reta cheia representa a regressão linear original enquando a tracejada representa a regressão linear com outlier. O ponto grande mais a direita representa o outlier introduzido}
+    \label{fig:placeholder}
+\end{figure}
+ 
+\newpage
+\section*{Códigos completos (Em R)}
+\subsection{Questão 1}
+
+\begin{lstlisting}
+# Tabela 1
+x <- c(
+  0.99, 2.31, 10.85, 6.15, 10.81, 3.72, 5.75, 4.15, 9.27, 7.84,
+  2.31, 10.85, 6.15, 1.81, 3.72, 5.75, 10.40, 10.04, 4.15, 9.27
+)
+
+# Número de observações
+n <- length(x)
+
+# Soma dos valores das observações
+sx <- sum(x)
+
+# (2) log-verossimilhança para Exponencial(lambda)
+loglik_exp <- function(lambda, x) {
+  if (lambda <= 0) return(-Inf)  # Retorna -Inf se lambda for não positivo
+  n <- length(x)
+  n * log(lambda) - lambda * sum(x)
+}
+
+# (2) MLE: lambda_est = n / sum(x)
+lambda_est <- n / sx
+cat("Estimador de máxima verossimilhança (MLE) lambdâ =", lambda_est, "\n")
+
+# (4) Gráfico da log-verossimilhança
+lambda_grid <- seq(from = max(1e-6, 0.05 * lambda_est),
+                   to   = 5 * lambda_est,
+                   length.out = 3000)
+
+# Calcula os valores de log-verossimilhança para cada lambda
+ll_vals <- vapply(lambda_grid, loglik_exp, numeric(1), x = x)
+
+# Prepara os dados para o gráfico
+df_ll <- data.frame(lambda = lambda_grid, loglik = ll_vals)
+
+# Gráfico da log-verossimilhança
+p_ll <- ggplot(df_ll, aes(x = lambda, y = loglik)) +
+  geom_line() +  # Linha do gráfico da log-verossimilhança
+  geom_vline(xintercept = lambda_est, linetype = 2, color = "red") +  # Linha vertical para indicar o valor de lambda_hat
+  geom_point(aes(x = lambda_est, y = loglik_exp(lambda_est, x)), size = 3, color = "blue") +  # Ponto no valor de lambda_hat
+  annotate("text", x = lambda_est, y = loglik_exp(lambda_est, x), label = paste("λ̂ = ", round(lambda_est, 5)), 
+           vjust = -1, color = "blue") +  # Anotação para indicar o valor de λ̂
+  labs(
+    title = "",
+    x = expression(lambda),
+    y = expression(l(lambda))
+  ) +
+  theme_minimal()  # Usando um tema minimalista para melhorar a visualização
+
+# Salva o gráfico
+print(p_ll)
+
+# (5a) Tempo médio estimado: E[X] = 1/lambda
+media_vida <- 1 / lambda_est
+cat("\nTempo médio estimado (anos) =", media_vida, "\n")
+
+# (5b) P(X > 5) = exp(-lambda * 5)
+p_5 <- exp(-lambda_est * 5)
+cat("P(X > 5) =", p_5, "\n\n")
+\end{lstlisting}
+
+\subsection{Questão 2}
+\begin{lstlisting}
+   library(palmerpenguins)
+library(ggplot2)
+
+# Importar dados
+penguins_data <- na.omit(penguins)
+
+# Selecionar as colunas relevantes (massa corporal e comprimento do bico)
+df <- penguins_data[, c("body_mass_g", "bill_length_mm")]
+names(df) <- c("x", "y")  # Renomeando as colunas para x e y
+
+# Verificar os dados
+head(df)
+
+df <- na.omit(df)  # Remove todas as linhas com valores ausentes
+
+# (1) Gráfico de dispersão
+dispersao_g <- ggplot(df, aes(x = x, y = y)) +
+  geom_point() +  # Adicionando pontos de dispersão
+  labs(
+    title = "Grafico de Dispersao entre Massa Corporal e Comprimento do Bico",
+    x = "Massa Corporal (g)",
+    y = "Comprimento do Bico (mm)"
+  )
+
+print(dispersao_g)
+
+# (2) MQO "na mão" (Método dos Mínimos Quadrados)
+xv <- df$x
+yv <- df$y
+
+xbar <- mean(xv)  # Média de x 
+ybar <- mean(yv)  # Média de y 
+
+Sxx <- sum((xv - xbar)^2)
+Sxy <- sum((xv - xbar) * (yv - ybar))
+
+# Cálculo (b1) e (b0)
+b1_manual <- Sxy / Sxx
+b0_manual <- ybar - b1_manual * xbar
+
+cat("Coeficientes da reta de regressão (manual):\n")
+cat("  b0 =", b0_manual, "\n")
+cat("  b1 =", b1_manual, "\n\n")
+
+# Checagem com lm()
+fit <- lm(y ~ x, data = df) 
+print(coef(fit)) 
+cat("\n")
+
+# Adicionar a reta de regressão ao gráfico de dispersão
+dispersao_g_line <- dispersao_g +
+  geom_abline(intercept = coef(fit)[1], slope = coef(fit)[2], color = "red")  # Linha da regressão
+
+print(dispersao_g_line)
+
+# (3) Resíduos, RMSE, R² e diagnósticos
+res <- resid(fit)
+fitted_vals <- fitted(fit)
+
+# Calcular RMSE
+rmse <- sqrt(mean(res^2))
+
+# Calcular R² (cálculo direto)
+SSE <- sum(res^2)
+SST <- sum((yv - mean(yv))^2)
+R2  <- 1 - SSE / SST
+
+cat("Qualidade do ajuste (original):\n")
+cat("  RMSE =", rmse, "\n")
+cat("  R²   =", R2, "\n\n")
+
+# Resíduos vs Ajustados
+p_resid <- ggplot(data.frame(fitted = fitted_vals, resid = res),
+                  aes(x = fitted, y = resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = 2) +
+  labs(
+    title = "Residuos vs Ajustados (original)",
+    x = "Valores ajustados",
+    y = "Residuos"
+  )
+
+# Salvar e mostrar o gráfico
+print(p_resid)
+
+
+# (4) Inserindo outlier artificial e repetindo análise
+df_out <- df
+idx <- 1  # Você pode trocar o índice do pinguim
+df_out$x[idx] <- df_out$x[idx] * 3  # Triplica a massa do 1º pinguim (outlier forte)
+
+# Ajuste com os dados com outlier
+fit_out <- lm(y ~ x, data = df_out)
+
+# Calcular resíduos para os dados com outlier
+res_out <- resid(fit_out)
+rmse_out <- sqrt(mean(res_out^2))
+
+SSE_out <- sum(res_out^2)
+SST_out <- sum((df_out$y - mean(df_out$y))^2)
+R2_out  <- 1 - SSE_out / SST_out
+
+# Comparação de coeficientes e métricas
+cmp <- data.frame(
+  modelo = c("Original", "Com outlier"),
+  b0 = c(coef(fit)[1], coef(fit_out)[1]),
+  b1 = c(coef(fit)[2], coef(fit_out)[2]),
+  RMSE = c(rmse, rmse_out),
+  R2 = c(R2, R2_out)
+)
+
+cat("Comparação (original vs com outlier):\n")
+print(cmp)
+cat("\n")
+
+# Plot comparando as duas retas (original vs com outlier)
+p_compare <- ggplot() +
+  geom_point(data = df, aes(x = x, y = y), alpha = 0.7) +
+  geom_point(data = df_out[idx, , drop = FALSE], aes(x = x, y = y), size = 3) +
+  geom_abline(intercept = coef(fit)[1], slope = coef(fit)[2], linetype = 1) +
+  geom_abline(intercept = coef(fit_out)[1], slope = coef(fit_out)[2], linetype = 2) +
+  labs(
+    title = "Regressao: original vs com outlier",
+    subtitle = "Ponto grande = observacao artificial; linha tracejada = modelo com outlier",
+    x = "body_mass_g (g)",
+    y = "bill_length_mm (mm)"
+  )
+
+# Salvar e mostrar o gráfico
+print(p_compare)
+\end{lstlisting}
+
+
+\end{document}
