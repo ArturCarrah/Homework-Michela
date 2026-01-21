@@ -1,7 +1,3 @@
-# Carregar pacotes necessários
-if (!requireNamespace("palmerpenguins", quietly = TRUE)) install.packages("palmerpenguins")
-if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2")
-
 library(palmerpenguins)
 library(ggplot2)
 
@@ -131,4 +127,5 @@ p_compare <- ggplot() +
   )
 
 # Salvar e mostrar o gráfico
+
 print(p_compare)
